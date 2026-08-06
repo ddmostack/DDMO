@@ -26,7 +26,7 @@ export function DoodleAccent({ className = "", variant = "squiggle" }: DoodleAcc
       aria-hidden="true"
       initial={reduceMotion ? false : { pathLength: 0, opacity: 0 }}
       whileInView={reduceMotion ? undefined : { pathLength: 1, opacity: 1 }}
-      viewport={{ once: true, margin: "-10%" }}
+      viewport={{ once: false, margin: "-5%" }}
       transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
     >
       <motion.path

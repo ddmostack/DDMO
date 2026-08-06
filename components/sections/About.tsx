@@ -1,12 +1,14 @@
+import { SectionOrb } from "@/components/effects/SectionOrb";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { stats, values } from "@/lib/constants";
 
 export function About() {
   return (
-    <section id="about" className="bg-dd-offwhite">
+    <section id="about" className="relative overflow-hidden bg-transparent">
+      <SectionOrb className="top-10 right-2 md:right-4 h-44 w-44 md:h-60 md:w-60" />
       <div className="page-container section-space">
-        <div className="grid gap-12 border-t border-dd-gray-300 pt-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
+        <div className="grid gap-12 border-t border-dd-gray-300/40 pt-10 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
           <ScrollReveal>
             <p className="text-sm font-bold text-dd-navy">About Doodle Dynamo</p>
             <h2 className="mt-5 text-balance text-4xl font-extrabold leading-[0.98] tracking-[-0.055em] text-dd-ink md:text-6xl">
@@ -43,9 +45,9 @@ export function About() {
         </div>
 
         <ScrollReveal className="mt-16">
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-md bg-dd-gray-300 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 overflow-hidden rounded-[28px] border border-white/80 bg-white/25 p-3 shadow-lg backdrop-blur-xl lg:grid-cols-4">
             {stats.map((stat) => (
-              <div key={stat.label} className="bg-dd-ink px-5 py-8 md:px-7">
+              <div key={stat.label} className="liquid-glass-card rounded-[20px] bg-white/40 px-5 py-8 transition-all duration-300 hover:bg-white/70 md:px-7">
                 <StatCounter {...stat} />
               </div>
             ))}

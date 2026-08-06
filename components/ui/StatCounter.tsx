@@ -60,7 +60,7 @@ export function StatCounter({ label, prefix = "", suffix = "", value }: StatCoun
         {reduceMotion ? value : displayValue}
         {suffix}
       </p>
-      <p className="mt-2 text-sm font-medium leading-relaxed text-white/70">{label}</p>
+      <p className="mt-2 text-sm font-medium leading-relaxed text-dd-gray-600">{label}</p>
     </div>
   );
 }

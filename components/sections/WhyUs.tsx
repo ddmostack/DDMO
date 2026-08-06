@@ -1,9 +1,11 @@
+import { SectionOrb } from "@/components/effects/SectionOrb";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { differentiators } from "@/lib/constants";
 
 export function WhyUs() {
   return (
-    <section id="why-us" className="bg-dd-gray-100">
+    <section id="why-us" className="relative overflow-hidden bg-transparent">
+      <SectionOrb className="top-16 left-2 md:left-4 h-40 w-40 md:h-56 md:w-56" />
       <div className="page-container section-space">
         <div className="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <ScrollReveal>
@@ -17,12 +19,12 @@ export function WhyUs() {
             </div>
           </ScrollReveal>
 
-          <div className="grid gap-px bg-dd-gray-300 sm:grid-cols-2">
+          <div className="grid gap-4 sm:grid-cols-2">
             {differentiators.map((item, index) => {
               const Icon = item.icon;
               return (
                 <ScrollReveal key={item.title} delay={(index % 2) * 0.06}>
-                  <article className="min-h-[260px] bg-dd-offwhite p-7 md:p-9">
+                  <article className="liquid-glass-card min-h-[260px] p-7 md:p-9">
                     <div className="flex items-center justify-between">
                       <Icon className="text-dd-navy" size={26} strokeWidth={1.7} aria-hidden="true" />
                       <span className="text-xs font-bold text-dd-gray-600">0{index + 1}</span>

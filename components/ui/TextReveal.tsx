@@ -12,7 +12,7 @@ type TextRevealProps = {
 
 export function TextReveal({ text, className = "", delay = 0, as = "span" }: TextRevealProps) {
   const ref = useRef<HTMLElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-8% 0px" });
+  const isInView = useInView(ref, { once: false, margin: "-5% 0px" });
   const reduceMotion = useReducedMotion();
   const Tag = as;
 

@@ -1,14 +1,16 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
+import { SectionOrb } from "@/components/effects/SectionOrb";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { projects } from "@/lib/constants";
 
 export function Portfolio() {
   return (
-    <section id="portfolio" className="bg-dd-offwhite">
-      <div className="page-container section-space border-t border-dd-gray-300">
+    <section id="portfolio" className="relative overflow-hidden bg-transparent">
+      <SectionOrb className="top-36 right-2 md:right-4 h-48 w-48 md:h-64 md:w-64" />
+      <div className="page-container section-space border-t border-dd-gray-300/40">
         <ScrollReveal>
           <SectionLabel>Selected Work</SectionLabel>
           <h2 className="mt-7 max-w-[760px] text-balance text-5xl font-extrabold leading-[0.94] tracking-[-0.06em] text-dd-ink md:text-7xl">
@@ -28,14 +30,16 @@ export function Portfolio() {
             >
               <article className="group">
                 <a href="#contact" className="block" aria-label={`Discuss a project like ${project.title}`}>
-                  <div className={`relative overflow-hidden bg-dd-gray-100 ${index % 2 === 0 ? "aspect-[4/3]" : "aspect-[5/6]"}`}>
-                    <Image
-                      src={project.image}
-                      alt={project.alt}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 58vw"
-                      className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.025]"
-                    />
+                  <div className={`relative overflow-hidden rounded-[28px] border border-white/80 bg-white/25 p-2.5 shadow-lg backdrop-blur-xl ${index % 2 === 0 ? "aspect-[4/3]" : "aspect-[5/6]"}`}>
+                    <div className="relative h-full w-full overflow-hidden rounded-[20px]">
+                      <Image
+                        src={project.image}
+                        alt={project.alt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 58vw"
+                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.025]"
+                      />
+                    </div>
                   </div>
                   <div className="mt-5 grid grid-cols-[1fr_auto] gap-5 border-t border-dd-gray-300 pt-5">
                     <div>

@@ -3,7 +3,6 @@
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { type FormEvent, useState } from "react";
 
-import { Button } from "@/components/ui/Button";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { footerDetails, projectTypes } from "@/lib/constants";
 
@@ -70,177 +69,185 @@ export function Contact() {
     setStatus("ready");
   };
 
-  const inputClasses =
-    "min-h-12 w-full rounded-md border border-dd-gray-300 bg-dd-offwhite px-4 py-3 text-sm font-medium text-dd-ink outline-none transition-[border-color,box-shadow] placeholder:text-dd-gray-600/80 focus:border-dd-navy focus:ring-4 focus:ring-dd-navy/10";
-
   return (
-    <section id="contact" className="bg-dd-offwhite">
-      <div className="page-container section-space">
-        <div className="grid overflow-hidden rounded-md border border-dd-gray-300 lg:grid-cols-[0.8fr_1.2fr]">
-          <ScrollReveal>
-            <div className="h-full bg-dd-navy p-7 text-white md:p-10 lg:p-12">
-              <p className="text-sm font-bold text-white/70">Start a project</p>
-              <h2 className="mt-7 text-balance text-5xl font-extrabold leading-[0.94] tracking-[-0.06em] text-white md:text-6xl">
-                Make the next move count.
-              </h2>
-              <p className="mt-6 max-w-[510px] text-base font-medium leading-relaxed text-white/75 md:text-lg">
-                Tell us what you are working toward. We will help turn it into a clear next move.
-              </p>
+    <section id="contact" className="contact-section-bg relative py-16 md:py-24 xl:py-32">
+      {/* Decorative blurred background shapes */}
+      <div className="contact-floating-blob contact-blob-1" aria-hidden="true" />
+      <div className="contact-floating-blob contact-blob-2" aria-hidden="true" />
+      <div className="contact-floating-blob contact-blob-3" aria-hidden="true" />
 
-            <address className="mt-12 space-y-5 not-italic">
-              <a
-                href={`mailto:${footerDetails.email}`}
-                className="flex items-center gap-3 text-sm font-bold text-white transition-colors hover:text-white/70"
+      <div className="page-container relative z-10">
+        <ScrollReveal>
+          <div className="contact-main-glass-card p-3 sm:p-5 lg:p-7">
+            <div className="grid gap-6 lg:grid-cols-[0.4fr_0.6fr]">
+              {/* Left Frosted Information Panel */}
+              <div className="contact-left-glass-panel flex flex-col justify-between p-6 sm:p-8 lg:p-10">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-gray-600">
+                    START A PROJECT
+                  </p>
+                  <h2 className="mt-4 text-balance text-2xl font-extrabold leading-[1.08] tracking-[-0.04em] text-dd-ink sm:text-3xl lg:text-[2.5rem]">
+                    Make the next move count.
+                  </h2>
+                  <p className="mt-4 max-w-[380px] text-sm font-medium leading-relaxed text-dd-gray-600 md:text-base">
+                    Tell us what you are working toward. We will help turn it into a clear next move.
+                  </p>
+                </div>
+
+                <address className="mt-10 space-y-4 not-italic">
+                  <a
+                    href={`mailto:${footerDetails.email}`}
+                    className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink transition-colors hover:text-dd-navy"
+                  >
+                    <span className="contact-icon-glass-btn">
+                      <Mail size={18} aria-hidden="true" />
+                    </span>
+                    <span className="truncate">{footerDetails.email}</span>
+                  </a>
+                  <a
+                    href={`tel:${footerDetails.phone.replace(/\s/g, "")}`}
+                    className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink transition-colors hover:text-dd-navy"
+                  >
+                    <span className="contact-icon-glass-btn">
+                      <Phone size={18} aria-hidden="true" />
+                    </span>
+                    <span>{footerDetails.phone}</span>
+                  </a>
+                  <p className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink">
+                    <span className="contact-icon-glass-btn">
+                      <MapPin size={18} aria-hidden="true" />
+                    </span>
+                    <span>{footerDetails.city}</span>
+                  </p>
+                </address>
+              </div>
+
+              {/* Right Frosted Form Panel */}
+              <form
+                className="p-3 sm:p-6 lg:p-8"
+                noValidate
+                onSubmit={handleSubmit}
               >
-                <span className="grid h-10 w-10 place-items-center rounded-md border border-white/25 text-white">
-                  <Mail size={18} aria-hidden="true" />
-                </span>
-                {footerDetails.email}
-              </a>
-              <a
-                href={`tel:${footerDetails.phone.replace(/\s/g, "")}`}
-                className="flex items-center gap-3 text-sm font-bold text-white transition-colors hover:text-white/70"
-              >
-                <span className="grid h-10 w-10 place-items-center rounded-md border border-white/25 text-white">
-                  <Phone size={18} aria-hidden="true" />
-                </span>
-                {footerDetails.phone}
-              </a>
-              <p className="flex items-center gap-3 text-sm font-bold text-white">
-                <span className="grid h-10 w-10 place-items-center rounded-md border border-white/25 text-white">
-                  <MapPin size={18} aria-hidden="true" />
-                </span>
-                {footerDetails.city}
-              </p>
-            </address>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <label className="block text-sm font-bold text-dd-ink" htmlFor="name">
+                      Name
+                    </label>
+                    <input
+                      id="name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      value={fields.name}
+                      onChange={(event) => updateField("name", event.target.value)}
+                      aria-invalid={Boolean(errors.name)}
+                      aria-describedby={errors.name ? "name-error" : undefined}
+                      className="contact-frosted-input"
+                      placeholder="Your name"
+                    />
+                    {errors.name ? (
+                      <p id="name-error" className="text-xs font-semibold text-[#FF4101]">
+                        {errors.name}
+                      </p>
+                    ) : null}
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="block text-sm font-bold text-dd-ink" htmlFor="email">
+                      Email
+                    </label>
+                    <input
+                      id="email"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      value={fields.email}
+                      onChange={(event) => updateField("email", event.target.value)}
+                      aria-invalid={Boolean(errors.email)}
+                      aria-describedby={errors.email ? "email-error" : undefined}
+                      className="contact-frosted-input"
+                      placeholder="you@company.com"
+                    />
+                    {errors.email ? (
+                      <p id="email-error" className="text-xs font-semibold text-[#FF4101]">
+                        {errors.email}
+                      </p>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="mt-5 space-y-2">
+                  <label className="block text-sm font-bold text-dd-ink" htmlFor="project-type">
+                    Project Type
+                  </label>
+                  <select
+                    id="project-type"
+                    name="projectType"
+                    value={fields.projectType}
+                    onChange={(event) => updateField("projectType", event.target.value)}
+                    aria-invalid={Boolean(errors.projectType)}
+                    aria-describedby={errors.projectType ? "project-type-error" : undefined}
+                    className="contact-frosted-input"
+                  >
+                    <option value="">Choose a project type</option>
+                    {projectTypes.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                  {errors.projectType ? (
+                    <p id="project-type-error" className="text-xs font-semibold text-[#FF4101]">
+                      {errors.projectType}
+                    </p>
+                  ) : null}
+                </div>
+
+                <div className="mt-5 space-y-2">
+                  <label className="block text-sm font-bold text-dd-ink" htmlFor="message">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    value={fields.message}
+                    onChange={(event) => updateField("message", event.target.value)}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? "message-error" : "message-helper"}
+                    className="contact-frosted-input min-h-[130px] resize-y"
+                    placeholder="What are you building, and what does success look like?"
+                  />
+                  <p id="message-helper" className="text-xs font-medium text-dd-gray-600">
+                    Include your goal, timeline, and any useful context.
+                  </p>
+                  {errors.message ? (
+                    <p id="message-error" className="text-xs font-semibold text-[#FF4101]">
+                      {errors.message}
+                    </p>
+                  ) : null}
+                </div>
+
+                <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="max-w-[34ch] text-xs font-medium leading-relaxed text-dd-gray-600">
+                    We only use your details to respond to this enquiry.
+                  </p>
+                  <button type="submit" className="contact-frosted-submit w-full sm:w-auto">
+                    Send Enquiry <ArrowUpRight className="contact-submit-arrow ml-2" size={17} aria-hidden="true" />
+                  </button>
+                </div>
+
+                <div aria-live="polite">
+                  {status === "ready" ? (
+                    <p className="mt-5 rounded-2xl border border-[#00D9AB]/40 bg-[#00D9AB]/10 p-4 text-sm font-bold text-dd-ink backdrop-blur-sm">
+                      Your message is ready. Delivery will be enabled when the contact endpoint is connected.
+                    </p>
+                  ) : null}
+                </div>
+              </form>
             </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={0.08}>
-            <form
-              className="h-full bg-dd-offwhite p-7 sm:p-10 lg:p-12"
-              noValidate
-              onSubmit={handleSubmit}
-            >
-              <div className="grid gap-6 sm:grid-cols-2">
-                <div className="space-y-2">
-                  <label className="block text-sm font-bold text-dd-ink" htmlFor="name">
-                    Name
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    autoComplete="name"
-                    value={fields.name}
-                    onChange={(event) => updateField("name", event.target.value)}
-                    aria-invalid={Boolean(errors.name)}
-                    aria-describedby={errors.name ? "name-error" : undefined}
-                    className={`${inputClasses} ${errors.name ? "border-dd-orange focus:border-dd-orange focus:ring-dd-orange/10" : ""}`}
-                    placeholder="Your name"
-                  />
-                  {errors.name ? (
-                    <p id="name-error" className="text-sm font-medium text-[#B52E00]">
-                      {errors.name}
-                    </p>
-                  ) : null}
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-sm font-bold text-dd-ink" htmlFor="email">
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    value={fields.email}
-                    onChange={(event) => updateField("email", event.target.value)}
-                    aria-invalid={Boolean(errors.email)}
-                    aria-describedby={errors.email ? "email-error" : undefined}
-                    className={`${inputClasses} ${errors.email ? "border-dd-orange focus:border-dd-orange focus:ring-dd-orange/10" : ""}`}
-                    placeholder="you@company.com"
-                  />
-                  {errors.email ? (
-                    <p id="email-error" className="text-sm font-medium text-[#B52E00]">
-                      {errors.email}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-2">
-                <label className="block text-sm font-bold text-dd-ink" htmlFor="project-type">
-                  Project Type
-                </label>
-                <select
-                  id="project-type"
-                  name="projectType"
-                  value={fields.projectType}
-                  onChange={(event) => updateField("projectType", event.target.value)}
-                  aria-invalid={Boolean(errors.projectType)}
-                  aria-describedby={errors.projectType ? "project-type-error" : undefined}
-                  className={`${inputClasses} ${errors.projectType ? "border-dd-orange focus:border-dd-orange focus:ring-dd-orange/10" : ""}`}
-                >
-                  <option value="">Choose a project type</option>
-                  {projectTypes.map((type) => (
-                    <option key={type} value={type}>
-                      {type}
-                    </option>
-                  ))}
-                </select>
-                {errors.projectType ? (
-                  <p id="project-type-error" className="text-sm font-medium text-[#B52E00]">
-                    {errors.projectType}
-                  </p>
-                ) : null}
-              </div>
-
-              <div className="mt-6 space-y-2">
-                <label className="block text-sm font-bold text-dd-ink" htmlFor="message">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={6}
-                  value={fields.message}
-                  onChange={(event) => updateField("message", event.target.value)}
-                  aria-invalid={Boolean(errors.message)}
-                  aria-describedby={errors.message ? "message-error" : "message-helper"}
-                  className={`${inputClasses} resize-y ${errors.message ? "border-dd-orange focus:border-dd-orange focus:ring-dd-orange/10" : ""}`}
-                  placeholder="What are you building, and what does success look like?"
-                />
-                <p id="message-helper" className="text-sm font-medium text-dd-gray-600">
-                  Include your goal, timeline, and any useful context.
-                </p>
-                {errors.message ? (
-                  <p id="message-error" className="text-sm font-medium text-[#B52E00]">
-                    {errors.message}
-                  </p>
-                ) : null}
-              </div>
-
-              <div className="mt-7 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-                <p className="max-w-[38ch] text-xs font-medium leading-relaxed text-dd-gray-600">
-                  We only use your details to respond to this enquiry.
-                </p>
-                <Button type="submit" className="w-full sm:w-auto">
-                  Send Enquiry <ArrowUpRight className="ml-2" size={17} aria-hidden="true" />
-                </Button>
-              </div>
-
-              <div aria-live="polite">
-                {status === "ready" ? (
-                    <p className="mt-5 rounded-md border border-dd-navy/20 bg-dd-navy/[0.05] px-4 py-3 text-sm font-bold text-dd-navy">
-                    Your message is ready. Delivery will be enabled when the contact endpoint is connected.
-                  </p>
-                ) : null}
-              </div>
-            </form>
-          </ScrollReveal>
-        </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );

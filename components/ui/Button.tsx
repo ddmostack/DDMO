@@ -27,23 +27,21 @@ type NativeButtonProps = CommonProps & {
 export type ButtonProps = LinkButtonProps | NativeButtonProps;
 
 const baseClasses =
-  "relative inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-md px-6 py-3 text-sm font-bold transition-[background-color,color,border-color,box-shadow,transform] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-55";
+  "group relative inline-flex min-h-12 items-center justify-center whitespace-nowrap rounded-full px-8 py-3 text-sm font-bold transition-all duration-300 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-55";
 
 const variants = {
-  primary:
-    "border border-dd-navy bg-dd-navy text-white hover:bg-dd-ink hover:border-dd-ink",
-  outline:
-    "border border-dd-gray-300 bg-transparent text-dd-ink hover:border-dd-ink hover:bg-dd-gray-100",
+  primary: "liquid-glass-btn-primary",
+  outline: "liquid-glass-btn-outline",
 };
 
 export function Button(props: ButtonProps) {
   const reduceMotion = useReducedMotion();
   const { children, className = "", variant = "primary", vhsEffect = false } = props;
-  const vhsClasses = vhsEffect && !reduceMotion ? "vhs-flicker vhs-glitch-hover" : "";
+  const vhsClasses = vhsEffect && !reduceMotion ? "vhs-flicker" : "";
   const classes = `${baseClasses} ${variants[variant]} ${vhsClasses} ${className}`;
   const interaction = reduceMotion
     ? {}
-    : { whileHover: vhsEffect ? {} : { scale: 1.02 }, whileTap: { scale: vhsEffect ? 0.96 : 0.98 } };
+    : { whileHover: { scale: 1.03 }, whileTap: { scale: 0.97 } };
 
   if ("href" in props && props.href) {
     return (

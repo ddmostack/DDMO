@@ -50,8 +50,8 @@ export function ScrollReveal({
 }: ScrollRevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, {
-    once: true,
-    margin: "-12% 0px -8% 0px",
+    once: false,
+    margin: "-5% 0px -5% 0px",
   });
   const reduceMotion = useReducedMotion();
   const states = variantStates[variant];

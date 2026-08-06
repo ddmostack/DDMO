@@ -10,26 +10,6 @@ import {
   useTransform,
 } from "framer-motion";
 
-/**
- * Fixed, full-bleed animated gradient-mesh background.
- *
- * Three soft blurred color blobs drift on a slow ambient loop, and are
- * additionally offset by scroll position (each at a different rate, for a
- * parallax depth cue) and by pointer position (subtle, spring-smoothed).
- * This gives a "moving 3D background" feel without a WebGL/Three.js layer.
- *
- * Mount this once, near the top of the document body in app/layout.tsx:
- *   <body>
- *     <a className="skip-link" href="#main-content">Skip to content</a>
- *     <GradientField />
- *     {children}
- *   </body>
- *
- * It is position: fixed with z-index: -1 (see globals.css), so it sits
- * behind every section automatically - no changes needed in Hero, About,
- * etc. Sections with an opaque background will simply cover it; sections
- * with a transparent background will let it show through.
- */
 export function GradientField() {
   const reducedMotion = useReducedMotion();
   const mouseX = useMotionValue(0);
@@ -52,31 +32,33 @@ export function GradientField() {
   const springY = useSpring(mouseY, { stiffness: 40, damping: 20 });
 
   // Each blob scrolls at its own rate -> depth/parallax illusion.
-  const blobAY = useTransform(scrollYProgress, [0, 1], [0, -160]);
-  const blobBY = useTransform(scrollYProgress, [0, 1], [0, 220]);
-  const blobCY = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const blobAY = useTransform(scrollYProgress, [0, 1], [0, -350]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], [0, 420]);
+  const blobCY = useTransform(scrollYProgress, [0, 1], [0, -280]);
+  const blobDY = useTransform(scrollYProgress, [0, 1], [0, 320]);
 
-  const blobAX = useTransform(springX, [-1, 1], [-24, 24]);
-  const blobBX = useTransform(springX, [-1, 1], [18, -18]);
-  const blobCX = useTransform(springY, [-1, 1], [-14, 14]);
+  const blobAX = useTransform(springX, [-1, 1], [-30, 30]);
+  const blobBX = useTransform(springX, [-1, 1], [24, -24]);
+  const blobCX = useTransform(springY, [-1, 1], [-20, 20]);
+  const blobDX = useTransform(springX, [-1, 1], [16, -16]);
 
-  const hueShift = useTransform(scrollYProgress, [0, 0.5, 1], [0, 18, -10]);
+  const hueShift = useTransform(scrollYProgress, [0, 0.5, 1], [0, 25, -15]);
   const blobCFilter = useTransform(hueShift, (value) => `hue-rotate(${value}deg) blur(70px)`);
 
   if (reducedMotion) {
-    // Static gradient wash, no animation, no listeners - respects the
-    // person's OS-level motion preference.
     return <div aria-hidden className="dd-mesh-static" />;
   }
 
   return (
     <div aria-hidden className="dd-mesh">
+      <div className="dd-grid-overlay" />
       <motion.span className="dd-blob dd-blob-a" style={{ x: blobAX, y: blobAY }} />
       <motion.span className="dd-blob dd-blob-b" style={{ x: blobBX, y: blobBY }} />
       <motion.span
         className="dd-blob dd-blob-c"
         style={{ x: blobCX, y: blobCY, filter: blobCFilter }}
       />
+      <motion.span className="dd-blob dd-blob-d" style={{ x: blobDX, y: blobDY }} />
       <div className="dd-grain" />
     </div>
   );
