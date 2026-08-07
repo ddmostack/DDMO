@@ -5,6 +5,7 @@ import React, { useRef, useState, type PropsWithChildren } from "react";
 
 type CommonProps = PropsWithChildren<{
   className?: string;
+  onClick?: () => void;
   variant?: "primary" | "outline";
   vhsEffect?: boolean;
   magnetic?: boolean;
@@ -95,6 +96,7 @@ export function Button(props: ButtonProps) {
         href={props.href}
         aria-label={props.ariaLabel}
         className={classes}
+        onClick={props.onClick}
         style={{ x: magneticX, y: magneticY }}
         onPointerMove={handlePointerMove}
         onPointerEnter={handlePointerEnter}
