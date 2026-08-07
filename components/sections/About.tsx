@@ -139,13 +139,18 @@ export function About() {
         {/* Stats Counter Row */}
         <ScrollReveal className="mt-16 lg:mt-24">
           <div className="grid grid-cols-2 gap-3 overflow-hidden rounded-[28px] border border-white/80 bg-white/25 p-3 shadow-lg backdrop-blur-xl lg:grid-cols-4">
-            {stats.map((stat) => (
-              <div
+            {stats.map((stat, index) => (
+              <CursorTiltCard
                 key={stat.label}
-                className="liquid-glass-card rounded-[20px] bg-white/40 px-5 py-8 transition-all duration-300 hover:bg-white/70 md:px-7"
+                maxTilt={4}
+                magnetic={true}
+                glare={true}
+                className="rounded-[20px]"
               >
-                <StatCounter {...stat} />
-              </div>
+                <article className="liquid-glass-card group h-full rounded-[20px] bg-white/40 px-5 py-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl md:px-7">
+                  <StatCounter delay={index * 0.12} {...stat} />
+                </article>
+              </CursorTiltCard>
             ))}
           </div>
         </ScrollReveal>
