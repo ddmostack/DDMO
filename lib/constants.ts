@@ -183,6 +183,14 @@ export const projectTypes = [
   "Something else",
 ] as const;
 
+export const budgetRanges = [
+  "< $5,000",
+  "$5,000 - $15,000",
+  "$15,000 - $30,000",
+  "$30,000+",
+  "Flexible / Undecided",
+] as const;
+
 export const footerServices = ["Search strategy", "Web development", "Brand identity", "UI & UX"];
 
 export const socialLinks = [

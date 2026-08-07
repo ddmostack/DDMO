@@ -8,9 +8,10 @@ import { HeroParticles } from "@/components/effects/HeroParticles";
 import { Button } from "@/components/ui/Button";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
-import { footerDetails, projectTypes } from "@/lib/constants";
+import { budgetRanges, footerDetails, projectTypes } from "@/lib/constants";
 
 type ContactFields = {
+  budget: string;
   email: string;
   message: string;
   name: string;
@@ -23,6 +24,7 @@ const initialFields: ContactFields = {
   name: "",
   email: "",
   projectType: "",
+  budget: "",
   message: "",
 };
 
@@ -38,7 +40,11 @@ function validate(fields: ContactFields): ContactErrors {
   }
 
   if (!fields.projectType) {
-    errors.projectType = "Please select a project type.";
+    errors.projectType = "Please select a project category.";
+  }
+
+  if (!fields.budget) {
+    errors.budget = "Please select an estimated budget.";
   }
 
   if (fields.message.trim().length < 15) {
@@ -78,7 +84,7 @@ export function Contact() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const allTouched = { name: true, email: true, projectType: true, message: true };
+    const allTouched = { name: true, email: true, projectType: true, budget: true, message: true };
     setTouched(allTouched);
     const nextErrors = validate(fields);
     setErrors(nextErrors);
@@ -109,7 +115,7 @@ export function Contact() {
       <div className="page-container relative z-10">
         <ScrollReveal>
           <div className="contact-main-glass-card p-3 sm:p-5 lg:p-7">
-            <div className="grid gap-6 lg:grid-cols-[0.42fr_0.58fr]">
+            <div className="grid gap-6 lg:grid-cols-[0.4fr_0.6fr]">
               {/* Left Frosted Information Panel */}
               <CursorTiltCard maxTilt={5} magnetic={true} glare={true} className="rounded-[28px]">
                 <div className="contact-left-glass-panel flex h-full flex-col justify-between p-6 sm:p-8 lg:p-10">
@@ -179,7 +185,7 @@ export function Contact() {
                       Message Received!
                     </h3>
                     <p className="mt-3 max-w-[400px] text-base font-medium leading-relaxed text-dd-gray-600">
-                      Thank you, <span className="font-bold text-dd-ink">{fields.name}</span>. We have received your project details and will be in touch within 24 hours.
+                      Thank you, <span className="font-bold text-dd-ink">{fields.name}</span>. We have received your enquiry for <span className="font-bold text-dd-navy">{fields.projectType}</span> ({fields.budget}) and will be in touch within 24 hours.
                     </p>
 
                     <Button variant="outline" className="mt-8" onClick={handleReset} magnetic={true}>
@@ -187,11 +193,15 @@ export function Contact() {
                     </Button>
                   </motion.div>
                 ) : (
-                  /* Interactive Form with Floating Labels & Center-Expanding Underlines */
-                  <form noValidate onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid gap-6 sm:grid-cols-2">
+                  /* Clean Non-Overlapping Interactive Form */
+                  <form noValidate onSubmit={handleSubmit} className="space-y-5">
+                    {/* Row 1: Name & Email */}
+                    <div className="grid gap-5 sm:grid-cols-2">
                       {/* Name Field */}
-                      <div className="relative">
+                      <div>
+                        <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-dd-gray-600 mb-1.5">
+                          Your Name
+                        </label>
                         <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
                           <input
                             id="name"
@@ -202,21 +212,9 @@ export function Contact() {
                             onFocus={() => handleFocus("name")}
                             onBlur={() => handleBlur("name")}
                             onChange={(e) => updateField("name", e.target.value)}
-                            placeholder=" "
-                            className="peer w-full bg-transparent px-4 pt-5 pb-2 text-sm font-bold text-dd-ink outline-none"
+                            placeholder="e.g. Sarah Jenkins"
+                            className="w-full bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none"
                           />
-                          <label
-                            htmlFor="name"
-                            className={`pointer-events-none absolute left-4 top-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                              focused.name || fields.name
-                                ? "-translate-y-2.5 scale-90 text-dd-navy"
-                                : "text-dd-gray-600"
-                            }`}
-                          >
-                            Your Name
-                          </label>
-
-                          {/* Animated Center-Expanding Focus Underline */}
                           <motion.div
                             className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
                             initial={{ scaleX: 0 }}
@@ -224,8 +222,6 @@ export function Contact() {
                             transition={{ duration: 0.25, ease: "easeOut" }}
                           />
                         </div>
-
-                        {/* Inline Feedback Icon */}
                         {touched.name && (
                           <div className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold">
                             {errors.name ? (
@@ -242,7 +238,10 @@ export function Contact() {
                       </div>
 
                       {/* Email Field */}
-                      <div className="relative">
+                      <div>
+                        <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-dd-gray-600 mb-1.5">
+                          Email Address
+                        </label>
                         <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
                           <input
                             id="email"
@@ -253,21 +252,9 @@ export function Contact() {
                             onFocus={() => handleFocus("email")}
                             onBlur={() => handleBlur("email")}
                             onChange={(e) => updateField("email", e.target.value)}
-                            placeholder=" "
-                            className="peer w-full bg-transparent px-4 pt-5 pb-2 text-sm font-bold text-dd-ink outline-none"
+                            placeholder="you@company.com"
+                            className="w-full bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none"
                           />
-                          <label
-                            htmlFor="email"
-                            className={`pointer-events-none absolute left-4 top-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                              focused.email || fields.email
-                                ? "-translate-y-2.5 scale-90 text-dd-navy"
-                                : "text-dd-gray-600"
-                            }`}
-                          >
-                            Email Address
-                          </label>
-
-                          {/* Animated Center-Expanding Focus Underline */}
                           <motion.div
                             className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
                             initial={{ scaleX: 0 }}
@@ -275,8 +262,6 @@ export function Contact() {
                             transition={{ duration: 0.25, ease: "easeOut" }}
                           />
                         </div>
-
-                        {/* Inline Feedback Icon */}
                         {touched.email && (
                           <div className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold">
                             {errors.email ? (
@@ -293,50 +278,106 @@ export function Contact() {
                       </div>
                     </div>
 
-                    {/* Project Type Field */}
-                    <div className="relative">
-                      <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
-                        <select
-                          id="projectType"
-                          name="projectType"
-                          value={fields.projectType}
-                          onFocus={() => handleFocus("projectType")}
-                          onBlur={() => handleBlur("projectType")}
-                          onChange={(e) => updateField("projectType", e.target.value)}
-                          className="w-full bg-transparent px-4 pt-5 pb-2 text-sm font-bold text-dd-ink outline-none"
-                        >
-                          <option value="">Choose a project type</option>
-                          {projectTypes.map((type) => (
-                            <option key={type} value={type}>
-                              {type}
-                            </option>
-                          ))}
-                        </select>
-                        <label
-                          htmlFor="projectType"
-                          className="pointer-events-none absolute left-4 top-1.5 text-[10px] font-bold uppercase tracking-wider text-dd-navy"
-                        >
+                    {/* Row 2: Project Category & Estimated Budget */}
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      {/* Project Category */}
+                      <div>
+                        <label htmlFor="projectType" className="block text-xs font-bold uppercase tracking-wider text-dd-gray-600 mb-1.5">
                           Project Category
                         </label>
-
-                        {/* Animated Center-Expanding Focus Underline */}
-                        <motion.div
-                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
-                          initial={{ scaleX: 0 }}
-                          animate={{ scaleX: focused.projectType ? 1 : 0 }}
-                          transition={{ duration: 0.25, ease: "easeOut" }}
-                        />
+                        <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
+                          <select
+                            id="projectType"
+                            name="projectType"
+                            value={fields.projectType}
+                            onFocus={() => handleFocus("projectType")}
+                            onBlur={() => handleBlur("projectType")}
+                            onChange={(e) => updateField("projectType", e.target.value)}
+                            className="w-full bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none cursor-pointer"
+                          >
+                            <option value="" disabled hidden>
+                              Select category...
+                            </option>
+                            {projectTypes.map((type) => (
+                              <option key={type} value={type} className="bg-white text-dd-ink">
+                                {type}
+                              </option>
+                            ))}
+                          </select>
+                          <motion.div
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: focused.projectType ? 1 : 0 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                          />
+                        </div>
+                        {touched.projectType && (
+                          <div className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold">
+                            {errors.projectType ? (
+                              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-amber-600">
+                                <AlertCircle size={13} /> {errors.projectType}
+                              </motion.span>
+                            ) : (
+                              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-emerald-600">
+                                <CheckCircle2 size={13} /> Category selected
+                              </motion.span>
+                            )}
+                          </div>
+                        )}
                       </div>
 
-                      {touched.projectType && errors.projectType && (
-                        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-amber-600">
-                          <AlertCircle size={13} /> {errors.projectType}
-                        </motion.p>
-                      )}
+                      {/* Estimated Budget */}
+                      <div>
+                        <label htmlFor="budget" className="block text-xs font-bold uppercase tracking-wider text-dd-gray-600 mb-1.5">
+                          Estimated Budget
+                        </label>
+                        <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
+                          <select
+                            id="budget"
+                            name="budget"
+                            value={fields.budget}
+                            onFocus={() => handleFocus("budget")}
+                            onBlur={() => handleBlur("budget")}
+                            onChange={(e) => updateField("budget", e.target.value)}
+                            className="w-full bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none cursor-pointer"
+                          >
+                            <option value="" disabled hidden>
+                              Select budget range...
+                            </option>
+                            {budgetRanges.map((range) => (
+                              <option key={range} value={range} className="bg-white text-dd-ink">
+                                {range}
+                              </option>
+                            ))}
+                          </select>
+                          <motion.div
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: focused.budget ? 1 : 0 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                          />
+                        </div>
+                        {touched.budget && (
+                          <div className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold">
+                            {errors.budget ? (
+                              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-amber-600">
+                                <AlertCircle size={13} /> {errors.budget}
+                              </motion.span>
+                            ) : (
+                              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-emerald-600">
+                                <CheckCircle2 size={13} /> Budget selected
+                              </motion.span>
+                            )}
+                          </div>
+                        )}
+                      </div>
                     </div>
 
                     {/* Message Field */}
-                    <div className="relative">
+                    <div>
+                      <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-dd-gray-600 mb-1.5">
+                        Project Details & Goals
+                      </label>
                       <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
                         <textarea
                           id="message"
@@ -346,21 +387,9 @@ export function Contact() {
                           onFocus={() => handleFocus("message")}
                           onBlur={() => handleBlur("message")}
                           onChange={(e) => updateField("message", e.target.value)}
-                          placeholder=" "
-                          className="peer w-full min-h-[110px] resize-y bg-transparent px-4 pt-6 pb-2 text-sm font-bold text-dd-ink outline-none"
+                          placeholder="What are you building, and what does success look like?"
+                          className="w-full min-h-[110px] resize-y bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none"
                         />
-                        <label
-                          htmlFor="message"
-                          className={`pointer-events-none absolute left-4 top-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                            focused.message || fields.message
-                              ? "-translate-y-2.5 scale-90 text-dd-navy"
-                              : "text-dd-gray-600"
-                          }`}
-                        >
-                          Project Details & Goals
-                        </label>
-
-                        {/* Animated Center-Expanding Focus Underline */}
                         <motion.div
                           className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
                           initial={{ scaleX: 0 }}
@@ -368,7 +397,6 @@ export function Contact() {
                           transition={{ duration: 0.25, ease: "easeOut" }}
                         />
                       </div>
-
                       {touched.message && (
                         <div className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold">
                           {errors.message ? (
