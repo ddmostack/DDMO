@@ -16,6 +16,7 @@ import {
   ShieldCheck,
   Sparkles,
   Target,
+  TrendingUp,
   UsersRound,
   type LucideIcon,
 } from "lucide-react";
@@ -60,6 +61,11 @@ export const values: IconContent[] = [
     icon: Eye,
     title: "Openness",
     description: "Clear decisions, clear reporting, and no hidden surprises.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Impact",
+    description: "Purposeful execution engineered to drive measurable growth.",
   },
 ];
 

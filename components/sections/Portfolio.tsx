@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import { SectionOrb } from "@/components/effects/SectionOrb";
+import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { projects } from "@/lib/constants";
@@ -30,17 +31,26 @@ export function Portfolio() {
             >
               <article className="group">
                 <a href="#contact" className="block" aria-label={`Discuss a project like ${project.title}`}>
-                  <div className={`relative overflow-hidden rounded-[28px] border border-white/80 bg-white/25 p-2.5 shadow-lg backdrop-blur-xl ${index % 2 === 0 ? "aspect-[4/3]" : "aspect-[5/6]"}`}>
-                    <div className="relative h-full w-full overflow-hidden rounded-[20px]">
-                      <Image
-                        src={project.image}
-                        alt={project.alt}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 58vw"
-                        className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.025]"
-                      />
+                  <CursorTiltCard
+                    maxTilt={7}
+                    magnetic={true}
+                    glare={true}
+                    dataCursor="view"
+                    dataCursorText="VIEW PROJECT"
+                    className="rounded-[28px]"
+                  >
+                    <div className={`relative overflow-hidden rounded-[28px] border border-white/80 bg-white/25 p-2.5 shadow-lg backdrop-blur-xl ${index % 2 === 0 ? "aspect-[4/3]" : "aspect-[5/6]"}`}>
+                      <div className="relative h-full w-full overflow-hidden rounded-[20px]">
+                        <Image
+                          src={project.image}
+                          alt={project.alt}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 58vw"
+                          className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.035]"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  </CursorTiltCard>
                   <div className="mt-5 grid grid-cols-[1fr_auto] gap-5 border-t border-dd-gray-300 pt-5">
                     <div>
                       <p className="text-xs font-bold text-dd-navy">{project.category}</p>
@@ -58,3 +68,4 @@ export function Portfolio() {
     </section>
   );
 }
+

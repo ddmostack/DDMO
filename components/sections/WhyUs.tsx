@@ -1,4 +1,5 @@
 import { SectionOrb } from "@/components/effects/SectionOrb";
+import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { differentiators } from "@/lib/constants";
 
@@ -24,14 +25,16 @@ export function WhyUs() {
               const Icon = item.icon;
               return (
                 <ScrollReveal key={item.title} delay={(index % 2) * 0.06}>
-                  <article className="liquid-glass-card min-h-[260px] p-7 md:p-9">
-                    <div className="flex items-center justify-between">
-                      <Icon className="text-dd-navy" size={26} strokeWidth={1.7} aria-hidden="true" />
-                      <span className="text-xs font-bold text-dd-gray-600">0{index + 1}</span>
-                    </div>
-                    <h3 className="mt-14 text-xl font-bold tracking-[-0.035em] text-dd-ink md:text-2xl">{item.title}</h3>
-                    <p className="mt-4 text-sm font-medium leading-relaxed text-dd-gray-600 md:text-base">{item.description}</p>
-                  </article>
+                  <CursorTiltCard maxTilt={6} magnetic={true} glare={true} className="h-full rounded-[24px]">
+                    <article className="liquid-glass-card h-full min-h-[260px] p-7 md:p-9">
+                      <div className="flex items-center justify-between">
+                        <Icon className="text-dd-navy" size={26} strokeWidth={1.7} aria-hidden="true" />
+                        <span className="text-xs font-bold text-dd-gray-600">0{index + 1}</span>
+                      </div>
+                      <h3 className="mt-14 text-xl font-bold tracking-[-0.035em] text-dd-ink md:text-2xl">{item.title}</h3>
+                      <p className="mt-4 text-sm font-medium leading-relaxed text-dd-gray-600 md:text-base">{item.description}</p>
+                    </article>
+                  </CursorTiltCard>
                 </ScrollReveal>
               );
             })}
@@ -41,3 +44,4 @@ export function WhyUs() {
     </section>
   );
 }
+

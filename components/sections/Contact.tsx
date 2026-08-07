@@ -3,6 +3,7 @@
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { type FormEvent, useState } from "react";
 
+import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { footerDetails, projectTypes } from "@/lib/constants";
 
@@ -81,46 +82,48 @@ export function Contact() {
           <div className="contact-main-glass-card p-3 sm:p-5 lg:p-7">
             <div className="grid gap-6 lg:grid-cols-[0.4fr_0.6fr]">
               {/* Left Frosted Information Panel */}
-              <div className="contact-left-glass-panel flex flex-col justify-between p-6 sm:p-8 lg:p-10">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-gray-600">
-                    START A PROJECT
-                  </p>
-                  <h2 className="mt-4 text-balance text-2xl font-extrabold leading-[1.08] tracking-[-0.04em] text-dd-ink sm:text-3xl lg:text-[2.5rem]">
-                    Make the next move count.
-                  </h2>
-                  <p className="mt-4 max-w-[380px] text-sm font-medium leading-relaxed text-dd-gray-600 md:text-base">
-                    Tell us what you are working toward. We will help turn it into a clear next move.
-                  </p>
-                </div>
+              <CursorTiltCard maxTilt={5} magnetic={true} glare={true} className="rounded-[28px]">
+                <div className="contact-left-glass-panel flex h-full flex-col justify-between p-6 sm:p-8 lg:p-10">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-gray-600">
+                      START A PROJECT
+                    </p>
+                    <h2 className="mt-4 text-balance text-2xl font-extrabold leading-[1.08] tracking-[-0.04em] text-dd-ink sm:text-3xl lg:text-[2.5rem]">
+                      Make the next move count.
+                    </h2>
+                    <p className="mt-4 max-w-[380px] text-sm font-medium leading-relaxed text-dd-gray-600 md:text-base">
+                      Tell us what you are working toward. We will help turn it into a clear next move.
+                    </p>
+                  </div>
 
-                <address className="mt-10 space-y-4 not-italic">
-                  <a
-                    href={`mailto:${footerDetails.email}`}
-                    className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink transition-colors hover:text-dd-navy"
-                  >
-                    <span className="contact-icon-glass-btn">
-                      <Mail size={18} aria-hidden="true" />
-                    </span>
-                    <span className="truncate">{footerDetails.email}</span>
-                  </a>
-                  <a
-                    href={`tel:${footerDetails.phone.replace(/\s/g, "")}`}
-                    className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink transition-colors hover:text-dd-navy"
-                  >
-                    <span className="contact-icon-glass-btn">
-                      <Phone size={18} aria-hidden="true" />
-                    </span>
-                    <span>{footerDetails.phone}</span>
-                  </a>
-                  <p className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink">
-                    <span className="contact-icon-glass-btn">
-                      <MapPin size={18} aria-hidden="true" />
-                    </span>
-                    <span>{footerDetails.city}</span>
-                  </p>
-                </address>
-              </div>
+                  <address className="mt-10 space-y-4 not-italic">
+                    <a
+                      href={`mailto:${footerDetails.email}`}
+                      className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink transition-colors hover:text-dd-navy"
+                    >
+                      <span className="contact-icon-glass-btn">
+                        <Mail size={18} aria-hidden="true" />
+                      </span>
+                      <span className="truncate">{footerDetails.email}</span>
+                    </a>
+                    <a
+                      href={`tel:${footerDetails.phone.replace(/\s/g, "")}`}
+                      className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink transition-colors hover:text-dd-navy"
+                    >
+                      <span className="contact-icon-glass-btn">
+                        <Phone size={18} aria-hidden="true" />
+                      </span>
+                      <span>{footerDetails.phone}</span>
+                    </a>
+                    <p className="group flex items-center gap-3.5 text-sm font-bold text-dd-ink">
+                      <span className="contact-icon-glass-btn">
+                        <MapPin size={18} aria-hidden="true" />
+                      </span>
+                      <span>{footerDetails.city}</span>
+                    </p>
+                  </address>
+                </div>
+              </CursorTiltCard>
 
               {/* Right Frosted Form Panel */}
               <form

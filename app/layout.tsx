@@ -3,6 +3,7 @@ import { Sora } from "next/font/google";
 
 import "@/styles/globals.css";
 import { GradientField } from "@/components/effects/GradientField";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -53,9 +54,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
+        <CustomCursor />
         <GradientField />
         {children}
       </body>
     </html>
   );
 }
+
