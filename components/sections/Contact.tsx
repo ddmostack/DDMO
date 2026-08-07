@@ -1,8 +1,11 @@
 "use client";
 
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { AlertCircle, ArrowUpRight, CheckCircle2, Mail, MapPin, Phone } from "lucide-react";
 import { type FormEvent, useState } from "react";
 
+import { HeroParticles } from "@/components/effects/HeroParticles";
+import { Button } from "@/components/ui/Button";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { footerDetails, projectTypes } from "@/lib/constants";
@@ -27,51 +30,77 @@ function validate(fields: ContactFields): ContactErrors {
   const errors: ContactErrors = {};
 
   if (fields.name.trim().length < 2) {
-    errors.name = "Enter your name using at least 2 characters.";
+    errors.name = "Please enter your name (at least 2 characters).";
   }
 
   if (!/^\S+@\S+\.\S+$/.test(fields.email)) {
-    errors.email = "Enter a valid email address.";
+    errors.email = "Please enter a valid email address.";
   }
 
   if (!fields.projectType) {
-    errors.projectType = "Choose the type of project you have in mind.";
+    errors.projectType = "Please select a project type.";
   }
 
-  if (fields.message.trim().length < 20) {
-    errors.message = "Tell us a little more using at least 20 characters.";
+  if (fields.message.trim().length < 15) {
+    errors.message = "Please share a bit more detail (at least 15 characters).";
   }
 
   return errors;
 }
 
 export function Contact() {
-  const [fields, setFields] = useState(initialFields);
+  const reduceMotion = useReducedMotion();
+  const [fields, setFields] = useState<ContactFields>(initialFields);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [focused, setFocused] = useState<Record<string, boolean>>({});
   const [errors, setErrors] = useState<ContactErrors>({});
-  const [status, setStatus] = useState<"idle" | "ready">("idle");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleBlur = (field: keyof ContactFields) => {
+    setFocused((prev) => ({ ...prev, [field]: false }));
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    const currentErrors = validate(fields);
+    setErrors((prev) => ({ ...prev, [field]: currentErrors[field] }));
+  };
+
+  const handleFocus = (field: keyof ContactFields) => {
+    setFocused((prev) => ({ ...prev, [field]: true }));
+  };
 
   const updateField = (field: keyof ContactFields, value: string) => {
-    setFields((current) => ({ ...current, [field]: value }));
-    setErrors((current) => ({ ...current, [field]: undefined }));
-    setStatus("idle");
+    const updated = { ...fields, [field]: value };
+    setFields(updated);
+    if (touched[field]) {
+      const currentErrors = validate(updated);
+      setErrors((prev) => ({ ...prev, [field]: currentErrors[field] }));
+    }
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const allTouched = { name: true, email: true, projectType: true, message: true };
+    setTouched(allTouched);
     const nextErrors = validate(fields);
     setErrors(nextErrors);
 
-    if (Object.keys(nextErrors).length > 0) {
-      setStatus("idle");
-      return;
+    if (Object.keys(nextErrors).length === 0) {
+      setIsSubmitted(true);
     }
+  };
 
-    // TODO: connect the approved email service or API endpoint before launch.
-    setStatus("ready");
+  const handleReset = () => {
+    setFields(initialFields);
+    setTouched({});
+    setFocused({});
+    setErrors({});
+    setIsSubmitted(false);
   };
 
   return (
-    <section id="contact" className="contact-section-bg relative py-16 md:py-24 xl:py-32">
+    <section id="contact" className="contact-section-bg relative py-16 md:py-24 xl:py-32 overflow-hidden">
+      {/* Animated Hero Canvas Particles Background Bookend */}
+      <HeroParticles />
+
       {/* Decorative blurred background shapes */}
       <div className="contact-floating-blob contact-blob-1" aria-hidden="true" />
       <div className="contact-floating-blob contact-blob-2" aria-hidden="true" />
@@ -80,12 +109,12 @@ export function Contact() {
       <div className="page-container relative z-10">
         <ScrollReveal>
           <div className="contact-main-glass-card p-3 sm:p-5 lg:p-7">
-            <div className="grid gap-6 lg:grid-cols-[0.4fr_0.6fr]">
+            <div className="grid gap-6 lg:grid-cols-[0.42fr_0.58fr]">
               {/* Left Frosted Information Panel */}
               <CursorTiltCard maxTilt={5} magnetic={true} glare={true} className="rounded-[28px]">
                 <div className="contact-left-glass-panel flex h-full flex-col justify-between p-6 sm:p-8 lg:p-10">
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-gray-600">
+                    <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-navy">
                       START A PROJECT
                     </p>
                     <h2 className="mt-4 text-balance text-2xl font-extrabold leading-[1.08] tracking-[-0.04em] text-dd-ink sm:text-3xl lg:text-[2.5rem]">
@@ -125,129 +154,247 @@ export function Contact() {
                 </div>
               </CursorTiltCard>
 
-              {/* Right Frosted Form Panel */}
-              <form
-                className="p-3 sm:p-6 lg:p-8"
-                noValidate
-                onSubmit={handleSubmit}
-              >
-                <div className="grid gap-5 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <label className="block text-sm font-bold text-dd-ink" htmlFor="name">
-                      Name
-                    </label>
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      autoComplete="name"
-                      value={fields.name}
-                      onChange={(event) => updateField("name", event.target.value)}
-                      aria-invalid={Boolean(errors.name)}
-                      aria-describedby={errors.name ? "name-error" : undefined}
-                      className="contact-frosted-input"
-                      placeholder="Your name"
-                    />
-                    {errors.name ? (
-                      <p id="name-error" className="text-xs font-semibold text-[#FF4101]">
-                        {errors.name}
-                      </p>
-                    ) : null}
-                  </div>
-
-                  <div className="space-y-2">
-                    <label className="block text-sm font-bold text-dd-ink" htmlFor="email">
-                      Email
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      value={fields.email}
-                      onChange={(event) => updateField("email", event.target.value)}
-                      aria-invalid={Boolean(errors.email)}
-                      aria-describedby={errors.email ? "email-error" : undefined}
-                      className="contact-frosted-input"
-                      placeholder="you@company.com"
-                    />
-                    {errors.email ? (
-                      <p id="email-error" className="text-xs font-semibold text-[#FF4101]">
-                        {errors.email}
-                      </p>
-                    ) : null}
-                  </div>
-                </div>
-
-                <div className="mt-5 space-y-2">
-                  <label className="block text-sm font-bold text-dd-ink" htmlFor="project-type">
-                    Project Type
-                  </label>
-                  <select
-                    id="project-type"
-                    name="projectType"
-                    value={fields.projectType}
-                    onChange={(event) => updateField("projectType", event.target.value)}
-                    aria-invalid={Boolean(errors.projectType)}
-                    aria-describedby={errors.projectType ? "project-type-error" : undefined}
-                    className="contact-frosted-input"
+              {/* Right Frosted Form Panel or Animated Success View */}
+              <div className="flex flex-col justify-center p-3 sm:p-6 lg:p-8">
+                {isSubmitted ? (
+                  /* Animated SVG Checkmark Success State */
+                  <motion.div
+                    initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.92, y: 16 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex flex-col items-center justify-center p-6 text-center"
                   >
-                    <option value="">Choose a project type</option>
-                    {projectTypes.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.projectType ? (
-                    <p id="project-type-error" className="text-xs font-semibold text-[#FF4101]">
-                      {errors.projectType}
-                    </p>
-                  ) : null}
-                </div>
+                    <div className="relative mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-600 shadow-md">
+                      <svg className="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.8">
+                        <motion.path
+                          d="M5 13l4 4L19 7"
+                          initial={reduceMotion ? false : { pathLength: 0 }}
+                          animate={{ pathLength: 1 }}
+                          transition={{ duration: 0.6, ease: "easeInOut" }}
+                        />
+                      </svg>
+                    </div>
 
-                <div className="mt-5 space-y-2">
-                  <label className="block text-sm font-bold text-dd-ink" htmlFor="message">
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={5}
-                    value={fields.message}
-                    onChange={(event) => updateField("message", event.target.value)}
-                    aria-invalid={Boolean(errors.message)}
-                    aria-describedby={errors.message ? "message-error" : "message-helper"}
-                    className="contact-frosted-input min-h-[130px] resize-y"
-                    placeholder="What are you building, and what does success look like?"
-                  />
-                  <p id="message-helper" className="text-xs font-medium text-dd-gray-600">
-                    Include your goal, timeline, and any useful context.
-                  </p>
-                  {errors.message ? (
-                    <p id="message-error" className="text-xs font-semibold text-[#FF4101]">
-                      {errors.message}
+                    <h3 className="text-3xl font-extrabold tracking-[-0.04em] text-dd-ink">
+                      Message Received!
+                    </h3>
+                    <p className="mt-3 max-w-[400px] text-base font-medium leading-relaxed text-dd-gray-600">
+                      Thank you, <span className="font-bold text-dd-ink">{fields.name}</span>. We have received your project details and will be in touch within 24 hours.
                     </p>
-                  ) : null}
-                </div>
 
-                <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="max-w-[34ch] text-xs font-medium leading-relaxed text-dd-gray-600">
-                    We only use your details to respond to this enquiry.
-                  </p>
-                  <button type="submit" className="contact-frosted-submit w-full sm:w-auto">
-                    Send Enquiry <ArrowUpRight className="contact-submit-arrow ml-2" size={17} aria-hidden="true" />
-                  </button>
-                </div>
+                    <Button variant="outline" className="mt-8" onClick={handleReset} magnetic={true}>
+                      Send Another Enquiry
+                    </Button>
+                  </motion.div>
+                ) : (
+                  /* Interactive Form with Floating Labels & Center-Expanding Underlines */
+                  <form noValidate onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      {/* Name Field */}
+                      <div className="relative">
+                        <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
+                          <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            autoComplete="name"
+                            value={fields.name}
+                            onFocus={() => handleFocus("name")}
+                            onBlur={() => handleBlur("name")}
+                            onChange={(e) => updateField("name", e.target.value)}
+                            placeholder=" "
+                            className="peer w-full bg-transparent px-4 pt-5 pb-2 text-sm font-bold text-dd-ink outline-none"
+                          />
+                          <label
+                            htmlFor="name"
+                            className={`pointer-events-none absolute left-4 top-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                              focused.name || fields.name
+                                ? "-translate-y-2.5 scale-90 text-dd-navy"
+                                : "text-dd-gray-600"
+                            }`}
+                          >
+                            Your Name
+                          </label>
 
-                <div aria-live="polite">
-                  {status === "ready" ? (
-                    <p className="mt-5 rounded-2xl border border-[#00D9AB]/40 bg-[#00D9AB]/10 p-4 text-sm font-bold text-dd-ink backdrop-blur-sm">
-                      Your message is ready. Delivery will be enabled when the contact endpoint is connected.
-                    </p>
-                  ) : null}
-                </div>
-              </form>
+                          {/* Animated Center-Expanding Focus Underline */}
+                          <motion.div
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: focused.name ? 1 : 0 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                          />
+                        </div>
+
+                        {/* Inline Feedback Icon */}
+                        {touched.name && (
+                          <div className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold">
+                            {errors.name ? (
+                              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-amber-600">
+                                <AlertCircle size={13} /> {errors.name}
+                              </motion.span>
+                            ) : (
+                              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-emerald-600">
+                                <CheckCircle2 size={13} /> Looks good
+                              </motion.span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Email Field */}
+                      <div className="relative">
+                        <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
+                          <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            autoComplete="email"
+                            value={fields.email}
+                            onFocus={() => handleFocus("email")}
+                            onBlur={() => handleBlur("email")}
+                            onChange={(e) => updateField("email", e.target.value)}
+                            placeholder=" "
+                            className="peer w-full bg-transparent px-4 pt-5 pb-2 text-sm font-bold text-dd-ink outline-none"
+                          />
+                          <label
+                            htmlFor="email"
+                            className={`pointer-events-none absolute left-4 top-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                              focused.email || fields.email
+                                ? "-translate-y-2.5 scale-90 text-dd-navy"
+                                : "text-dd-gray-600"
+                            }`}
+                          >
+                            Email Address
+                          </label>
+
+                          {/* Animated Center-Expanding Focus Underline */}
+                          <motion.div
+                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
+                            initial={{ scaleX: 0 }}
+                            animate={{ scaleX: focused.email ? 1 : 0 }}
+                            transition={{ duration: 0.25, ease: "easeOut" }}
+                          />
+                        </div>
+
+                        {/* Inline Feedback Icon */}
+                        {touched.email && (
+                          <div className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold">
+                            {errors.email ? (
+                              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-amber-600">
+                                <AlertCircle size={13} /> {errors.email}
+                              </motion.span>
+                            ) : (
+                              <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-emerald-600">
+                                <CheckCircle2 size={13} /> Valid email format
+                              </motion.span>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Project Type Field */}
+                    <div className="relative">
+                      <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
+                        <select
+                          id="projectType"
+                          name="projectType"
+                          value={fields.projectType}
+                          onFocus={() => handleFocus("projectType")}
+                          onBlur={() => handleBlur("projectType")}
+                          onChange={(e) => updateField("projectType", e.target.value)}
+                          className="w-full bg-transparent px-4 pt-5 pb-2 text-sm font-bold text-dd-ink outline-none"
+                        >
+                          <option value="">Choose a project type</option>
+                          {projectTypes.map((type) => (
+                            <option key={type} value={type}>
+                              {type}
+                            </option>
+                          ))}
+                        </select>
+                        <label
+                          htmlFor="projectType"
+                          className="pointer-events-none absolute left-4 top-1.5 text-[10px] font-bold uppercase tracking-wider text-dd-navy"
+                        >
+                          Project Category
+                        </label>
+
+                        {/* Animated Center-Expanding Focus Underline */}
+                        <motion.div
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: focused.projectType ? 1 : 0 }}
+                          transition={{ duration: 0.25, ease: "easeOut" }}
+                        />
+                      </div>
+
+                      {touched.projectType && errors.projectType && (
+                        <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-amber-600">
+                          <AlertCircle size={13} /> {errors.projectType}
+                        </motion.p>
+                      )}
+                    </div>
+
+                    {/* Message Field */}
+                    <div className="relative">
+                      <div className="relative overflow-hidden rounded-xl border border-dd-gray-300/80 bg-white/40 focus-within:border-dd-navy">
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows={4}
+                          value={fields.message}
+                          onFocus={() => handleFocus("message")}
+                          onBlur={() => handleBlur("message")}
+                          onChange={(e) => updateField("message", e.target.value)}
+                          placeholder=" "
+                          className="peer w-full min-h-[110px] resize-y bg-transparent px-4 pt-6 pb-2 text-sm font-bold text-dd-ink outline-none"
+                        />
+                        <label
+                          htmlFor="message"
+                          className={`pointer-events-none absolute left-4 top-3.5 text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                            focused.message || fields.message
+                              ? "-translate-y-2.5 scale-90 text-dd-navy"
+                              : "text-dd-gray-600"
+                          }`}
+                        >
+                          Project Details & Goals
+                        </label>
+
+                        {/* Animated Center-Expanding Focus Underline */}
+                        <motion.div
+                          className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: focused.message ? 1 : 0 }}
+                          transition={{ duration: 0.25, ease: "easeOut" }}
+                        />
+                      </div>
+
+                      {touched.message && (
+                        <div className="mt-1.5 flex items-center gap-1.5 text-xs font-semibold">
+                          {errors.message ? (
+                            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-amber-600">
+                              <AlertCircle size={13} /> {errors.message}
+                            </motion.span>
+                          ) : (
+                            <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-1 text-emerald-600">
+                              <CheckCircle2 size={13} /> Detailed message
+                            </motion.span>
+                          )}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+                      <p className="max-w-[34ch] text-xs font-medium leading-relaxed text-dd-gray-600">
+                        We respect your privacy and only use details to respond to this enquiry.
+                      </p>
+                      <Button type="submit" vhsEffect magnetic={true} className="w-full sm:w-auto">
+                        Send Enquiry <ArrowUpRight className="ml-2" size={17} aria-hidden="true" />
+                      </Button>
+                    </div>
+                  </form>
+                )}
+              </div>
             </div>
           </div>
         </ScrollReveal>
