@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Sora } from "next/font/google";
 
 import "@/styles/globals.css";
-import { GradientField } from "@/components/effects/GradientField";
+import { AnimatedGradientBackground } from "@/components/ui/AnimatedGradientBackground";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 
 const sora = Sora({
@@ -55,7 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
         <CustomCursor />
-        <GradientField />
+        <AnimatedGradientBackground />
         {children}
       </body>
     </html>
