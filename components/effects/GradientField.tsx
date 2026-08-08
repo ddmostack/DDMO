@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   motion,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -12,12 +13,14 @@ import {
 
 export function GradientField() {
   const reducedMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { margin: "200px 0px" });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const { scrollYProgress } = useScroll();
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || !isInView) return;
 
     function handlePointerMove(event: PointerEvent) {
       mouseX.set((event.clientX / window.innerWidth - 0.5) * 2);
@@ -26,7 +29,7 @@ export function GradientField() {
 
     window.addEventListener("pointermove", handlePointerMove);
     return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [reducedMotion, mouseX, mouseY]);
+  }, [reducedMotion, isInView, mouseX, mouseY]);
 
   const springX = useSpring(mouseX, { stiffness: 40, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 40, damping: 20 });
@@ -55,11 +58,11 @@ export function GradientField() {
   const blobCFilter = useTransform(hueShift, (value) => `hue-rotate(${value}deg) blur(70px)`);
 
   if (reducedMotion) {
-    return <div aria-hidden className="dd-mesh-static" />;
+    return <div ref={ref} aria-hidden className="dd-mesh-static" />;
   }
 
   return (
-    <div aria-hidden className="dd-mesh">
+    <div ref={ref} aria-hidden className="dd-mesh">
       <div className="dd-grid-overlay" />
       <motion.span
         className="dd-blob dd-blob-a"

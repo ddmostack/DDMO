@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
-import { useEffect } from "react";
+import { motion, useInView, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 type SectionOrbProps = {
   className?: string;
@@ -11,11 +11,13 @@ type SectionOrbProps = {
 
 export function SectionOrb({ className = "", glowColor = "rgba(14, 42, 133, 0.16)", style }: SectionOrbProps) {
   const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { margin: "200px 0px" });
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || !isInView) return;
 
     function handlePointerMove(e: PointerEvent) {
       mouseX.set(e.clientX / window.innerWidth);
@@ -24,7 +26,7 @@ export function SectionOrb({ className = "", glowColor = "rgba(14, 42, 133, 0.16
 
     window.addEventListener("pointermove", handlePointerMove);
     return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [reduceMotion, mouseX, mouseY]);
+  }, [reduceMotion, isInView, mouseX, mouseY]);
 
   const springConfig = { stiffness: 45, damping: 20 };
   const smoothMouseX = useSpring(mouseX, springConfig);
@@ -42,7 +44,7 @@ export function SectionOrb({ className = "", glowColor = "rgba(14, 42, 133, 0.16
 
   if (reduceMotion) {
     return (
-      <div className="relative pointer-events-none" aria-hidden="true">
+      <div ref={ref} className="relative pointer-events-none" aria-hidden="true">
         <div
           className="absolute -inset-8 rounded-full blur-2xl opacity-60"
           style={{ background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)` }}
@@ -53,7 +55,7 @@ export function SectionOrb({ className = "", glowColor = "rgba(14, 42, 133, 0.16
   }
 
   return (
-    <div className="relative pointer-events-none" aria-hidden="true">
+    <div ref={ref} className="relative pointer-events-none" aria-hidden="true">
       {/* Light Source Backglow Aura */}
       <motion.div
         className="absolute -inset-10 rounded-full blur-3xl pointer-events-none z-0"

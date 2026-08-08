@@ -29,9 +29,16 @@ export function FloatingOrbs() {
   useEffect(() => {
     if (reduceMotion) return;
 
+    let ticking = false;
     function handlePointerMove(e: PointerEvent) {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          mouseX.set(e.clientX);
+          mouseY.set(e.clientY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     }
 
     window.addEventListener("pointermove", handlePointerMove);

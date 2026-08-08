@@ -3,13 +3,14 @@
 import {
   AnimatePresence,
   motion,
+  useInView,
   useMotionValue,
   useReducedMotion,
   useSpring,
   Variants,
 } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { HeroParticles } from "@/components/effects/HeroParticles";
 import { Button } from "@/components/ui/Button";
@@ -71,6 +72,8 @@ const letterVariants: Variants = {
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { margin: "0px 0px -200px 0px" });
   const [wordIndex, setWordIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [isRevealed, setIsRevealed] = useState(() => Boolean(reduceMotion));
@@ -85,7 +88,7 @@ export function Hero() {
 
   // Parallax mouse move handler
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || !isInView) return;
 
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
@@ -97,7 +100,7 @@ export function Hero() {
 
     window.addEventListener("mousemove", handleMouseMove);
     return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [reduceMotion, rawMouseX, rawMouseY]);
+  }, [reduceMotion, isInView, rawMouseX, rawMouseY]);
 
   // Load reveal trigger timer
   useEffect(() => {
@@ -124,7 +127,7 @@ export function Hero() {
   const currentWord = ROTATING_WORDS[wordIndex];
 
   return (
-    <section id="home" className="relative min-h-[100dvh] pt-[72px]">
+    <section ref={sectionRef} id="home" className="relative min-h-[100dvh] pt-[72px]">
       {/* Interactive Particle Canvas */}
       <HeroParticles />
 

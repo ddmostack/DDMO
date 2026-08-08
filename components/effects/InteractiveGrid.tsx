@@ -1,14 +1,15 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 export function InteractiveGrid() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const reduceMotion = useReducedMotion();
+  const isInView = useInView(canvasRef, { margin: "200px 0px" });
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || !isInView) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -192,7 +193,7 @@ export function InteractiveGrid() {
       window.removeEventListener("pointermove", handlePointerMove);
       document.removeEventListener("pointerleave", handlePointerLeave);
     };
-  }, [reduceMotion]);
+  }, [reduceMotion, isInView]);
 
   if (reduceMotion) {
     return (

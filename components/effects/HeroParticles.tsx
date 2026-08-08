@@ -1,14 +1,15 @@
 "use client";
 
-import { useReducedMotion } from "framer-motion";
+import { useInView, useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
 
 export function HeroParticles() {
   const reduceMotion = useReducedMotion();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isInView = useInView(canvasRef, { margin: "200px 0px" });
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (reduceMotion || !isInView) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -114,7 +115,7 @@ export function HeroParticles() {
       window.removeEventListener("pointermove", handlePointerMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [reduceMotion]);
+  }, [reduceMotion, isInView]);
 
   if (reduceMotion) return null;
 
