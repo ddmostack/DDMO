@@ -202,6 +202,32 @@ textarea {
   50% { transform: translate(-3rem, 2.5rem) scale(1.1); }
 }
 
+/* Scale down background blobs on mobile for performance & to prevent overflow */
+@media (max-width: 639px) {
+  .dd-blob {
+    filter: blur(60px);
+  }
+  .dd-blob-a {
+    width: 28rem;
+    height: 28rem;
+    top: -6rem;
+    left: -8rem;
+  }
+  .dd-blob-b {
+    width: 26rem;
+    height: 26rem;
+    right: -8rem;
+  }
+  .dd-blob-c {
+    width: 24rem;
+    height: 24rem;
+  }
+  .dd-blob-d {
+    width: 22rem;
+    height: 22rem;
+  }
+}
+
 .dd-grain {
   position: absolute;
   inset: 0;
@@ -337,8 +363,8 @@ textarea {
 }
 
 .contact-blob-1 {
-  width: 20rem;
-  height: 20rem;
+  width: min(20rem, 55vw);
+  height: min(20rem, 55vw);
   top: 1rem;
   right: 1rem;
   background: radial-gradient(circle at 35% 30%, #ffffff 0%, #e2e8f0 55%, #cbd5e1 90%, #94a3b8 100%);
@@ -347,8 +373,8 @@ textarea {
 }
 
 .contact-blob-2 {
-  width: 24rem;
-  height: 24rem;
+  width: min(24rem, 60vw);
+  height: min(24rem, 60vw);
   bottom: 1rem;
   right: 1rem;
   background: radial-gradient(circle at 35% 35%, #ffffff 0%, #f1f5f9 50%, #cbd5e1 85%, #94a3b8 100%);
@@ -357,8 +383,8 @@ textarea {
 }
 
 .contact-blob-3 {
-  width: 18rem;
-  height: 18rem;
+  width: min(18rem, 50vw);
+  height: min(18rem, 50vw);
   bottom: 1rem;
   left: 1rem;
   background: radial-gradient(circle at 40% 30%, #ffffff 0%, #e2e8f0 60%, #cbd5e1 95%);

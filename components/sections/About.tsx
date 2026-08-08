@@ -45,7 +45,7 @@ export function About() {
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-navy">
                 About Doodle Dynamo
               </p>
-              <h2 className="text-balance text-4xl font-extrabold leading-[0.98] tracking-[-0.055em] text-dd-ink md:text-6xl">
+              <h2 className="text-balance text-3xl font-extrabold leading-[0.98] tracking-[-0.055em] text-dd-ink sm:text-4xl md:text-5xl lg:text-6xl">
                 Small team.<br />
                 Wide-angle thinking.
               </h2>
@@ -80,7 +80,7 @@ export function About() {
               {!reduceMotion && (
                 <CurvyDashedProgressArrow
                   progress={smoothProgress}
-                  className="absolute -left-6 sm:-left-8 md:-left-12 lg:-left-14 top-0 bottom-0 w-10 sm:w-12 md:w-16 lg:w-20 block z-20"
+                  className="absolute -left-6 sm:-left-8 md:-left-12 lg:-left-14 top-0 bottom-0 w-10 sm:w-12 md:w-16 lg:w-20 hidden sm:block z-20"
                 />
               )}
 

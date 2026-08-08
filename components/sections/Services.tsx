@@ -66,7 +66,7 @@ export function Services() {
               <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-navy">
                 Capabilities
               </p>
-              <h2 className="mt-4 max-w-[760px] text-balance text-5xl font-extrabold leading-[0.94] tracking-[-0.06em] text-dd-ink md:text-7xl">
+              <h2 className="mt-4 max-w-[760px] text-balance text-3xl font-extrabold leading-[0.94] tracking-[-0.06em] text-dd-ink sm:text-4xl md:text-5xl lg:text-7xl">
                 Built for the whole journey.
               </h2>
             </div>
@@ -126,7 +126,7 @@ export function Services() {
 
                       {/* Oversized Background Numeral */}
                       <span
-                        className={`pointer-events-none absolute -bottom-3 -right-2 font-mono text-8xl md:text-9xl font-extrabold tracking-tighter text-dd-ink/5 select-none transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-105 ${style.badgeColor}`}
+                        className={`pointer-events-none absolute -bottom-3 -right-2 font-mono text-6xl md:text-8xl lg:text-9xl font-extrabold tracking-tighter text-dd-ink/5 select-none transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-105 ${style.badgeColor}`}
                         aria-hidden="true"
                       >
                         {num}

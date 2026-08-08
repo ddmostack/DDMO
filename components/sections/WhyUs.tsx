@@ -42,7 +42,7 @@ export function WhyUs() {
             <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-navy">
               Our Differentiators
             </p>
-            <h2 className="mt-4 text-balance text-5xl font-extrabold leading-[0.94] tracking-[-0.06em] text-dd-ink md:text-7xl">
+            <h2 className="mt-4 text-balance text-3xl font-extrabold leading-[0.94] tracking-[-0.06em] text-dd-ink sm:text-4xl md:text-5xl lg:text-7xl">
               Why teams keep us close.
             </h2>
             <p className="mt-6 text-base font-medium leading-relaxed text-dd-gray-600 md:text-lg">
@@ -57,7 +57,7 @@ export function WhyUs() {
           {!reduceMotion && (
             <CurvyDashedProgressArrow
               progress={smoothProgress}
-              className="absolute left-2 md:left-1/2 top-0 bottom-0 w-10 sm:w-12 md:w-16 lg:w-20 -translate-x-1/2 z-20"
+              className="absolute md:left-1/2 top-0 bottom-0 w-10 sm:w-12 md:w-16 lg:w-20 -translate-x-1/2 hidden md:block z-20"
             />
           )}
 
@@ -78,7 +78,7 @@ export function WhyUs() {
                     delay: reduceMotion ? 0 : (index % 2) * 0.1,
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className="relative grid grid-cols-1 gap-6 pl-10 md:grid-cols-12 md:gap-8 md:pl-0"
+                  className="relative grid grid-cols-1 gap-6 md:grid-cols-12 md:gap-8 md:pl-0"
                 >
                   {/* Left Column (Content for EVEN items, Empty for ODD items) */}
                   <div

@@ -154,7 +154,7 @@ export function Hero() {
               initial={reduceMotion ? { opacity: 0 } : "hidden"}
               animate={reduceMotion ? { opacity: 1 } : "visible"}
               transition={reduceMotion ? { duration: 0.7 } : undefined}
-              className="max-w-[920px] text-balance text-[clamp(3.6rem,8vw,7.2rem)] font-extrabold leading-[0.92] tracking-[-0.075em] text-dd-ink"
+              className="max-w-[920px] text-balance text-[clamp(2.6rem,8vw,7.2rem)] font-extrabold leading-[0.92] tracking-[-0.075em] text-dd-ink"
             >
               {/* Line 1: Ideas built */}
               <span className="inline-block overflow-hidden py-1">
@@ -195,7 +195,11 @@ export function Hero() {
                   <span
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
-                    className="relative inline-flex items-center justify-start min-w-[4.4ch] md:min-w-[4.8ch] text-left cursor-pointer"
+                    onTouchStart={() => {
+                      setIsHovered(true);
+                      setTimeout(() => setIsHovered(false), 600);
+                    }}
+                    className="relative inline-flex items-center justify-start min-w-[5.2ch] md:min-w-[5.2ch] text-left cursor-pointer"
                   >
                     {reduceMotion ? (
                       <span className="bg-dd-gradient bg-clip-text text-transparent">

@@ -111,7 +111,7 @@ export function Navbar() {
 
           <button
             type="button"
-            className="grid h-9 w-9 place-items-center rounded-full bg-white/40 text-dd-ink shadow-sm backdrop-blur-md transition-colors hover:bg-white/60 lg:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full bg-white/40 text-dd-ink shadow-sm backdrop-blur-md transition-colors hover:bg-white/60 lg:hidden"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}

@@ -81,7 +81,7 @@ export function Portfolio() {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <SectionLabel>Selected Work</SectionLabel>
-              <h2 className="mt-7 max-w-[760px] text-balance text-5xl font-extrabold leading-[0.94] tracking-[-0.06em] text-dd-ink md:text-7xl">
+              <h2 className="mt-7 max-w-[760px] text-balance text-3xl font-extrabold leading-[0.94] tracking-[-0.06em] text-dd-ink sm:text-4xl md:text-5xl lg:text-7xl">
                 Different problems.<br />Distinct answers.
               </h2>
             </div>

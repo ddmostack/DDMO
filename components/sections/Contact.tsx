@@ -213,7 +213,7 @@ export function Contact() {
                             onBlur={() => handleBlur("name")}
                             onChange={(e) => updateField("name", e.target.value)}
                             placeholder="e.g. Sarah Jenkins"
-                            className="w-full bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none"
+                            className="w-full min-h-[44px] bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none"
                           />
                           <motion.div
                             className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
@@ -253,7 +253,7 @@ export function Contact() {
                             onBlur={() => handleBlur("email")}
                             onChange={(e) => updateField("email", e.target.value)}
                             placeholder="you@company.com"
-                            className="w-full bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none"
+                            className="w-full min-h-[44px] bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none"
                           />
                           <motion.div
                             className="absolute bottom-0 left-0 right-0 h-0.5 bg-dd-navy"
@@ -293,7 +293,7 @@ export function Contact() {
                             onFocus={() => handleFocus("projectType")}
                             onBlur={() => handleBlur("projectType")}
                             onChange={(e) => updateField("projectType", e.target.value)}
-                            className="w-full bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none cursor-pointer"
+                            className="w-full min-h-[44px] bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none cursor-pointer"
                           >
                             <option value="" disabled hidden>
                               Select category...
@@ -339,7 +339,7 @@ export function Contact() {
                             onFocus={() => handleFocus("budget")}
                             onBlur={() => handleBlur("budget")}
                             onChange={(e) => updateField("budget", e.target.value)}
-                            className="w-full bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none cursor-pointer"
+                            className="w-full min-h-[44px] bg-transparent px-4 py-3 text-sm font-bold text-dd-ink outline-none cursor-pointer"
                           >
                             <option value="" disabled hidden>
                               Select budget range...

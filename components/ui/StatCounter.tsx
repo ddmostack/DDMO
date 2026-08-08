@@ -64,7 +64,7 @@ export function StatCounter({
       <div>
         {/* Scale Bounce Punctuation on Number when Count Completes */}
         <motion.p
-          className="bg-dd-gradient bg-clip-text text-4xl font-extrabold tracking-[-0.04em] text-transparent md:text-5xl inline-block"
+          className="bg-dd-gradient bg-clip-text text-3xl font-extrabold tracking-[-0.04em] text-transparent sm:text-4xl md:text-5xl inline-block"
           animate={
             isCompleted && !reduceMotion
               ? { scale: [1, 1.08, 1] }
