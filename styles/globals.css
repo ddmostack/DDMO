@@ -726,11 +726,7 @@ a:hover .contact-icon-glass-btn {
 /* ---------------------------------------------------------------- */
 
 .directional-light-wash {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(circle at 15% 15%, rgba(14, 42, 133, 0.12) 0%, rgba(12, 143, 128, 0.06) 40%, transparent 75%);
-  animation: directionalLightDrift 28s ease-in-out infinite alternate;
+  display: none;
 }
 
 @keyframes directionalLightDrift {

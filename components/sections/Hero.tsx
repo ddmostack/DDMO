@@ -38,22 +38,6 @@ export function Hero() {
       {/* Interactive Particle Canvas */}
       <HeroParticles />
 
-      {/* Soft theme-tint gradient overlay wash (5-10% opacity using indigo/navy theme tokens) */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dd-navy/10 via-dd-blue-600/5 to-transparent z-0"
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-dd-navy/8 via-dd-blue-700/4 to-transparent z-0"
-      />
-
-      {/* Soft legibility wash */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-dd-offwhite/55 via-dd-offwhite/15 to-transparent z-0"
-      />
-
       <div className="page-container relative flex min-h-[calc(100dvh-72px)] flex-col items-center justify-center py-12 text-center">
         <CursorTiltCard
           maxTilt={5}

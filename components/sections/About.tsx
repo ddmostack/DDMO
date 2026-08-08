@@ -35,8 +35,6 @@ export function About() {
 
   return (
     <section id="about" className="relative bg-transparent">
-      {/* Directional light wash */}
-      <div className="directional-light-wash" aria-hidden="true" />
 
       <div className="page-container section-space relative z-10">
         {/* Top Header & Overview */}

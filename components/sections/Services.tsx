@@ -58,8 +58,6 @@ export function Services() {
 
   return (
     <section id="services" className="relative bg-transparent">
-      {/* Directional light wash background */}
-      <div className="directional-light-wash" aria-hidden="true" />
 
       <div className="page-container section-space relative z-10">
         <ScrollReveal>
