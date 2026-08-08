@@ -1,37 +1,127 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  Variants,
+} from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import { HeroParticles } from "@/components/effects/HeroParticles";
 import { Button } from "@/components/ui/Button";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 
-const wordContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
+const ROTATING_WORDS = ["move.", "scale.", "convert.", "ship."];
+
+const loadWordVariants: Variants = {
+  hidden: { y: "100%" },
+  visible: (i: number) => ({
+    y: "0%",
     transition: {
-      staggerChildren: 0.06,
-      delayChildren: 0.15,
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as const,
+      delay: 0.15 + i * 0.08,
+    },
+  }),
+};
+
+const lastWordRevealVariants: Variants = {
+  hidden: { y: "100%" },
+  visible: {
+    y: "0%",
+    transition: {
+      duration: 0.7,
+      ease: [0.16, 1, 0.3, 1] as const,
+      delay: 0.46, // 150ms after "to" (0.15 + 2 * 0.08 + 0.15 = 0.46)
     },
   },
 };
 
-const wordItemVariants = {
-  hidden: { y: "120%", opacity: 0 },
-  visible: {
-    y: "0%",
+const wordRotationVariants: Variants = {
+  initial: { opacity: 0, y: 18, filter: "blur(8px)" },
+  animate: {
     opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const },
+  },
+  exit: {
+    opacity: 0,
+    y: -18,
+    filter: "blur(8px)",
+    transition: { duration: 0.2, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
+const letterVariants: Variants = {
+  rest: { y: 0 },
+  hover: (i: number) => ({
+    y: [0, -4, 0],
     transition: {
-      duration: 0.7,
+      duration: 0.35,
+      delay: i * 0.03,
       ease: [0.22, 1, 0.36, 1] as const,
     },
-  },
+  }),
 };
 
 export function Hero() {
   const reduceMotion = useReducedMotion();
+  const [wordIndex, setWordIndex] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isRevealed, setIsRevealed] = useState(() => Boolean(reduceMotion));
+
+  // Parallax spring values (max 6px opposite mouse movement)
+  const rawMouseX = useMotionValue(0);
+  const rawMouseY = useMotionValue(0);
+
+  const springConfig = { stiffness: 50, damping: 20 };
+  const headlineX = useSpring(rawMouseX, springConfig);
+  const headlineY = useSpring(rawMouseY, springConfig);
+
+  // Parallax mouse move handler
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { innerWidth, innerHeight } = window;
+      const normX = (e.clientX / innerWidth - 0.5) * 2;
+      const normY = (e.clientY / innerHeight - 0.5) * 2;
+      rawMouseX.set(-normX * 6);
+      rawMouseY.set(-normY * 6);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [reduceMotion, rawMouseX, rawMouseY]);
+
+  // Load reveal trigger timer
+  useEffect(() => {
+    if (reduceMotion) return;
+
+    const timer = setTimeout(() => {
+      setIsRevealed(true);
+    }, 460);
+
+    return () => clearTimeout(timer);
+  }, [reduceMotion]);
+
+  // Word rotator interval (cycles every 2.5s once load reveal finishes)
+  useEffect(() => {
+    if (reduceMotion || !isRevealed) return;
+
+    const interval = setInterval(() => {
+      setWordIndex((prev) => (prev + 1) % ROTATING_WORDS.length);
+    }, 2500);
+
+    return () => clearInterval(interval);
+  }, [reduceMotion, isRevealed]);
+
+  const currentWord = ROTATING_WORDS[wordIndex];
 
   return (
     <section id="home" className="relative min-h-[100dvh] pt-[72px]">
@@ -50,7 +140,7 @@ export function Hero() {
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
               className="mb-7 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-dd-gray-600"
             >
               <span className="h-px w-9 bg-dd-navy" aria-hidden="true" />
@@ -58,48 +148,106 @@ export function Hero() {
               <span className="h-px w-9 bg-dd-navy" aria-hidden="true" />
             </motion.p>
 
-            {/* Kinetic Text Reveal Headline */}
+            {/* Kinetic Text Reveal Headline with Parallax & Word Rotator */}
             <motion.h1
-              variants={wordContainerVariants}
-              initial={reduceMotion ? false : "hidden"}
-              animate="visible"
+              style={reduceMotion ? {} : { x: headlineX, y: headlineY }}
+              initial={reduceMotion ? { opacity: 0 } : "hidden"}
+              animate={reduceMotion ? { opacity: 1 } : "visible"}
+              transition={reduceMotion ? { duration: 0.7 } : undefined}
               className="max-w-[920px] text-balance text-[clamp(3.6rem,8vw,7.2rem)] font-extrabold leading-[0.92] tracking-[-0.075em] text-dd-ink"
             >
+              {/* Line 1: Ideas built */}
               <span className="inline-block overflow-hidden py-1">
-                <motion.span variants={wordItemVariants} className="inline-block">
+                <motion.span
+                  custom={0}
+                  variants={reduceMotion ? undefined : loadWordVariants}
+                  className="inline-block"
+                >
                   Ideas
                 </motion.span>
               </span>{" "}
               <span className="inline-block overflow-hidden py-1">
-                <motion.span variants={wordItemVariants} className="inline-block">
+                <motion.span
+                  custom={1}
+                  variants={reduceMotion ? undefined : loadWordVariants}
+                  className="inline-block"
+                >
                   built
                 </motion.span>
               </span>
               <br />
+              {/* Line 2: to [Rotating Word] */}
               <span className="inline-block overflow-hidden py-1">
-                <motion.span variants={wordItemVariants} className="inline-block">
+                <motion.span
+                  custom={2}
+                  variants={reduceMotion ? undefined : loadWordVariants}
+                  className="inline-block"
+                >
                   to
                 </motion.span>
               </span>{" "}
-              <span className="inline-block overflow-hidden py-1">
+              <span className="inline-block overflow-hidden py-1 align-bottom">
                 <motion.span
-                  variants={wordItemVariants}
-                  className="inline-block bg-dd-gradient bg-clip-text text-transparent"
-                  animate={
-                    reduceMotion
-                      ? {}
-                      : {
-                          y: [0, -3.5, 0],
-                          skewX: [0, -1, 0, 1, 0],
-                        }
-                  }
-                  transition={{
-                    duration: 4.8,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                  variants={reduceMotion ? undefined : lastWordRevealVariants}
+                  className="inline-block"
                 >
-                  move.
+                  {/* Fixed-width layout wrapper to prevent Cumulative Layout Shift (CLS) */}
+                  <span
+                    onMouseEnter={() => setIsHovered(true)}
+                    onMouseLeave={() => setIsHovered(false)}
+                    className="relative inline-flex items-center justify-start min-w-[4.4ch] md:min-w-[4.8ch] text-left cursor-pointer"
+                  >
+                    {reduceMotion ? (
+                      <span className="bg-dd-gradient bg-clip-text text-transparent">
+                        move.
+                      </span>
+                    ) : (
+                      <AnimatePresence mode="wait">
+                        <motion.span
+                          key={currentWord}
+                          variants={wordRotationVariants}
+                          initial="initial"
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                            filter: "blur(0px)",
+                            backgroundPosition: ["0% 50%", "200% 50%"],
+                          }}
+                          exit="exit"
+                          className="inline-block bg-clip-text text-transparent"
+                          style={{
+                            backgroundImage:
+                              "linear-gradient(90deg, #1235A0 0%, #10D9AB 25%, #FEBD02 50%, #FF4101 75%, #1235A0 100%)",
+                            backgroundSize: "200% auto",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                          }}
+                          transition={{
+                            opacity: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const },
+                            y: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const },
+                            filter: { duration: 0.3, ease: [0.16, 1, 0.3, 1] as const },
+                            backgroundPosition: {
+                              duration: isHovered ? 3 : 6,
+                              repeat: Infinity,
+                              ease: "linear",
+                            },
+                          }}
+                        >
+                          {currentWord.split("").map((char, index) => (
+                            <motion.span
+                              key={`${currentWord}-${index}`}
+                              custom={index}
+                              variants={letterVariants}
+                              animate={isHovered ? "hover" : "rest"}
+                              className="inline-block"
+                            >
+                              {char}
+                            </motion.span>
+                          ))}
+                        </motion.span>
+                      </AnimatePresence>
+                    )}
+                  </span>
                 </motion.span>
               </span>
             </motion.h1>
@@ -108,7 +256,7 @@ export function Hero() {
             <motion.p
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
               className="mt-8 max-w-[620px] text-balance text-base font-medium leading-relaxed text-dd-gray-600 md:text-xl"
             >
               Strategy, design, and technology for ambitious brands ready to turn attention into momentum.
@@ -118,7 +266,7 @@ export function Hero() {
             <motion.div
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: 0.55, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
               className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-center"
             >
               <Button href="#contact" vhsEffect magnetic={true}>
