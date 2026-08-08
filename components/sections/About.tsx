@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 
+import { CurvyDashedProgressArrow } from "@/components/ui/CurvyDashedProgressArrow";
 import { SectionOrb } from "@/components/effects/SectionOrb";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -32,9 +33,6 @@ export function About() {
     stiffness: 280,
     damping: 28,
   });
-
-  const progressLineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-  const progressDotY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section id="about" className="relative bg-transparent">
@@ -89,21 +87,12 @@ export function About() {
 
             {/* Values Grid Module */}
             <div ref={gridRef} className="relative mt-12 lg:mt-16">
-              {/* Vertical Scroll-Linked Progress Track & Indicator */}
+              {/* Organic Hand-Drawn Curvy Arrow Scroll Indicator */}
               {!reduceMotion && (
-                <div
-                  className="pointer-events-none absolute -left-5 top-0 bottom-0 hidden w-1 bg-dd-gray-300/40 rounded-full md:block"
-                  aria-hidden="true"
-                >
-                  <motion.div
-                    className="w-full bg-dd-blue-600 rounded-full"
-                    style={{ height: progressLineHeight }}
-                  />
-                  <motion.div
-                    className="absolute -left-[3px] top-0 h-2.5 w-2.5 rounded-full bg-dd-blue-600 shadow-sm"
-                    style={{ top: progressDotY, translateY: "-50%" }}
-                  />
-                </div>
+                <CurvyDashedProgressArrow
+                  progress={smoothProgress}
+                  className="absolute -left-10 md:-left-12 lg:-left-14 top-0 bottom-0 hidden w-12 md:w-16 lg:w-20 md:block z-20"
+                />
               )}
 
               {/* 3x2 Balanced Grid Layout */}
