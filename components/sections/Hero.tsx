@@ -84,7 +84,7 @@ export function Hero() {
               <span className="inline-block overflow-hidden py-1">
                 <motion.span
                   variants={wordItemVariants}
-                  className="inline-block bg-gradient-to-r from-dd-blue-600 via-dd-blue-700 to-dd-teal-600 bg-clip-text text-transparent"
+                  className="inline-block bg-dd-gradient bg-clip-text text-transparent"
                   animate={
                     reduceMotion
                       ? {}

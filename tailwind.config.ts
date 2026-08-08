@@ -56,12 +56,12 @@ const config: Config = {
           800: "#992200",
           900: "#6B1700",
         },
-        // Primary brand aliases pointing to deepened 600 scale tokens
-        "dd-navy": "#0E2A85",
-        "dd-teal-primary": "#0C8F80",
-        "dd-yellow-primary": "#D99A00",
-        "dd-coral": "#D93600",
-        "dd-signal": "#D99A00",
+        // Primary brand aliases pointing to exact 4-color brand tokens
+        "dd-navy": "#1235A0",
+        "dd-teal-primary": "#10D9AB",
+        "dd-yellow-primary": "#FEBD02",
+        "dd-coral": "#FF4101",
+        "dd-signal": "#FEBD02",
         "dd-ink": "rgb(var(--dd-ink) / <alpha-value>)",
         "dd-offwhite": "rgb(var(--dd-paper) / <alpha-value>)",
         "dd-gray-600": "rgb(var(--dd-muted) / <alpha-value>)",
@@ -70,10 +70,10 @@ const config: Config = {
       },
       backgroundImage: {
         "dd-gradient":
-          "linear-gradient(125deg, #0E2A85 0%, #0C8F80 33%, #D99A00 66%, #D93600 100%)",
+          "linear-gradient(135deg, #1235A0 0%, #10D9AB 33%, #FEBD02 66%, #FF4101 100%)",
         "dd-gradient-dark": "linear-gradient(135deg, #0A1F6E, #050E33)",
         "dd-gradient-radial":
-          "radial-gradient(circle at 30% 20%, rgba(14, 42, 133, 0.25), transparent 60%)",
+          "radial-gradient(circle at 30% 20%, rgba(18, 53, 160, 0.25), transparent 60%)",
       },
       borderRadius: {
         "2xl": "1.375rem",
