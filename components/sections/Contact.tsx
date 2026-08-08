@@ -107,10 +107,7 @@ export function Contact() {
       {/* Animated Hero Canvas Particles Background Bookend */}
       <HeroParticles />
 
-      {/* Decorative blurred background shapes */}
-      <div className="contact-floating-blob contact-blob-1" aria-hidden="true" />
-      <div className="contact-floating-blob contact-blob-2" aria-hidden="true" />
-      <div className="contact-floating-blob contact-blob-3" aria-hidden="true" />
+      {/* Removed decorative blurred background shapes as requested */}
 
       <div className="page-container relative z-10">
         <ScrollReveal>

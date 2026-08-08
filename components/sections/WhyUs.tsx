@@ -82,8 +82,8 @@ export function WhyUs() {
                 >
                   {/* Left Column (Content for EVEN items, Empty for ODD items) */}
                   <div
-                    className={`md:col-span-5 ${
-                      isEven ? "md:order-1 md:text-right" : "md:order-3 md:block hidden"
+                    className={`hidden md:block md:col-span-5 ${
+                      isEven ? "md:order-1 md:text-right" : "md:order-3"
                     }`}
                   >
                     {isEven && (
@@ -122,8 +122,8 @@ export function WhyUs() {
 
                   {/* Right Column (Content for ODD items, Empty for EVEN items) */}
                   <div
-                    className={`md:col-span-5 ${
-                      !isEven ? "md:order-3 md:text-left" : "md:order-1 md:block hidden"
+                    className={`hidden md:block md:col-span-5 ${
+                      !isEven ? "md:order-3 md:text-left" : "md:order-1"
                     }`}
                   >
                     {!isEven && (
