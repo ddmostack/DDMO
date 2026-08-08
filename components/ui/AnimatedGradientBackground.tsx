@@ -1,31 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import React from "react";
-
-export interface BlobConfig {
-  id: string;
-  color: string;
-  size?: string;
-  initialPosition: {
-    top?: string;
-    bottom?: string;
-    left?: string;
-    right?: string;
-  };
-  animate: {
-    x: (number | string)[];
-    y: (number | string)[];
-    scale: number[];
-  };
-  duration: number;
-}
 
 export interface AnimatedGradientBackgroundProps {
   /** Base background color (defaults to near-white paper #F7F8FA) */
   baseColor?: string;
-  /** Custom array of blob configurations for total brand flexibility */
-  blobs?: BlobConfig[];
   /** Grain overlay opacity (0.04 to 0.08 recommended, defaults to 0.06) */
   grainOpacity?: number;
   /** Custom className for container */
@@ -36,102 +16,96 @@ export interface AnimatedGradientBackgroundProps {
   positioning?: "fixed" | "absolute";
 }
 
-// Default blob setup closely tuned to match the reference image:
-// - Luminous soft white highlights in the inner gradients for high contrast & clarity
-// - Warm orange/coral top-right
-// - Electric azure blue bottom-left
-// - Rich violet-purple center-bottom diagonal sweep
-// - Soft lavender top-center accent
-const defaultBlobs: BlobConfig[] = [
-  // Luminous Soft White Core Glow (Center-Top)
-  {
-    id: "center-white-luminous",
-    color: "radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 45%, transparent 80%)",
-    size: "w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] md:w-[900px] md:h-[900px]",
-    initialPosition: { top: "10%", left: "20%" },
-    animate: {
-      x: [0, 40, -40, 20, 0],
-      y: [0, -30, 40, -20, 0],
-      scale: [1, 1.15, 0.92, 1.08, 1],
-    },
-    duration: 20,
-  },
-  // Luminous Soft White Glow (Bottom-Right)
-  {
-    id: "bottom-white-luminous",
-    color: "radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 40%, transparent 80%)",
-    size: "w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] md:w-[850px] md:h-[850px]",
-    initialPosition: { bottom: "10%", right: "15%" },
-    animate: {
-      x: [0, -50, 30, -20, 0],
-      y: [0, 40, -30, 25, 0],
-      scale: [1, 1.1, 0.95, 1.05, 1],
-    },
-    duration: 24,
-  },
-  // Warm orange/coral top-right with soft white center core
-  {
-    id: "top-right-coral",
-    color: "radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 94, 54, 0.75) 30%, rgba(255, 140, 40, 0.4) 60%, transparent 85%)",
-    size: "w-[480px] h-[480px] sm:w-[650px] sm:h-[650px] md:w-[800px] md:h-[800px]",
-    initialPosition: { top: "-12%", right: "-8%" },
-    animate: {
-      x: [0, 45, -35, 25, 0],
-      y: [0, -35, 45, -25, 0],
-      scale: [1, 1.12, 0.92, 1.08, 1],
-    },
-    duration: 22,
-  },
-  // Electric azure blue bottom-left with soft white inner transition
-  {
-    id: "bottom-left-blue",
-    color: "radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(0, 145, 255, 0.8) 35%, rgba(37, 99, 235, 0.5) 60%, transparent 85%)",
-    size: "w-[520px] h-[520px] sm:w-[700px] sm:h-[700px] md:w-[900px] md:h-[900px]",
-    initialPosition: { bottom: "-18%", left: "-12%" },
-    animate: {
-      x: [0, 55, -45, 30, 0],
-      y: [0, -45, 35, -30, 0],
-      scale: [1, 1.18, 0.95, 1.1, 1],
-    },
-    duration: 27,
-  },
-  // Rich violet-purple center-bottom diagonal sweep with soft white highlights
-  {
-    id: "bottom-center-purple",
-    color: "radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(140, 45, 226, 0.7) 35%, rgba(124, 58, 237, 0.45) 60%, transparent 85%)",
-    size: "w-[550px] h-[550px] sm:w-[750px] sm:h-[750px] md:w-[950px] md:h-[950px]",
-    initialPosition: { bottom: "-15%", left: "12%" },
-    animate: {
-      x: [0, -45, 55, -25, 0],
-      y: [0, 35, -40, 20, 0],
-      scale: [1, 0.92, 1.15, 1.05, 1],
-    },
-    duration: 32,
-  },
-  // Soft lavender top-center accent with white glow
-  {
-    id: "top-center-lavender",
-    color: "radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(168, 85, 247, 0.35) 40%, rgba(99, 102, 241, 0.2) 65%, transparent 85%)",
-    size: "w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] md:w-[700px] md:h-[700px]",
-    initialPosition: { top: "15%", right: "20%" },
-    animate: {
-      x: [0, 30, -30, 20, 0],
-      y: [0, -30, 25, -15, 0],
-      scale: [1, 1.08, 0.94, 1.04, 1],
-    },
-    duration: 25,
-  },
-];
+// Brand color palette hex definitions from reference:
+// BLUE:   #1235A0 -> rgba(18, 53, 160, opacity)
+// TEAL:   #10D9AB -> rgba(16, 217, 171, opacity)
+// YELLOW: #FEBD02 -> rgba(254, 189, 2, opacity)
+// RED:    #FF4101 -> rgba(255, 65, 1, opacity)
 
 export function AnimatedGradientBackground({
   baseColor = "#F7F8FA",
-  blobs = defaultBlobs,
   grainOpacity = 0.06,
   className = "",
   blurRadius = "100px",
   positioning = "fixed",
 }: AnimatedGradientBackgroundProps) {
   const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+
+  const smoothScroll = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 30,
+  });
+
+  // Blob 1 (Top-Right): Red -> Teal -> Yellow -> Blue on scroll
+  const blob1Color = useTransform(
+    smoothScroll,
+    [0, 0.33, 0.66, 1],
+    [
+      "rgba(255, 65, 1, 0.75)",   // Red at Top
+      "rgba(16, 217, 171, 0.75)", // Teal at Middle
+      "rgba(254, 189, 2, 0.75)",  // Yellow at Lower-Middle
+      "rgba(18, 53, 160, 0.75)",  // Blue at Bottom
+    ]
+  );
+  const blob1Bg = useTransform(
+    blob1Color,
+    (c) => `radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, ${c} 40%, transparent 80%)`
+  );
+
+  // Blob 2 (Bottom-Left): Blue -> Red -> Teal -> Yellow on scroll
+  const blob2Color = useTransform(
+    smoothScroll,
+    [0, 0.33, 0.66, 1],
+    [
+      "rgba(18, 53, 160, 0.8)",   // Blue at Top
+      "rgba(255, 65, 1, 0.75)",   // Red at Middle
+      "rgba(16, 217, 171, 0.75)", // Teal at Lower-Middle
+      "rgba(254, 189, 2, 0.75)",  // Yellow at Bottom
+    ]
+  );
+  const blob2Bg = useTransform(
+    blob2Color,
+    (c) => `radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, ${c} 42%, transparent 80%)`
+  );
+
+  // Blob 3 (Bottom-Center / Diagonal Sweep): Teal -> Yellow -> Blue -> Red on scroll
+  const blob3Color = useTransform(
+    smoothScroll,
+    [0, 0.33, 0.66, 1],
+    [
+      "rgba(16, 217, 171, 0.75)", // Teal at Top
+      "rgba(254, 189, 2, 0.75)",  // Yellow at Middle
+      "rgba(18, 53, 160, 0.75)",  // Blue at Lower-Middle
+      "rgba(255, 65, 1, 0.75)",   // Red at Bottom
+    ]
+  );
+  const blob3Bg = useTransform(
+    blob3Color,
+    (c) => `radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, ${c} 40%, transparent 80%)`
+  );
+
+  // Blob 4 (Top-Left Accent): Yellow -> Blue -> Red -> Teal on scroll
+  const blob4Color = useTransform(
+    smoothScroll,
+    [0, 0.33, 0.66, 1],
+    [
+      "rgba(254, 189, 2, 0.65)",  // Yellow at Top
+      "rgba(18, 53, 160, 0.65)",  // Blue at Middle
+      "rgba(255, 65, 1, 0.65)",   // Red at Lower-Middle
+      "rgba(16, 217, 171, 0.65)", // Teal at Bottom
+    ]
+  );
+  const blob4Bg = useTransform(
+    blob4Color,
+    (c) => `radial-gradient(circle, rgba(255, 255, 255, 0.55) 0%, ${c} 45%, transparent 85%)`
+  );
+
+  const styleBase = (blur: string): React.CSSProperties => ({
+    filter: `blur(${blur})`,
+    WebkitFilter: `blur(${blur})`,
+    willChange: "transform, background",
+  });
 
   return (
     <div
@@ -141,44 +115,175 @@ export function AnimatedGradientBackground({
     >
       {/* Container for blurred colorful gradient blobs */}
       <div className="relative h-full w-full">
-        {blobs.map((blob) => {
-          const style: React.CSSProperties = {
-            background: blob.color,
-            filter: `blur(${blurRadius})`,
-            WebkitFilter: `blur(${blurRadius})`,
-            willChange: "transform",
-            ...blob.initialPosition,
-          };
+        {/* Luminous Soft White Glow (Center-Top) */}
+        <motion.div
+          className="absolute rounded-full pointer-events-none opacity-90 w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] md:w-[900px] md:h-[900px] top-[10%] left-[20%]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 45%, transparent 80%)",
+            ...styleBase(blurRadius),
+          }}
+          animate={
+            reduceMotion
+              ? false
+              : {
+                  x: [0, 40, -40, 20, 0],
+                  y: [0, -30, 40, -20, 0],
+                  scale: [1, 1.15, 0.92, 1.08, 1],
+                }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : {
+                  duration: 20,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }
+          }
+        />
 
-          return (
-            <motion.div
-              key={blob.id}
-              className={`absolute rounded-full pointer-events-none opacity-90 ${
-                blob.size || "w-[600px] h-[600px]"
-              }`}
-              style={style}
-              animate={
-                reduceMotion
-                  ? false
-                  : {
-                      x: blob.animate.x,
-                      y: blob.animate.y,
-                      scale: blob.animate.scale,
-                    }
-              }
-              transition={
-                reduceMotion
-                  ? undefined
-                  : {
-                      duration: blob.duration,
-                      repeat: Infinity,
-                      repeatType: "mirror",
-                      ease: "easeInOut",
-                    }
-              }
-            />
-          );
-        })}
+        {/* Luminous Soft White Glow (Bottom-Right) */}
+        <motion.div
+          className="absolute rounded-full pointer-events-none opacity-90 w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] md:w-[850px] md:h-[850px] bottom-[10%] right-[15%]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 40%, transparent 80%)",
+            ...styleBase(blurRadius),
+          }}
+          animate={
+            reduceMotion
+              ? false
+              : {
+                  x: [0, -50, 30, -20, 0],
+                  y: [0, 40, -30, 25, 0],
+                  scale: [1, 1.1, 0.95, 1.05, 1],
+                }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : {
+                  duration: 24,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }
+          }
+        />
+
+        {/* Blob 1 (Top-Right): Red -> Teal -> Yellow -> Blue */}
+        <motion.div
+          className="absolute rounded-full pointer-events-none opacity-90 w-[480px] h-[480px] sm:w-[650px] sm:h-[650px] md:w-[800px] md:h-[800px] -top-[12%] -right-[8%]"
+          style={{
+            background: blob1Bg,
+            ...styleBase(blurRadius),
+          }}
+          animate={
+            reduceMotion
+              ? false
+              : {
+                  x: [0, 45, -35, 25, 0],
+                  y: [0, -35, 45, -25, 0],
+                  scale: [1, 1.12, 0.92, 1.08, 1],
+                }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : {
+                  duration: 22,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }
+          }
+        />
+
+        {/* Blob 2 (Bottom-Left): Blue -> Red -> Teal -> Yellow */}
+        <motion.div
+          className="absolute rounded-full pointer-events-none opacity-90 w-[520px] h-[520px] sm:w-[700px] sm:h-[700px] md:w-[900px] md:h-[900px] -bottom-[18%] -left-[12%]"
+          style={{
+            background: blob2Bg,
+            ...styleBase(blurRadius),
+          }}
+          animate={
+            reduceMotion
+              ? false
+              : {
+                  x: [0, 55, -45, 30, 0],
+                  y: [0, -45, 35, -30, 0],
+                  scale: [1, 1.18, 0.95, 1.1, 1],
+                }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : {
+                  duration: 27,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }
+          }
+        />
+
+        {/* Blob 3 (Bottom-Center / Diagonal Sweep): Teal -> Yellow -> Blue -> Red */}
+        <motion.div
+          className="absolute rounded-full pointer-events-none opacity-90 w-[550px] h-[550px] sm:w-[750px] sm:h-[750px] md:w-[950px] md:h-[950px] -bottom-[15%] left-[12%]"
+          style={{
+            background: blob3Bg,
+            ...styleBase(blurRadius),
+          }}
+          animate={
+            reduceMotion
+              ? false
+              : {
+                  x: [0, -45, 55, -25, 0],
+                  y: [0, 35, -40, 20, 0],
+                  scale: [1, 0.92, 1.15, 1.05, 1],
+                }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : {
+                  duration: 32,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }
+          }
+        />
+
+        {/* Blob 4 (Top-Left Accent): Yellow -> Blue -> Red -> Teal */}
+        <motion.div
+          className="absolute rounded-full pointer-events-none opacity-90 w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] md:w-[700px] md:h-[700px] top-[15%] right-[20%]"
+          style={{
+            background: blob4Bg,
+            ...styleBase(blurRadius),
+          }}
+          animate={
+            reduceMotion
+              ? false
+              : {
+                  x: [0, 30, -30, 20, 0],
+                  y: [0, -30, 25, -15, 0],
+                  scale: [1, 1.08, 0.94, 1.04, 1],
+                }
+          }
+          transition={
+            reduceMotion
+              ? undefined
+              : {
+                  duration: 25,
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  ease: "easeInOut",
+                }
+          }
+        />
       </div>
 
       {/* SVG feTurbulence Grain / Noise Overlay matching the reference */}
