@@ -3,7 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 
-import { SectionOrb } from "@/components/effects/SectionOrb";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { services } from "@/lib/constants";
@@ -61,14 +60,6 @@ export function Services() {
     <section id="services" className="relative bg-transparent">
       {/* Directional light wash background */}
       <div className="directional-light-wash" aria-hidden="true" />
-
-      {/* Paired compositional light-emitting orbs (fully contained within padding) */}
-      <div className="pointer-events-none absolute top-8 left-6 md:top-12 md:left-12 z-0">
-        <SectionOrb className="h-40 w-40 md:h-52 md:w-52" glowColor="rgba(14, 42, 133, 0.16)" />
-      </div>
-      <div className="pointer-events-none absolute bottom-12 right-6 md:bottom-16 md:right-12 z-0">
-        <SectionOrb className="h-32 w-32 md:h-40 md:w-40" glowColor="rgba(12, 143, 128, 0.14)" />
-      </div>
 
       <div className="page-container section-space relative z-10">
         <ScrollReveal>

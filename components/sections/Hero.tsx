@@ -4,7 +4,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowUpRight, ChevronDown } from "lucide-react";
 
 import { HeroParticles } from "@/components/effects/HeroParticles";
-import { SectionOrb } from "@/components/effects/SectionOrb";
 import { Button } from "@/components/ui/Button";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 
@@ -38,10 +37,6 @@ export function Hero() {
     <section id="home" className="relative min-h-[100dvh] pt-[72px]">
       {/* Interactive Particle Canvas */}
       <HeroParticles />
-
-      {/* Responsive locked 3D Orbs */}
-      <SectionOrb className="top-16 right-2 md:top-20 md:right-4 h-44 w-44 md:h-64 md:w-64" />
-      <SectionOrb className="bottom-8 left-2 md:bottom-12 md:left-4 h-36 w-36 md:h-52 md:w-52" />
 
       {/* Soft theme-tint gradient overlay wash (5-10% opacity using indigo/navy theme tokens) */}
       <div

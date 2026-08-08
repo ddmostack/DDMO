@@ -4,7 +4,6 @@ import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 import { CurvyDashedProgressArrow } from "@/components/ui/CurvyDashedProgressArrow";
-import { SectionOrb } from "@/components/effects/SectionOrb";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { StatCounter } from "@/components/ui/StatCounter";
@@ -38,14 +37,6 @@ export function About() {
     <section id="about" className="relative bg-transparent">
       {/* Directional light wash */}
       <div className="directional-light-wash" aria-hidden="true" />
-
-      {/* Paired compositional light-emitting orbs (fully contained) */}
-      <div className="pointer-events-none absolute top-8 right-6 md:top-12 md:right-12 z-0">
-        <SectionOrb className="h-44 w-44 md:h-52 md:w-52" glowColor="rgba(14, 42, 133, 0.16)" />
-      </div>
-      <div className="pointer-events-none absolute bottom-12 left-6 md:bottom-16 md:left-12 z-0">
-        <SectionOrb className="h-32 w-32 md:h-40 md:w-40" glowColor="rgba(12, 143, 128, 0.14)" />
-      </div>
 
       <div className="page-container section-space relative z-10">
         {/* Top Header & Overview */}

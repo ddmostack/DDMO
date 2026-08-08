@@ -4,7 +4,6 @@ import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 
 import { CurvyDashedProgressArrow } from "@/components/ui/CurvyDashedProgressArrow";
-import { SectionOrb } from "@/components/effects/SectionOrb";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { DifferentiatorMicroAnimation } from "@/components/ui/DifferentiatorMicroAnimation";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -36,8 +35,6 @@ export function WhyUs() {
 
   return (
     <section id="why-us" className="relative bg-transparent">
-      <SectionOrb className="top-16 left-2 md:left-4 h-40 w-40 md:h-56 md:w-56" />
-
       <div className="page-container section-space">
         {/* Section Header */}
         <ScrollReveal>

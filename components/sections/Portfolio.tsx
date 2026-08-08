@@ -5,7 +5,6 @@ import { ArrowUpRight, X } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import { SectionOrb } from "@/components/effects/SectionOrb";
 import { Button } from "@/components/ui/Button";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
@@ -77,8 +76,6 @@ export function Portfolio() {
 
   return (
     <section id="portfolio" className="relative bg-transparent">
-      <SectionOrb className="top-36 right-2 md:right-4 h-48 w-48 md:h-64 md:w-64" />
-
       <div className="page-container section-space">
         <ScrollReveal>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">

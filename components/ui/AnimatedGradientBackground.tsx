@@ -37,14 +37,42 @@ export interface AnimatedGradientBackgroundProps {
 }
 
 // Default blob setup closely tuned to match the reference image:
+// - Luminous soft white highlights in the inner gradients for high contrast & clarity
 // - Warm orange/coral top-right
 // - Electric azure blue bottom-left
 // - Rich violet-purple center-bottom diagonal sweep
 // - Soft lavender top-center accent
 const defaultBlobs: BlobConfig[] = [
+  // Luminous Soft White Core Glow (Center-Top)
+  {
+    id: "center-white-luminous",
+    color: "radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.6) 45%, transparent 80%)",
+    size: "w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] md:w-[900px] md:h-[900px]",
+    initialPosition: { top: "10%", left: "20%" },
+    animate: {
+      x: [0, 40, -40, 20, 0],
+      y: [0, -30, 40, -20, 0],
+      scale: [1, 1.15, 0.92, 1.08, 1],
+    },
+    duration: 20,
+  },
+  // Luminous Soft White Glow (Bottom-Right)
+  {
+    id: "bottom-white-luminous",
+    color: "radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 40%, transparent 80%)",
+    size: "w-[450px] h-[450px] sm:w-[650px] sm:h-[650px] md:w-[850px] md:h-[850px]",
+    initialPosition: { bottom: "10%", right: "15%" },
+    animate: {
+      x: [0, -50, 30, -20, 0],
+      y: [0, 40, -30, 25, 0],
+      scale: [1, 1.1, 0.95, 1.05, 1],
+    },
+    duration: 24,
+  },
+  // Warm orange/coral top-right with soft white center core
   {
     id: "top-right-coral",
-    color: "radial-gradient(circle, rgba(255, 94, 54, 0.8) 0%, rgba(255, 140, 40, 0.45) 50%, transparent 80%)",
+    color: "radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 94, 54, 0.75) 30%, rgba(255, 140, 40, 0.4) 60%, transparent 85%)",
     size: "w-[480px] h-[480px] sm:w-[650px] sm:h-[650px] md:w-[800px] md:h-[800px]",
     initialPosition: { top: "-12%", right: "-8%" },
     animate: {
@@ -54,9 +82,10 @@ const defaultBlobs: BlobConfig[] = [
     },
     duration: 22,
   },
+  // Electric azure blue bottom-left with soft white inner transition
   {
     id: "bottom-left-blue",
-    color: "radial-gradient(circle, rgba(0, 145, 255, 0.85) 0%, rgba(37, 99, 235, 0.55) 55%, transparent 80%)",
+    color: "radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(0, 145, 255, 0.8) 35%, rgba(37, 99, 235, 0.5) 60%, transparent 85%)",
     size: "w-[520px] h-[520px] sm:w-[700px] sm:h-[700px] md:w-[900px] md:h-[900px]",
     initialPosition: { bottom: "-18%", left: "-12%" },
     animate: {
@@ -66,9 +95,10 @@ const defaultBlobs: BlobConfig[] = [
     },
     duration: 27,
   },
+  // Rich violet-purple center-bottom diagonal sweep with soft white highlights
   {
     id: "bottom-center-purple",
-    color: "radial-gradient(circle, rgba(140, 45, 226, 0.75) 0%, rgba(124, 58, 237, 0.5) 50%, transparent 80%)",
+    color: "radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(140, 45, 226, 0.7) 35%, rgba(124, 58, 237, 0.45) 60%, transparent 85%)",
     size: "w-[550px] h-[550px] sm:w-[750px] sm:h-[750px] md:w-[950px] md:h-[950px]",
     initialPosition: { bottom: "-15%", left: "12%" },
     animate: {
@@ -78,9 +108,10 @@ const defaultBlobs: BlobConfig[] = [
     },
     duration: 32,
   },
+  // Soft lavender top-center accent with white glow
   {
     id: "top-center-lavender",
-    color: "radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, rgba(99, 102, 241, 0.25) 55%, transparent 80%)",
+    color: "radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, rgba(168, 85, 247, 0.35) 40%, rgba(99, 102, 241, 0.2) 65%, transparent 85%)",
     size: "w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] md:w-[700px] md:h-[700px]",
     initialPosition: { top: "15%", right: "20%" },
     animate: {
