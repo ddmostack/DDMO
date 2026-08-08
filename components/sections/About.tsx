@@ -91,7 +91,7 @@ export function About() {
               {!reduceMotion && (
                 <CurvyDashedProgressArrow
                   progress={smoothProgress}
-                  className="absolute -left-10 md:-left-12 lg:-left-14 top-0 bottom-0 hidden w-12 md:w-16 lg:w-20 md:block z-20"
+                  className="absolute -left-6 sm:-left-8 md:-left-12 lg:-left-14 top-0 bottom-0 w-10 sm:w-12 md:w-16 lg:w-20 block z-20"
                 />
               )}
 

@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
 import { useRef } from "react";
 
+import { CurvyDashedProgressArrow } from "@/components/ui/CurvyDashedProgressArrow";
 import { SectionOrb } from "@/components/effects/SectionOrb";
 import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { DifferentiatorMicroAnimation } from "@/components/ui/DifferentiatorMicroAnimation";
@@ -33,9 +34,6 @@ export function WhyUs() {
     damping: 28,
   });
 
-  const timelineHeight = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-  const nodeDotY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
-
   return (
     <section id="why-us" className="relative bg-transparent">
       <SectionOrb className="top-16 left-2 md:left-4 h-40 w-40 md:h-56 md:w-56" />
@@ -58,25 +56,13 @@ export function WhyUs() {
 
         {/* Alternating Two-Column Timeline Module */}
         <div ref={timelineRef} className="relative mt-20 max-w-5xl mx-auto">
-          {/* Central Vertical Progress Timeline Line (Desktop & Mobile) */}
-          <div
-            className="pointer-events-none absolute left-4 top-0 bottom-0 w-1 -translate-x-1/2 rounded-full bg-dd-navy/15 md:left-1/2"
-            aria-hidden="true"
-          >
-            {/* Scroll-Linked Filled Line */}
-            <motion.div
-              className="w-full rounded-full bg-gradient-to-b from-dd-blue-600 via-dd-teal-600 to-dd-blue-600"
-              style={{ height: timelineHeight }}
+          {/* Organic Hand-Drawn Curvy Arrow Scroll Indicator */}
+          {!reduceMotion && (
+            <CurvyDashedProgressArrow
+              progress={smoothProgress}
+              className="absolute left-2 md:left-1/2 top-0 bottom-0 w-10 sm:w-12 md:w-16 lg:w-20 -translate-x-1/2 z-20"
             />
-
-            {/* Glowing Active Scroll Node */}
-            {!reduceMotion && (
-              <motion.div
-                className="absolute -left-[5px] top-0 h-3.5 w-3.5 rounded-full bg-dd-blue-600 shadow-md ring-4 ring-white"
-                style={{ top: nodeDotY, translateY: "-50%" }}
-              />
-            )}
-          </div>
+          )}
 
           {/* 6 Alternating Timeline Items */}
           <div className="space-y-12 md:space-y-16">
