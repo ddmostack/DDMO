@@ -74,15 +74,16 @@ export function InteractiveGrid() {
 
       ctx.clearRect(0, 0, width, height);
 
-      // Base grid styling
-      ctx.lineWidth = 1;
-
       const cols = Math.ceil(width / gridSize) + 2;
       const rows = Math.ceil(height / gridSize) + 2;
 
-      // Draw Grid Lines with Cursor Interaction
+      // Draw Grid Vertical Lines (Blueprint weight variations)
       for (let i = -1; i < cols; i++) {
         const x = i * gridSize + (gridOffset % gridSize) - gridSize;
+        const isFifth = Math.abs(i) % 5 === 0;
+
+        ctx.lineWidth = isFifth ? 1.5 : 1;
+        ctx.strokeStyle = isFifth ? "rgba(14, 42, 133, 0.065)" : "rgba(14, 42, 133, 0.03)";
 
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -110,12 +111,16 @@ export function InteractiveGrid() {
           ctx.lineTo(drawX, drawY);
         }
 
-        ctx.strokeStyle = "rgba(18, 53, 160, 0.08)";
         ctx.stroke();
       }
 
+      // Draw Grid Horizontal Lines (Blueprint weight variations)
       for (let j = -1; j < rows; j++) {
         const y = j * gridSize;
+        const isFifth = Math.abs(j) % 5 === 0;
+
+        ctx.lineWidth = isFifth ? 1.5 : 1;
+        ctx.strokeStyle = isFifth ? "rgba(14, 42, 133, 0.065)" : "rgba(14, 42, 133, 0.03)";
 
         ctx.beginPath();
         ctx.moveTo(0, y);
@@ -143,7 +148,6 @@ export function InteractiveGrid() {
           ctx.lineTo(drawX, drawY);
         }
 
-        ctx.strokeStyle = "rgba(18, 53, 160, 0.08)";
         ctx.stroke();
       }
 
@@ -170,7 +174,7 @@ export function InteractiveGrid() {
 
               ctx.beginPath();
               ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(16, 217, 171, ${alpha})`;
+              ctx.fillStyle = `rgba(12, 143, 128, ${alpha})`;
               ctx.fill();
             }
           }
@@ -197,8 +201,10 @@ export function InteractiveGrid() {
         className="pointer-events-none absolute inset-0 opacity-15"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(18, 53, 160, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(18, 53, 160, 0.12) 1px, transparent 1px)",
+            "linear-gradient(rgba(14, 42, 133, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(14, 42, 133, 0.04) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
+          maskImage: "radial-gradient(circle at 50% 40%, black 20%, transparent 80%)",
+          WebkitMaskImage: "radial-gradient(circle at 50% 40%, black 20%, transparent 80%)",
         }}
       />
     );
@@ -208,7 +214,11 @@ export function InteractiveGrid() {
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-80"
+      className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-65"
+      style={{
+        maskImage: "radial-gradient(circle at 50% 40%, black 25%, transparent 80%)",
+        WebkitMaskImage: "radial-gradient(circle at 50% 40%, black 25%, transparent 80%)",
+      }}
     />
   );
 }

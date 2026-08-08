@@ -9,6 +9,15 @@ import { DifferentiatorMicroAnimation } from "@/components/ui/DifferentiatorMicr
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { differentiators } from "@/lib/constants";
 
+const diffGlows = [
+  "hover:shadow-glow-blue",
+  "hover:shadow-glow-teal",
+  "hover:shadow-glow-yellow",
+  "hover:shadow-glow-red",
+  "hover:shadow-glow-blue",
+  "hover:shadow-glow-teal",
+];
+
 export function WhyUs() {
   const reduceMotion = useReducedMotion();
   const timelineRef = useRef<HTMLDivElement>(null);
@@ -28,7 +37,7 @@ export function WhyUs() {
   const nodeDotY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="why-us" className="relative overflow-hidden bg-transparent">
+    <section id="why-us" className="relative bg-transparent">
       <SectionOrb className="top-16 left-2 md:left-4 h-40 w-40 md:h-56 md:w-56" />
 
       <div className="page-container section-space">
@@ -56,14 +65,14 @@ export function WhyUs() {
           >
             {/* Scroll-Linked Filled Line */}
             <motion.div
-              className="w-full rounded-full bg-gradient-to-b from-dd-navy via-blue-600 to-dd-navy"
+              className="w-full rounded-full bg-gradient-to-b from-dd-blue-600 via-dd-teal-600 to-dd-blue-600"
               style={{ height: timelineHeight }}
             />
 
             {/* Glowing Active Scroll Node */}
             {!reduceMotion && (
               <motion.div
-                className="absolute -left-[5px] top-0 h-3.5 w-3.5 rounded-full bg-dd-navy shadow-md ring-4 ring-white"
+                className="absolute -left-[5px] top-0 h-3.5 w-3.5 rounded-full bg-dd-blue-600 shadow-md ring-4 ring-white"
                 style={{ top: nodeDotY, translateY: "-50%" }}
               />
             )}
@@ -73,6 +82,7 @@ export function WhyUs() {
           <div className="space-y-12 md:space-y-16">
             {differentiators.map((item, index) => {
               const isEven = index % 2 === 0;
+              const glowClass = diffGlows[index % diffGlows.length];
 
               return (
                 <motion.div
@@ -100,7 +110,9 @@ export function WhyUs() {
                         glare={true}
                         className="rounded-[28px]"
                       >
-                        <article className="liquid-glass-card group rounded-[28px] border border-white/80 bg-white/35 p-7 md:p-8 transition-all duration-300 hover:border-white hover:bg-white/60 hover:shadow-xl backdrop-blur-md">
+                        <article
+                          className={`liquid-glass-card group rounded-[28px] border border-white/80 bg-white/35 p-7 md:p-8 transition-all duration-300 hover:border-white hover:bg-white/60 ${glowClass} backdrop-blur-md`}
+                        >
                           <div className="flex items-center justify-between gap-4 md:flex-row-reverse">
                             <DifferentiatorMicroAnimation index={index} />
                             <span className="text-xs font-mono font-bold text-dd-navy/70">
@@ -120,7 +132,7 @@ export function WhyUs() {
 
                   {/* Central Node Pillar */}
                   <div className="hidden md:col-span-2 md:order-2 md:flex md:items-center md:justify-center">
-                    <div className="relative z-10 grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-dd-navy text-xs font-mono font-bold text-white shadow-md">
+                    <div className="relative z-10 grid h-10 w-10 place-items-center rounded-full border-2 border-white bg-dd-navy text-xs font-mono font-bold text-white shadow-md transition-colors duration-300 group-hover:bg-dd-blue-700">
                       0{index + 1}
                     </div>
                   </div>
@@ -138,7 +150,9 @@ export function WhyUs() {
                         glare={true}
                         className="rounded-[28px]"
                       >
-                        <article className="liquid-glass-card group rounded-[28px] border border-white/80 bg-white/35 p-7 md:p-8 transition-all duration-300 hover:border-white hover:bg-white/60 hover:shadow-xl backdrop-blur-md">
+                        <article
+                          className={`liquid-glass-card group rounded-[28px] border border-white/80 bg-white/35 p-7 md:p-8 transition-all duration-300 hover:border-white hover:bg-white/60 ${glowClass} backdrop-blur-md`}
+                        >
                           <div className="flex items-center justify-between gap-4">
                             <DifferentiatorMicroAnimation index={index} />
                             <span className="text-xs font-mono font-bold text-dd-navy/70">
@@ -156,7 +170,7 @@ export function WhyUs() {
                     )}
                   </div>
 
-                  {/* Mobile Mobile Screen Card Layout */}
+                  {/* Mobile Screen Card Layout */}
                   <div className="block md:hidden">
                     <CursorTiltCard
                       maxTilt={4}
@@ -164,7 +178,9 @@ export function WhyUs() {
                       glare={true}
                       className="rounded-[24px]"
                     >
-                      <article className="liquid-glass-card group rounded-[24px] border border-white/80 bg-white/35 p-6 transition-all duration-300 hover:bg-white/60 backdrop-blur-md">
+                      <article
+                        className={`liquid-glass-card group rounded-[24px] border border-white/80 bg-white/35 p-6 transition-all duration-300 hover:bg-white/60 ${glowClass} backdrop-blur-md`}
+                      >
                         <div className="flex items-center justify-between gap-4">
                           <DifferentiatorMicroAnimation index={index} />
                           <span className="text-xs font-mono font-bold text-dd-navy">

@@ -76,10 +76,10 @@ export function Portfolio() {
   }, []);
 
   return (
-    <section id="portfolio" className="relative overflow-hidden bg-transparent">
+    <section id="portfolio" className="relative bg-transparent">
       <SectionOrb className="top-36 right-2 md:right-4 h-48 w-48 md:h-64 md:w-64" />
 
-      <div className="page-container section-space border-t border-dd-gray-300/40">
+      <div className="page-container section-space">
         <ScrollReveal>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>

@@ -35,7 +35,7 @@ export function Hero() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="home" className="relative min-h-[100dvh] overflow-hidden pt-[72px]">
+    <section id="home" className="relative min-h-[100dvh] pt-[72px]">
       {/* Interactive Particle Canvas */}
       <HeroParticles />
 
@@ -95,7 +95,7 @@ export function Hero() {
               <span className="inline-block overflow-hidden py-1">
                 <motion.span
                   variants={wordItemVariants}
-                  className="inline-block bg-gradient-to-r from-dd-navy via-[#1d4ed8] to-[#0284c7] bg-clip-text text-transparent"
+                  className="inline-block bg-gradient-to-r from-dd-blue-600 via-dd-blue-700 to-dd-teal-600 bg-clip-text text-transparent"
                   animate={
                     reduceMotion
                       ? {}

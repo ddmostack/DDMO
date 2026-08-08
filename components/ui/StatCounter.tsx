@@ -23,24 +23,16 @@ export function StatCounter({
   const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
   const reduceMotion = useReducedMotion();
 
-  const [displayValue, setDisplayValue] = useState(0);
-  const [progressRatio, setProgressRatio] = useState(0);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [displayValue, setDisplayValue] = useState(() => (reduceMotion ? value : 0));
+  const [progressRatio, setProgressRatio] = useState(() => (reduceMotion ? 1 : 0));
+  const [isCompleted, setIsCompleted] = useState(() => Boolean(reduceMotion));
 
   useEffect(() => {
-    if (reduceMotion) {
-      setDisplayValue(value);
-      setProgressRatio(1);
-      setIsCompleted(true);
-      return;
-    }
+    if (reduceMotion || !isInView) return;
 
-    if (!isInView) return;
-
-    let timeoutId: NodeJS.Timeout;
     const duration = 1200;
 
-    timeoutId = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       const start = performance.now();
 
       const tick = (time: number) => {
@@ -93,7 +85,7 @@ export function StatCounter({
       {/* Syncing Thin Animated Underline / Progress Bar */}
       <div className="mt-4 h-0.5 w-full overflow-hidden rounded-full bg-dd-navy/15" aria-hidden="true">
         <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-dd-navy via-dd-navy to-[#2563eb]"
+          className="h-full rounded-full bg-gradient-to-r from-dd-blue-600 via-dd-teal-600 to-dd-blue-600"
           style={{ width: `${(reduceMotion ? 1 : progressRatio) * 100}%` }}
           transition={{ duration: 0.1, ease: "linear" }}
         />

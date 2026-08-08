@@ -9,6 +9,15 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { StatCounter } from "@/components/ui/StatCounter";
 import { stats, values } from "@/lib/constants";
 
+const valueCardStyles = [
+  { iconColor: "text-dd-blue-600", hoverGlow: "hover:shadow-glow-blue", borderHover: "group-hover:border-dd-blue-600/40" },
+  { iconColor: "text-dd-teal-600", hoverGlow: "hover:shadow-glow-teal", borderHover: "group-hover:border-dd-teal-600/40" },
+  { iconColor: "text-dd-yellow-700", hoverGlow: "hover:shadow-glow-yellow", borderHover: "group-hover:border-dd-yellow-700/40" },
+  { iconColor: "text-dd-red-600", hoverGlow: "hover:shadow-glow-red", borderHover: "group-hover:border-dd-red-600/40" },
+  { iconColor: "text-dd-blue-600", hoverGlow: "hover:shadow-glow-blue", borderHover: "group-hover:border-dd-blue-600/40" },
+  { iconColor: "text-dd-teal-600", hoverGlow: "hover:shadow-glow-teal", borderHover: "group-hover:border-dd-teal-600/40" },
+];
+
 export function About() {
   const reduceMotion = useReducedMotion();
   const gridRef = useRef<HTMLDivElement>(null);
@@ -28,12 +37,21 @@ export function About() {
   const progressDotY = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="about" className="relative overflow-hidden bg-transparent">
-      <SectionOrb className="top-10 right-2 md:right-4 h-44 w-44 md:h-60 md:w-60" />
+    <section id="about" className="relative bg-transparent">
+      {/* Directional light wash */}
+      <div className="directional-light-wash" aria-hidden="true" />
 
-      <div className="page-container section-space">
+      {/* Paired compositional light-emitting orbs (fully contained) */}
+      <div className="pointer-events-none absolute top-8 right-6 md:top-12 md:right-12 z-0">
+        <SectionOrb className="h-44 w-44 md:h-52 md:w-52" glowColor="rgba(14, 42, 133, 0.16)" />
+      </div>
+      <div className="pointer-events-none absolute bottom-12 left-6 md:bottom-16 md:left-12 z-0">
+        <SectionOrb className="h-32 w-32 md:h-40 md:w-40" glowColor="rgba(12, 143, 128, 0.14)" />
+      </div>
+
+      <div className="page-container section-space relative z-10">
         {/* Top Header & Overview */}
-        <div className="grid gap-12 border-t border-dd-gray-300/40 pt-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+        <div className="grid gap-12 pt-4 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
           {/* Left Column - Sticky Heading & Studio Badge */}
           <ScrollReveal>
             <div className="lg:sticky lg:top-28 lg:self-start space-y-6">
@@ -48,7 +66,7 @@ export function About() {
               {/* Supporting Badge Card to eliminate left column dead space */}
               <div className="liquid-glass-card mt-6 max-w-[360px] rounded-2xl border border-white/70 bg-white/35 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:bg-white/50 hover:shadow-md">
                 <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-dd-navy">
-                  <span className="h-2 w-2 rounded-full bg-dd-navy animate-pulse" aria-hidden="true" />
+                  <span className="h-2 w-2 rounded-full bg-dd-blue-600 animate-pulse" aria-hidden="true" />
                   Agile Studio Model
                 </div>
                 <p className="mt-3 text-sm font-medium leading-relaxed text-dd-gray-600">
@@ -69,8 +87,8 @@ export function About() {
               </p>
             </ScrollReveal>
 
-            {/* Values Grid Module (Distinct spacing from intro text) */}
-            <div ref={gridRef} className="relative mt-16 lg:mt-20">
+            {/* Values Grid Module */}
+            <div ref={gridRef} className="relative mt-12 lg:mt-16">
               {/* Vertical Scroll-Linked Progress Track & Indicator */}
               {!reduceMotion && (
                 <div
@@ -78,11 +96,11 @@ export function About() {
                   aria-hidden="true"
                 >
                   <motion.div
-                    className="w-full bg-dd-navy rounded-full"
+                    className="w-full bg-dd-blue-600 rounded-full"
                     style={{ height: progressLineHeight }}
                   />
                   <motion.div
-                    className="absolute -left-[3px] top-0 h-2.5 w-2.5 rounded-full bg-dd-navy shadow-sm"
+                    className="absolute -left-[3px] top-0 h-2.5 w-2.5 rounded-full bg-dd-blue-600 shadow-sm"
                     style={{ top: progressDotY, translateY: "-50%" }}
                   />
                 </div>
@@ -92,6 +110,8 @@ export function About() {
               <div className="grid gap-4 sm:grid-cols-2">
                 {values.map((value, index) => {
                   const Icon = value.icon;
+                  const style = valueCardStyles[index % valueCardStyles.length];
+
                   return (
                     <motion.div
                       key={value.title}
@@ -110,11 +130,13 @@ export function About() {
                         glare={true}
                         className="h-full rounded-2xl"
                       >
-                        <article className="group h-full border-t border-dd-gray-300/80 p-6 transition-all duration-300 hover:border-white/90 hover:bg-white/50 hover:shadow-md hover:backdrop-blur-md rounded-2xl">
+                        <article
+                          className={`liquid-glass-card group h-full p-6 transition-all duration-300 hover:border-white/90 hover:bg-white/50 ${style.hoverGlow} backdrop-blur-md rounded-2xl`}
+                        >
                           {/* Heading + Icon Optically Aligned to Cap-Height */}
                           <div className="flex items-center gap-3">
                             <Icon
-                              className="shrink-0 text-dd-navy transition-transform duration-300 group-hover:scale-110"
+                              className={`shrink-0 ${style.iconColor} transition-transform duration-300 group-hover:scale-110`}
                               size={20}
                               strokeWidth={2}
                               aria-hidden="true"
@@ -136,8 +158,14 @@ export function About() {
           </div>
         </div>
 
-        {/* Stats Counter Row */}
-        <ScrollReveal className="mt-16 lg:mt-24">
+        {/* Stats Counter Row with Eyebrow Header Context */}
+        <ScrollReveal className="mt-16 lg:mt-20">
+          <div className="mb-5 flex items-center justify-center gap-3">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-dd-blue-600">
+              Studio Metrics • Impact By The Numbers
+            </p>
+          </div>
+
           <div className="grid grid-cols-2 gap-3 overflow-hidden rounded-[28px] border border-white/80 bg-white/25 p-3 shadow-lg backdrop-blur-xl lg:grid-cols-4">
             {stats.map((stat, index) => (
               <CursorTiltCard

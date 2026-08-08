@@ -8,32 +8,69 @@ import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { services } from "@/lib/constants";
 
-const serviceGradients = [
-  "from-blue-600/15 via-indigo-500/8 to-transparent",
-  "from-cyan-500/15 via-sky-500/8 to-transparent",
-  "from-violet-600/15 via-purple-500/8 to-transparent",
-  "from-emerald-500/15 via-teal-500/8 to-transparent",
-  "from-amber-500/15 via-orange-500/8 to-transparent",
-  "from-rose-500/15 via-pink-500/8 to-transparent",
-];
-
-const serviceAccents = [
-  "group-hover:border-blue-400/40 group-hover:text-blue-600",
-  "group-hover:border-cyan-400/40 group-hover:text-cyan-600",
-  "group-hover:border-violet-400/40 group-hover:text-violet-600",
-  "group-hover:border-emerald-400/40 group-hover:text-emerald-600",
-  "group-hover:border-amber-400/40 group-hover:text-amber-600",
-  "group-hover:border-rose-400/40 group-hover:text-rose-600",
+// 6 Cards strictly mapped to the 4-brand-color scale (Blue, Teal, Yellow, Red, Blue-Teal, Yellow-Red)
+const serviceStyles = [
+  {
+    gradient: "from-dd-blue-600/20 via-dd-blue-700/10 to-transparent",
+    iconAccent: "group-hover:border-dd-blue-600/40 group-hover:text-dd-blue-600",
+    hoverGlow: "hover:shadow-glow-blue",
+    lineGlow: "via-dd-blue-600/60",
+    badgeColor: "group-hover:text-dd-blue-600/20",
+  },
+  {
+    gradient: "from-dd-teal-600/20 via-dd-teal-700/10 to-transparent",
+    iconAccent: "group-hover:border-dd-teal-600/40 group-hover:text-dd-teal-600",
+    hoverGlow: "hover:shadow-glow-teal",
+    lineGlow: "via-dd-teal-600/60",
+    badgeColor: "group-hover:text-dd-teal-600/20",
+  },
+  {
+    gradient: "from-dd-yellow-600/22 via-dd-yellow-700/12 to-transparent",
+    iconAccent: "group-hover:border-dd-yellow-700/40 group-hover:text-dd-yellow-700",
+    hoverGlow: "hover:shadow-glow-yellow",
+    lineGlow: "via-dd-yellow-600/60",
+    badgeColor: "group-hover:text-dd-yellow-700/20",
+  },
+  {
+    gradient: "from-dd-red-600/20 via-dd-red-700/10 to-transparent",
+    iconAccent: "group-hover:border-dd-red-600/40 group-hover:text-dd-red-600",
+    hoverGlow: "hover:shadow-glow-red",
+    lineGlow: "via-dd-red-600/60",
+    badgeColor: "group-hover:text-dd-red-600/20",
+  },
+  {
+    gradient: "from-dd-blue-600/20 via-dd-teal-600/15 to-transparent",
+    iconAccent: "group-hover:border-dd-teal-600/40 group-hover:text-dd-blue-600",
+    hoverGlow: "hover:shadow-glow-blue",
+    lineGlow: "via-dd-blue-600/60",
+    badgeColor: "group-hover:text-dd-blue-600/20",
+  },
+  {
+    gradient: "from-dd-yellow-600/20 via-dd-red-600/15 to-transparent",
+    iconAccent: "group-hover:border-dd-red-600/40 group-hover:text-dd-red-600",
+    hoverGlow: "hover:shadow-glow-red",
+    lineGlow: "via-dd-red-600/60",
+    badgeColor: "group-hover:text-dd-red-600/20",
+  },
 ];
 
 export function Services() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="services" className="relative overflow-hidden bg-transparent">
-      <SectionOrb className="top-24 left-2 md:left-4 h-40 w-40 md:h-56 md:w-56" />
+    <section id="services" className="relative bg-transparent">
+      {/* Directional light wash background */}
+      <div className="directional-light-wash" aria-hidden="true" />
 
-      <div className="page-container section-space">
+      {/* Paired compositional light-emitting orbs (fully contained within padding) */}
+      <div className="pointer-events-none absolute top-8 left-6 md:top-12 md:left-12 z-0">
+        <SectionOrb className="h-40 w-40 md:h-52 md:w-52" glowColor="rgba(14, 42, 133, 0.16)" />
+      </div>
+      <div className="pointer-events-none absolute bottom-12 right-6 md:bottom-16 md:right-12 z-0">
+        <SectionOrb className="h-32 w-32 md:h-40 md:w-40" glowColor="rgba(12, 143, 128, 0.14)" />
+      </div>
+
+      <div className="page-container section-space relative z-10">
         <ScrollReveal>
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
@@ -50,21 +87,18 @@ export function Services() {
           </div>
         </ScrollReveal>
 
-        {/* Connecting System Line Header */}
-        <div className="relative mt-14 flex items-center justify-between overflow-hidden py-3" aria-hidden="true">
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-dd-navy/30 to-transparent" />
-          <span className="shrink-0 px-4 text-[10px] font-bold uppercase tracking-widest text-dd-navy/60">
+        {/* Connecting System Network Badge */}
+        <div className="relative mt-12 flex items-center justify-center py-2" aria-hidden="true">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-dd-navy/70">
             System Network • 01 — 06
           </span>
-          <div className="h-px w-full bg-gradient-to-r from-transparent via-dd-navy/30 to-transparent" />
         </div>
 
         {/* 6-Item Interactive Services Grid */}
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3" style={{ perspective: 1200 }}>
+        <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3" style={{ perspective: 1200 }}>
           {services.map((service, index) => {
             const Icon = service.icon;
-            const gradient = serviceGradients[index % serviceGradients.length];
-            const accent = serviceAccents[index % serviceAccents.length];
+            const style = serviceStyles[index % serviceStyles.length];
             const num = index + 1 < 10 ? `0${index + 1}` : `${index + 1}`;
 
             return (
@@ -92,16 +126,18 @@ export function Services() {
                     glare={true}
                     className="h-full rounded-[28px]"
                   >
-                    <article className="liquid-glass-card relative flex h-full flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white/35 p-7 md:p-8 transition-all duration-500 hover:scale-[1.02] hover:border-white hover:bg-white/60 hover:shadow-2xl backdrop-blur-md">
-                      {/* Service Specific Gradient Overlay on Hover */}
+                    <article
+                      className={`liquid-glass-card relative flex h-full flex-col justify-between overflow-hidden rounded-[28px] border border-white/70 bg-white/35 p-7 md:p-8 transition-all duration-300 hover:scale-[1.02] hover:border-white hover:bg-white/65 ${style.hoverGlow} backdrop-blur-md`}
+                    >
+                      {/* Service Specific Animated Gradient Overlay on Hover */}
                       <div
-                        className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
+                        className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${style.gradient} opacity-0 transition-opacity duration-500 group-hover:opacity-100`}
                         aria-hidden="true"
                       />
 
                       {/* Oversized Background Numeral */}
                       <span
-                        className="pointer-events-none absolute -bottom-3 -right-2 font-mono text-8xl md:text-9xl font-extrabold tracking-tighter text-dd-ink/5 select-none transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-105 group-hover:text-dd-navy/15"
+                        className={`pointer-events-none absolute -bottom-3 -right-2 font-mono text-8xl md:text-9xl font-extrabold tracking-tighter text-dd-ink/5 select-none transition-all duration-500 group-hover:-translate-y-2 group-hover:scale-105 ${style.badgeColor}`}
                         aria-hidden="true"
                       >
                         {num}
@@ -110,7 +146,7 @@ export function Services() {
                       {/* Top Row: Icon Badge & Arrow */}
                       <div className="relative z-10 flex items-center justify-between">
                         <div
-                          className={`grid h-13 w-13 place-items-center rounded-2xl border border-white/80 bg-white/60 text-dd-navy shadow-sm backdrop-blur-md transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-md ${accent}`}
+                          className={`grid h-13 w-13 place-items-center rounded-2xl border border-white/80 bg-white/60 text-dd-navy shadow-sm backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:shadow-md ${style.iconAccent}`}
                         >
                           <Icon size={24} strokeWidth={1.8} aria-hidden="true" />
                         </div>
@@ -136,7 +172,7 @@ export function Services() {
 
                       {/* Bottom Connecting Glow Line */}
                       <div
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-dd-navy/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                        className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent ${style.lineGlow} to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
                         aria-hidden="true"
                       />
                     </article>

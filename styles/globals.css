@@ -13,17 +13,28 @@
   --dd-soft: 232 233 227;
   --dd-white: #fbfbf8;
 
-  /* Brand accents — three distinct colors, not one variable wearing three name tags */
-  --dd-accent: 38 72 245;      /* Volt Indigo — primary */
-  --dd-accent-2: 255 93 58;    /* Doodle Coral — energy / CTA */
-  --dd-accent-3: 255 196 61;   /* Signal Yellow — highlight, used sparingly */
+  /* Deepened Brand Accents — 600 scale primaries */
+  --dd-accent: 14 42 133;      /* Deep Navy Blue #0E2A85 — primary */
+  --dd-accent-2: 217 54 0;     /* Deep Burnt Red #D93600 — energy / CTA */
+  --dd-accent-3: 217 154 0;    /* Deep Amber Gold #D99A00 — highlight */
+  --dd-accent-4: 12 143 128;   /* Deep Emerald Teal #0C8F80 — secondary */
+
+  /* 600 to 700 shade shift pairs */
+  --dd-blue-600: #0E2A85;
+  --dd-blue-700: #0A1F6E;
+  --dd-teal-600: #0C8F80;
+  --dd-teal-700: #0A7A6E;
+  --dd-yellow-600: #D99A00;
+  --dd-yellow-700: #B27B00;
+  --dd-red-600: #D93600;
+  --dd-red-700: #C93000;
 
   --dd-gradient: linear-gradient(
     125deg,
-    #1235A0 0%,
-    #10D9AB 33%,
-    #FEBD02 66%,
-    #FF4101 100%
+    #0E2A85 0%,
+    #0C8F80 33%,
+    #D99A00 66%,
+    #D93600 100%
   );
 }
 
@@ -140,7 +151,7 @@ textarea {
   height: 52rem;
   top: -10rem;
   left: -12rem;
-  background: radial-gradient(circle at 30% 30%, rgba(18, 53, 160, 0.65), transparent 70%);
+  background: radial-gradient(circle at 30% 30%, rgba(14, 42, 133, 0.65), transparent 70%);
   animation: dd-drift-a 26s ease-in-out infinite;
 }
 
@@ -149,7 +160,7 @@ textarea {
   height: 48rem;
   top: 15rem;
   right: -10rem;
-  background: radial-gradient(circle at 70% 40%, rgba(16, 217, 171, 0.6), transparent 70%);
+  background: radial-gradient(circle at 70% 40%, rgba(12, 143, 128, 0.6), transparent 70%);
   animation: dd-drift-b 32s ease-in-out infinite;
 }
 
@@ -158,7 +169,7 @@ textarea {
   height: 44rem;
   top: 45rem;
   left: 8%;
-  background: radial-gradient(circle at 50% 50%, rgba(254, 189, 2, 0.55), transparent 70%);
+  background: radial-gradient(circle at 50% 50%, rgba(217, 154, 0, 0.55), transparent 70%);
   animation: dd-drift-c 24s ease-in-out infinite;
 }
 
@@ -167,7 +178,7 @@ textarea {
   height: 42rem;
   top: 75rem;
   right: 12%;
-  background: radial-gradient(circle at 40% 60%, rgba(255, 65, 1, 0.55), transparent 70%);
+  background: radial-gradient(circle at 40% 60%, rgba(217, 54, 0, 0.55), transparent 70%);
   animation: dd-drift-d 28s ease-in-out infinite;
 }
 
@@ -203,10 +214,14 @@ textarea {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(to right, rgba(18, 53, 160, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(18, 53, 160, 0.08) 1px, transparent 1px);
-  background-size: 48px 48px;
-  opacity: 0.85;
+    linear-gradient(to right, rgba(14, 42, 133, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 42, 133, 0.035) 1px, transparent 1px),
+    linear-gradient(to right, rgba(14, 42, 133, 0.065) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(14, 42, 133, 0.065) 1px, transparent 1px);
+  background-size: 48px 48px, 48px 48px, 240px 240px, 240px 240px;
+  opacity: 0.65;
+  mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 80%);
   pointer-events: none;
 }
 
@@ -287,7 +302,7 @@ textarea {
 .contact-moving-gradient {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.3) 100%),
-    linear-gradient(125deg, #1235A0 0%, #10D9AB 33%, #FEBD02 66%, #FF4101 100%);
+    linear-gradient(125deg, #0E2A85 0%, #0C8F80 33%, #D99A00 66%, #D93600 100%);
   background-size: 100% 100%, 300% 300%;
   animation: contactGradientShift 12s ease-in-out infinite alternate;
 }
@@ -557,14 +572,14 @@ a:hover .contact-icon-glass-btn {
   isolation: isolate;
   overflow: hidden;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #1235A0 0%, #00D9AB 100%);
+  background: linear-gradient(135deg, #0E2A85 0%, #0C8F80 100%);
   border: none;
   color: #ffffff;
   box-shadow:
-    0 8px 20px -4px rgba(18, 53, 160, 0.3),
-    0 4px 10px rgba(0, 217, 171, 0.2),
+    0 8px 20px -4px rgba(14, 42, 133, 0.3),
+    0 4px 10px rgba(12, 143, 128, 0.2),
     inset 0 1px 1px rgba(255, 255, 255, 0.6);
-  transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
+  transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease, background 250ms ease;
 }
 
 .liquid-glass-btn-primary::after {
@@ -586,9 +601,10 @@ a:hover .contact-icon-glass-btn {
 @media (hover: hover) {
   .liquid-glass-btn-primary:hover {
     transform: translateY(-2px);
+    background: linear-gradient(135deg, #0A1F6E 0%, #0A7A6E 100%);
     box-shadow:
-      0 14px 28px -4px rgba(18, 53, 160, 0.38),
-      0 6px 16px rgba(0, 217, 171, 0.3),
+      0 14px 28px -4px rgba(10, 31, 110, 0.45),
+      0 6px 16px rgba(10, 122, 110, 0.35),
       inset 0 1px 1px rgba(255, 255, 255, 0.8);
   }
 
@@ -709,6 +725,26 @@ a:hover .contact-icon-glass-btn {
 /* 3D Interactive White Orbs                                        */
 /* ---------------------------------------------------------------- */
 
+.directional-light-wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at 15% 15%, rgba(14, 42, 133, 0.12) 0%, rgba(12, 143, 128, 0.06) 40%, transparent 75%);
+  animation: directionalLightDrift 28s ease-in-out infinite alternate;
+}
+
+@keyframes directionalLightDrift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3%, 2%) scale(1.05);
+  }
+  100% {
+    transform: translate(-2%, 3%) scale(0.98);
+  }
+}
+
 .white-orb-3d {
   position: absolute;
   z-index: 0;
@@ -716,7 +752,8 @@ a:hover .contact-icon-glass-btn {
   pointer-events: none;
   background: radial-gradient(circle at 35% 30%, #ffffff 0%, #e8eef5 50%, #cbd5e1 85%, #94a3b8 100%);
   box-shadow:
-    0 24px 50px -10px rgba(30, 50, 90, 0.12),
+    0 0 60px 20px rgba(14, 42, 133, 0.12),
+    0 24px 50px -10px rgba(30, 50, 90, 0.14),
     0 8px 20px rgba(0, 0, 0, 0.04),
     inset 0 -14px 28px rgba(0, 0, 0, 0.09),
     inset 0 4px 8px rgba(255, 255, 255, 1);

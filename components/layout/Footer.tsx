@@ -8,9 +8,9 @@ const socialIcons = [BriefcaseBusiness, Camera, Share2] as const;
 
 export function Footer() {
   return (
-    <footer className="border-t border-dd-gray-300 bg-dd-offwhite text-dd-ink">
+    <footer className="bg-dd-offwhite text-dd-ink">
       <div className="page-container pb-8 pt-16 md:pt-20">
-        <div className="grid gap-12 border-b border-dd-gray-300 pb-14 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
+        <div className="grid gap-12 border-b border-dd-gray-300/40 pb-14 md:grid-cols-2 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
           <div>
             <a href="#home"><Logo /></a>
             <p className="mt-6 max-w-[430px] text-sm font-medium leading-relaxed text-dd-gray-600">

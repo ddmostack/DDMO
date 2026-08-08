@@ -5,13 +5,12 @@ import { useEffect } from "react";
 
 type SectionOrbProps = {
   className?: string;
+  glowColor?: string;
   style?: React.CSSProperties;
 };
 
-export function SectionOrb({ className = "", style }: SectionOrbProps) {
+export function SectionOrb({ className = "", glowColor = "rgba(14, 42, 133, 0.16)", style }: SectionOrbProps) {
   const reduceMotion = useReducedMotion();
-  // Initialize to 0.5 (center) so that the initial transform evaluates to 0 on both server and client,
-  // preventing hydration mismatches.
   const mouseX = useMotionValue(0.5);
   const mouseY = useMotionValue(0.5);
 
@@ -42,26 +41,54 @@ export function SectionOrb({ className = "", style }: SectionOrbProps) {
   });
 
   if (reduceMotion) {
-    return <div className={`white-orb-3d ${className}`} style={style} aria-hidden="true" />;
+    return (
+      <div className="relative pointer-events-none" aria-hidden="true">
+        <div
+          className="absolute -inset-8 rounded-full blur-2xl opacity-60"
+          style={{ background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)` }}
+        />
+        <div className={`white-orb-3d ${className}`} style={style} />
+      </div>
+    );
   }
 
   return (
-    <motion.div
-      className={`white-orb-3d ${className}`}
-      style={{
-        ...style,
-        x: orbX,
-        y: orbY,
-      }}
-      animate={{
-        scale: [1, 1.025, 1],
-      }}
-      transition={{
-        duration: 7,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-      aria-hidden="true"
-    />
+    <div className="relative pointer-events-none" aria-hidden="true">
+      {/* Light Source Backglow Aura */}
+      <motion.div
+        className="absolute -inset-10 rounded-full blur-3xl pointer-events-none z-0"
+        style={{
+          background: `radial-gradient(circle, ${glowColor} 0%, transparent 70%)`,
+          x: orbX,
+          y: orbY,
+        }}
+        animate={{
+          scale: [1, 1.08, 1],
+          opacity: [0.55, 0.8, 0.55],
+        }}
+        transition={{
+          duration: 6.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      {/* Primary 3D Orb */}
+      <motion.div
+        className={`white-orb-3d ${className}`}
+        style={{
+          ...style,
+          x: orbX,
+          y: orbY,
+        }}
+        animate={{
+          scale: [1, 1.025, 1],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+    </div>
   );
 }
