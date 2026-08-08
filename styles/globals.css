@@ -646,8 +646,8 @@ a:hover .contact-icon-glass-btn {
   border-radius: 1.75rem; /* 28px */
   background: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.35) 0%,
-    rgba(255, 255, 255, 0.18) 100%
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(255, 255, 255, 0.22) 100%
   );
   backdrop-filter: blur(16px) saturate(135%);
   -webkit-backdrop-filter: blur(16px) saturate(135%);
@@ -657,16 +657,27 @@ a:hover .contact-icon-glass-btn {
     0 4px 15px rgba(0, 0, 0, 0.02),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.95),
     inset 0 -1.5px 2px 0 rgba(0, 0, 0, 0.04);
-  transition: transform 300ms ease, box-shadow 300ms ease, border-color 300ms ease;
+  transition: transform 550ms cubic-bezier(0.22, 1, 0.36, 1),
+              background 550ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 550ms cubic-bezier(0.22, 1, 0.36, 1),
+              filter 550ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 550ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @media (hover: hover) {
   .liquid-glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.95);
+    transform: translateY(-8px);
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.88) 0%,
+      rgba(255, 255, 255, 0.68) 100%
+    );
+    filter: brightness(1.14);
+    border-color: rgba(255, 255, 255, 1);
     box-shadow:
-      0 28px 65px -10px rgba(30, 50, 90, 0.14),
-      0 6px 20px rgba(0, 217, 171, 0.1),
-      inset 0 2px 3px 0 rgba(255, 255, 255, 1);
+      0 32px 75px -10px rgba(18, 53, 160, 0.16),
+      0 12px 35px rgba(255, 255, 255, 0.7),
+      inset 0 2px 4px 0 rgba(255, 255, 255, 1);
   }
 }
 

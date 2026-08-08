@@ -83,7 +83,7 @@ export function CursorTiltCard({
   return (
     <motion.div
       ref={cardRef}
-      className={`relative overflow-hidden ${className}`}
+      className={`relative overflow-hidden transition-all duration-500 ease-out ${className}`}
       style={{
         perspective: 1000,
         rotateX,
@@ -103,10 +103,10 @@ export function CursorTiltCard({
       {/* Dynamic Cursor Spotlight Glare Sheen */}
       {glare && (
         <motion.div
-          className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] transition-opacity duration-300"
+          className="pointer-events-none absolute inset-0 z-20 rounded-[inherit] transition-opacity duration-500"
           style={{
-            opacity: isHovered ? 0.35 : 0,
-            background: `radial-gradient(circle 350px at ${glareX.get()}% ${glareY.get()}%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 70%)`,
+            opacity: isHovered ? 0.45 : 0,
+            background: `radial-gradient(circle 400px at ${glareX.get()}% ${glareY.get()}%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 70%)`,
           }}
         />
       )}

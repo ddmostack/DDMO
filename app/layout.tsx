@@ -1,16 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Sora } from "next/font/google";
 
 import "@/styles/globals.css";
 import { AnimatedGradientBackground } from "@/components/ui/AnimatedGradientBackground";
 import { CustomCursor } from "@/components/ui/CustomCursor";
-
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-sora",
-  display: "swap",
-  weight: ["400", "500", "700", "800"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://doodledynamo.com"),
@@ -49,7 +41,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={sora.variable}>
+    <html lang="en">
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content
