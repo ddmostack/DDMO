@@ -84,7 +84,7 @@ export function InteractiveGrid() {
         const isFifth = Math.abs(i) % 5 === 0;
 
         ctx.lineWidth = isFifth ? 1.5 : 1;
-        ctx.strokeStyle = isFifth ? "rgba(14, 42, 133, 0.065)" : "rgba(14, 42, 133, 0.03)";
+        ctx.strokeStyle = isFifth ? "rgba(17, 56, 230, 0.065)" : "rgba(17, 56, 230, 0.03)";
 
         ctx.beginPath();
         ctx.moveTo(x, 0);
@@ -121,7 +121,7 @@ export function InteractiveGrid() {
         const isFifth = Math.abs(j) % 5 === 0;
 
         ctx.lineWidth = isFifth ? 1.5 : 1;
-        ctx.strokeStyle = isFifth ? "rgba(14, 42, 133, 0.065)" : "rgba(14, 42, 133, 0.03)";
+        ctx.strokeStyle = isFifth ? "rgba(17, 56, 230, 0.065)" : "rgba(17, 56, 230, 0.03)";
 
         ctx.beginPath();
         ctx.moveTo(0, y);
@@ -175,7 +175,7 @@ export function InteractiveGrid() {
 
               ctx.beginPath();
               ctx.arc(x, y, dotSize, 0, Math.PI * 2);
-              ctx.fillStyle = `rgba(12, 143, 128, ${alpha})`;
+              ctx.fillStyle = `rgba(255, 217, 59, ${alpha})`;
               ctx.fill();
             }
           }
@@ -202,7 +202,7 @@ export function InteractiveGrid() {
         className="pointer-events-none absolute inset-0 opacity-15"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(14, 42, 133, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(14, 42, 133, 0.04) 1px, transparent 1px)",
+            "linear-gradient(rgba(17, 56, 230, 0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(17, 56, 230, 0.04) 1px, transparent 1px)",
           backgroundSize: "48px 48px",
           maskImage: "radial-gradient(circle at 50% 40%, black 20%, transparent 80%)",
           WebkitMaskImage: "radial-gradient(circle at 50% 40%, black 20%, transparent 80%)",

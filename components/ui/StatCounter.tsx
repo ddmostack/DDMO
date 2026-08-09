@@ -85,7 +85,7 @@ export function StatCounter({
       {/* Syncing Thin Animated Underline / Progress Bar */}
       <div className="mt-4 h-0.5 w-full overflow-hidden rounded-full bg-dd-navy/15" aria-hidden="true">
         <motion.div
-          className="h-full rounded-full bg-gradient-to-r from-dd-blue-600 via-dd-teal-600 to-dd-blue-600"
+          className="h-full rounded-full bg-gradient-to-r from-dd-blue-600 via-dd-yellow-600 to-dd-blue-600"
           style={{ width: `${(reduceMotion ? 1 : progressRatio) * 100}%` }}
           transition={{ duration: 0.1, ease: "linear" }}
         />

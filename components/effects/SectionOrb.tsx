@@ -9,7 +9,7 @@ type SectionOrbProps = {
   style?: React.CSSProperties;
 };
 
-export function SectionOrb({ className = "", glowColor = "rgba(14, 42, 133, 0.16)", style }: SectionOrbProps) {
+export function SectionOrb({ className = "", glowColor = "rgba(17, 56, 230, 0.16)", style }: SectionOrbProps) {
   const reduceMotion = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { margin: "200px 0px" });

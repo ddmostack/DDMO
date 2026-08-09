@@ -7,7 +7,7 @@ import { CursorTiltCard } from "@/components/ui/CursorTiltCard";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { services } from "@/lib/constants";
 
-// 6 Cards strictly mapped to the 4-brand-color scale (Blue, Teal, Yellow, Red, Blue-Teal, Yellow-Red)
+// Six cards alternate the brand blue and yellow accents.
 const serviceStyles = [
   {
     gradient: "from-dd-blue-600/20 via-dd-blue-700/10 to-transparent",
@@ -17,11 +17,11 @@ const serviceStyles = [
     badgeColor: "group-hover:text-dd-blue-600/20",
   },
   {
-    gradient: "from-dd-teal-600/20 via-dd-teal-700/10 to-transparent",
-    iconAccent: "group-hover:border-dd-teal-600/40 group-hover:text-dd-teal-600",
-    hoverGlow: "hover:shadow-glow-teal",
-    lineGlow: "via-dd-teal-600/60",
-    badgeColor: "group-hover:text-dd-teal-600/20",
+    gradient: "from-dd-blue-600/20 via-dd-blue-700/10 to-transparent",
+    iconAccent: "group-hover:border-dd-blue-600/40 group-hover:text-dd-blue-600",
+    hoverGlow: "hover:shadow-glow-blue",
+    lineGlow: "via-dd-blue-600/60",
+    badgeColor: "group-hover:text-dd-blue-600/20",
   },
   {
     gradient: "from-dd-yellow-600/22 via-dd-yellow-700/12 to-transparent",
@@ -31,25 +31,25 @@ const serviceStyles = [
     badgeColor: "group-hover:text-dd-yellow-700/20",
   },
   {
-    gradient: "from-dd-red-600/20 via-dd-red-700/10 to-transparent",
-    iconAccent: "group-hover:border-dd-red-600/40 group-hover:text-dd-red-600",
-    hoverGlow: "hover:shadow-glow-red",
-    lineGlow: "via-dd-red-600/60",
-    badgeColor: "group-hover:text-dd-red-600/20",
+    gradient: "from-dd-yellow-600/20 via-dd-yellow-700/10 to-transparent",
+    iconAccent: "group-hover:border-dd-yellow-700/40 group-hover:text-dd-yellow-700",
+    hoverGlow: "hover:shadow-glow-yellow",
+    lineGlow: "via-dd-yellow-600/60",
+    badgeColor: "group-hover:text-dd-yellow-700/20",
   },
   {
-    gradient: "from-dd-blue-600/20 via-dd-teal-600/15 to-transparent",
-    iconAccent: "group-hover:border-dd-teal-600/40 group-hover:text-dd-blue-600",
+    gradient: "from-dd-blue-600/20 via-dd-blue-600/15 to-transparent",
+    iconAccent: "group-hover:border-dd-blue-600/40 group-hover:text-dd-blue-600",
     hoverGlow: "hover:shadow-glow-blue",
     lineGlow: "via-dd-blue-600/60",
     badgeColor: "group-hover:text-dd-blue-600/20",
   },
   {
-    gradient: "from-dd-yellow-600/20 via-dd-red-600/15 to-transparent",
-    iconAccent: "group-hover:border-dd-red-600/40 group-hover:text-dd-red-600",
-    hoverGlow: "hover:shadow-glow-red",
-    lineGlow: "via-dd-red-600/60",
-    badgeColor: "group-hover:text-dd-red-600/20",
+    gradient: "from-dd-yellow-600/20 via-dd-yellow-600/15 to-transparent",
+    iconAccent: "group-hover:border-dd-yellow-700/40 group-hover:text-dd-yellow-700",
+    hoverGlow: "hover:shadow-glow-yellow",
+    lineGlow: "via-dd-yellow-600/60",
+    badgeColor: "group-hover:text-dd-yellow-700/20",
   },
 ];
 

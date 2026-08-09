@@ -76,8 +76,8 @@ export function CurvyDashedProgressArrow({ progress, className = "" }: CurvyDash
           <linearGradient id="curvy-arrow-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#4F46E5" />   {/* Indigo */}
             <stop offset="35%" stopColor="#2563EB" />  {/* Blue */}
-            <stop offset="70%" stopColor="#0C8F80" />  {/* Teal */}
-            <stop offset="100%" stopColor="#0E2A85" /> {/* Navy */}
+            <stop offset="70%" stopColor="#ffd93b" />
+            <stop offset="100%" stopColor="#1138e6" />
           </linearGradient>
 
           {/* Mask for smooth progressive drawing */}

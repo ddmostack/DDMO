@@ -11,11 +11,11 @@ import { differentiators } from "@/lib/constants";
 
 const diffGlows = [
   "hover:shadow-glow-blue",
-  "hover:shadow-glow-teal",
-  "hover:shadow-glow-yellow",
-  "hover:shadow-glow-red",
   "hover:shadow-glow-blue",
-  "hover:shadow-glow-teal",
+  "hover:shadow-glow-yellow",
+  "hover:shadow-glow-yellow",
+  "hover:shadow-glow-blue",
+  "hover:shadow-glow-blue",
 ];
 
 export function WhyUs() {

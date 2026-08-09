@@ -4,10 +4,10 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 
 const doodles = [
-  { d: "M 12 90 Q 40 20, 88 62 T 168 34", stroke: "#D99A00", delay: 0 },
-  { d: "M 24 120 C 70 40, 110 140, 160 70", stroke: "#D93600", delay: 0.15 },
-  { d: "M 40 60 A 48 48 0 1 1 39.5 60", stroke: "#0E2A85", delay: 0.3 },
-  { d: "M 180 100 L 220 60 L 260 100 M 200 120 L 240 80", stroke: "#0E2A85", delay: 0.2 },
+  { d: "M 12 90 Q 40 20, 88 62 T 168 34", stroke: "#ffd93b", delay: 0 },
+  { d: "M 24 120 C 70 40, 110 140, 160 70", stroke: "#ffd93b", delay: 0.15 },
+  { d: "M 40 60 A 48 48 0 1 1 39.5 60", stroke: "#1138e6", delay: 0.3 },
+  { d: "M 180 100 L 220 60 L 260 100 M 200 120 L 240 80", stroke: "#1138e6", delay: 0.2 },
 ];
 
 export function DoodleBackground() {

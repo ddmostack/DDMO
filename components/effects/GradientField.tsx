@@ -17,9 +17,33 @@ export function GradientField() {
   const isInView = useInView(ref, { margin: "200px 0px" });
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const { scrollYProgress } = useScroll();
+  const fadeStart = useMotionValue(1400);
+  const fadeEnd = useMotionValue(1800);
+  const { scrollY, scrollYProgress } = useScroll();
+
+  const fieldOpacity = useTransform(
+    [scrollY, fadeStart, fadeEnd],
+    (latest) => {
+      const [scroll, start, end] = latest as number[];
+      if (scroll <= start) return 1;
+      if (scroll >= end) return 0;
+      return 1 - (scroll - start) / Math.max(1, end - start);
+    }
+  );
 
   useEffect(() => {
+    const measure = () => {
+      const height = window.innerHeight;
+      const services = document.getElementById("services");
+      const servicesTop = services?.offsetTop ?? height * 2.2;
+
+      fadeStart.set(Math.max(height, servicesTop - height * 1.1));
+      fadeEnd.set(Math.max(height + 1, servicesTop - height * 0.4));
+    };
+
+    measure();
+    window.addEventListener("resize", measure);
+
     if (reducedMotion || !isInView) return;
 
     function handlePointerMove(event: PointerEvent) {
@@ -28,8 +52,11 @@ export function GradientField() {
     }
 
     window.addEventListener("pointermove", handlePointerMove);
-    return () => window.removeEventListener("pointermove", handlePointerMove);
-  }, [reducedMotion, isInView, mouseX, mouseY]);
+    return () => {
+      window.removeEventListener("resize", measure);
+      window.removeEventListener("pointermove", handlePointerMove);
+    };
+  }, [reducedMotion, isInView, mouseX, mouseY, fadeStart, fadeEnd]);
 
   const springX = useSpring(mouseX, { stiffness: 40, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 40, damping: 20 });
@@ -38,46 +65,94 @@ export function GradientField() {
   const blobAY = useTransform(scrollYProgress, [0, 1], [0, -350]);
   const blobBY = useTransform(scrollYProgress, [0, 1], [0, 420]);
   const blobCY = useTransform(scrollYProgress, [0, 1], [0, -280]);
-  const blobDY = useTransform(scrollYProgress, [0, 1], [0, 320]);
 
   const blobAX = useTransform(springX, [-1, 1], [-30, 30]);
   const blobBX = useTransform(springX, [-1, 1], [24, -24]);
   const blobCX = useTransform(springY, [-1, 1], [-20, 20]);
-  const blobDX = useTransform(springX, [-1, 1], [16, -16]);
-
-  // Color-shift-on-scroll: subtle hue & scale interpolation matching brand sections
-  const blobAOpacity = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0.75, 0.55, 0.75, 0.85]);
-  const blobBOpacity = useTransform(scrollYProgress, [0, 0.3, 0.6, 1], [0.6, 0.8, 0.6, 0.75]);
-  const blobCOpacity = useTransform(scrollYProgress, [0, 0.4, 0.7, 1], [0.55, 0.75, 0.5, 0.7]);
-
-  const hueShift = useTransform(
-    scrollYProgress,
-    [0, 0.2, 0.4, 0.6, 0.8, 1],
-    [0, 18, -12, 22, -18, 0]
-  );
-  const blobCFilter = useTransform(hueShift, (value) => `hue-rotate(${value}deg) blur(70px)`);
 
   if (reducedMotion) {
-    return <div ref={ref} aria-hidden className="dd-mesh-static" />;
+    return (
+      <motion.div
+        ref={ref}
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+        style={{ opacity: fieldOpacity }}
+      >
+        <div className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[44rem] w-[44rem] rounded-full bg-[radial-gradient(circle,rgba(255,217,59,0.55)_0%,transparent_70%)] blur-[115px] opacity-75" />
+        <div className="absolute -top-[10%] -left-[10%] h-[48rem] w-[48rem] rounded-full bg-[radial-gradient(circle,rgba(17,56,230,0.65)_0%,transparent_70%)] blur-[115px] opacity-80" />
+      </motion.div>
+    );
   }
 
   return (
-    <div ref={ref} aria-hidden className="dd-mesh">
-      <div className="dd-grid-overlay" />
-      <motion.span
-        className="dd-blob dd-blob-a"
-        style={{ x: blobAX, y: blobAY, opacity: blobAOpacity }}
-      />
-      <motion.span
-        className="dd-blob dd-blob-b"
-        style={{ x: blobBX, y: blobBY, opacity: blobBOpacity }}
-      />
-      <motion.span
-        className="dd-blob dd-blob-c"
-        style={{ x: blobCX, y: blobCY, opacity: blobCOpacity, filter: blobCFilter }}
-      />
-      <motion.span className="dd-blob dd-blob-d" style={{ x: blobDX, y: blobDY }} />
-      <div className="dd-grain" />
-    </div>
+    <motion.div
+      ref={ref}
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      style={{ opacity: fieldOpacity }}
+    >
+      {/* Blue Blob (#1138e6 / #38bdf8) - Top Left Vivid Glow */}
+      <motion.div
+        className="absolute -top-[14%] -left-[10%] h-[52rem] w-[52rem]"
+        style={{ x: blobAX, y: blobAY }}
+      >
+        <motion.div
+          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(56,189,248,0.92)_0%,rgba(17,56,230,0.85)_38%,rgba(17,56,230,0.25)_65%,transparent_80%)] blur-[95px] mix-blend-screen brightness-[1.25] saturate-[1.35] opacity-90"
+          animate={{
+            x: [0, 50, -40, 0],
+            y: [0, -45, 35, 0],
+            scale: [1, 1.12, 0.92, 1],
+            rotate: [0, 18, -12, 0],
+          }}
+          transition={{
+            duration: 24,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </motion.div>
+
+      {/* Yellow Blob (#ffd93b / #ffea79) - Positioned directly behind "to convert." text */}
+      <motion.div
+        className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[48rem] w-[48rem]"
+        style={{ x: blobBX, y: blobBY }}
+      >
+        <motion.div
+          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,234,121,0.95)_0%,rgba(255,217,59,0.82)_40%,rgba(255,217,59,0.22)_65%,transparent_80%)] blur-[95px] mix-blend-screen brightness-[1.3] saturate-[1.4] opacity-90"
+          animate={{
+            x: [0, -35, 45, 0],
+            y: [0, 30, -35, 0],
+            scale: [1, 1.14, 0.95, 1],
+            rotate: [0, -15, 20, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </motion.div>
+
+      {/* Electric Cyan/Indigo Blob (#06b6d4 / #1d4ed8) - Right side vibrant depth */}
+      <motion.div
+        className="absolute top-[18%] -right-[14%] h-[46rem] w-[46rem]"
+        style={{ x: blobCX, y: blobCY }}
+      >
+        <motion.div
+          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_60%_40%,rgba(6,182,212,0.85)_0%,rgba(29,78,216,0.75)_45%,rgba(29,78,216,0.2)_70%,transparent_80%)] blur-[90px] mix-blend-screen brightness-[1.2] saturate-[1.3] opacity-85"
+          animate={{
+            x: [0, 40, -50, 0],
+            y: [0, -40, 25, 0],
+            scale: [1, 0.92, 1.1, 1],
+            rotate: [0, 22, -16, 0],
+          }}
+          transition={{
+            duration: 28,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </motion.div>
+    </motion.div>
   );
 }

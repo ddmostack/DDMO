@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 
 import "@/styles/globals.css";
-import { AnimatedGradientBackground } from "@/components/ui/AnimatedGradientBackground";
+import { GradientField } from "@/components/effects/GradientField";
+import { KineticTypeField } from "@/components/effects/KineticTypeField";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 
 export const metadata: Metadata = {
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f6f6f2",
+  themeColor: "#000000",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -47,10 +48,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
         <CustomCursor />
-        <AnimatedGradientBackground />
+        <GradientField />
+        <KineticTypeField />
         {children}
       </body>
     </html>
   );
 }
-

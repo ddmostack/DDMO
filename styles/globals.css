@@ -13,28 +13,23 @@
   --dd-soft: 232 233 227;
   --dd-white: #fbfbf8;
 
-  /* Deepened Brand Accents — 600 scale primaries */
-  --dd-accent: 14 42 133;      /* Deep Navy Blue #0E2A85 — primary */
-  --dd-accent-2: 217 54 0;     /* Deep Burnt Red #D93600 — energy / CTA */
-  --dd-accent-3: 217 154 0;    /* Deep Amber Gold #D99A00 — highlight */
-  --dd-accent-4: 12 143 128;   /* Deep Emerald Teal #0C8F80 — secondary */
+  /* Core brand accents */
+  --dd-accent: 17 56 230;      /* #1138e6 */
+  --dd-accent-2: 255 217 59;   /* #ffd93b */
+  --dd-accent-3: 0 0 0;        /* #000000 */
+  --dd-accent-4: 17 56 230;
 
-  /* 600 to 700 shade shift pairs */
-  --dd-blue-600: #0E2A85;
-  --dd-blue-700: #0A1F6E;
-  --dd-teal-600: #0C8F80;
-  --dd-teal-700: #0A7A6E;
-  --dd-yellow-600: #D99A00;
-  --dd-yellow-700: #B27B00;
-  --dd-red-600: #D93600;
-  --dd-red-700: #C93000;
+  /* Semantic blue and yellow pairs */
+  --dd-blue-600: #1138e6;
+  --dd-blue-700: #0a218a;
+  --dd-yellow-600: #ffd93b;
+  --dd-yellow-700: #ccad2f;
 
   --dd-gradient: linear-gradient(
     125deg,
-    #0E2A85 0%,
-    #0C8F80 33%,
-    #D99A00 66%,
-    #D93600 100%
+    #000000 0%,
+    #1138e6 50%,
+    #ffd93b 100%
   );
 }
 
@@ -47,7 +42,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
-  background-color: #f6f6f2;
+  background-color: #f7f8fa;
 }
 
 body {
@@ -122,15 +117,8 @@ textarea {
   }
 }
 
-/* ---------------------------------------------------------------- */
-/* Gradient field — fixed, full-bleed animated background layer.    */
-/* Rendered once from <GradientField /> in layout.tsx.               */
-/* z-index: -1 keeps it behind ALL page content, including plain    */
-/* static sections that never declare their own z-index.            */
-/* ---------------------------------------------------------------- */
-
-.dd-mesh,
-.dd-mesh-static {
+/* Kinetic type background: layer 0, page content starts at layer 1. */
+.kinetic-type-field {
   position: fixed;
   inset: 0;
   z-index: -1;
@@ -138,117 +126,49 @@ textarea {
   pointer-events: none;
 }
 
-.dd-blob {
+.kinetic-type-base {
   position: absolute;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: 0.75;
+  inset: 0;
+  background: #000000;
+}
+
+.kinetic-type-plane {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 185dvh;
   will-change: transform;
-}
-
-.dd-blob-a {
-  width: 52rem;
-  height: 52rem;
-  top: -10rem;
-  left: -12rem;
-  background: radial-gradient(circle at 30% 30%, rgba(14, 42, 133, 0.65), transparent 70%);
-  animation: dd-drift-a 26s ease-in-out infinite;
-}
-
-.dd-blob-b {
-  width: 48rem;
-  height: 48rem;
-  top: 15rem;
-  right: -10rem;
-  background: radial-gradient(circle at 70% 40%, rgba(12, 143, 128, 0.6), transparent 70%);
-  animation: dd-drift-b 32s ease-in-out infinite;
-}
-
-.dd-blob-c {
-  width: 44rem;
-  height: 44rem;
-  top: 45rem;
-  left: 8%;
-  background: radial-gradient(circle at 50% 50%, rgba(217, 154, 0, 0.55), transparent 70%);
-  animation: dd-drift-c 24s ease-in-out infinite;
-}
-
-.dd-blob-d {
-  width: 42rem;
-  height: 42rem;
-  top: 75rem;
-  right: 12%;
-  background: radial-gradient(circle at 40% 60%, rgba(217, 54, 0, 0.55), transparent 70%);
-  animation: dd-drift-d 28s ease-in-out infinite;
-}
-
-@keyframes dd-drift-a {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(3rem, 2rem) scale(1.08); }
-}
-
-@keyframes dd-drift-b {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-2.5rem, -3rem) scale(0.95); }
-}
-
-@keyframes dd-drift-c {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(2rem, -1.5rem) scale(1.05); }
-}
-
-@keyframes dd-drift-d {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-3rem, 2.5rem) scale(1.1); }
-}
-
-/* Scale down background blobs on mobile for performance & to prevent overflow */
-@media (max-width: 639px) {
-  .dd-blob {
-    filter: blur(60px);
-  }
-  .dd-blob-a {
-    width: 28rem;
-    height: 28rem;
-    top: -6rem;
-    left: -8rem;
-  }
-  .dd-blob-b {
-    width: 26rem;
-    height: 26rem;
-    right: -8rem;
-  }
-  .dd-blob-c {
-    width: 24rem;
-    height: 24rem;
-  }
-  .dd-blob-d {
-    width: 22rem;
-    height: 22rem;
-  }
-}
-
-.dd-grain {
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
-  opacity: 0.05;
-  mix-blend-mode: overlay;
-}
-
-.dd-grid-overlay {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(14, 42, 133, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(14, 42, 133, 0.035) 1px, transparent 1px),
-    linear-gradient(to right, rgba(14, 42, 133, 0.065) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(14, 42, 133, 0.065) 1px, transparent 1px);
-  background-size: 48px 48px, 48px 48px, 240px 240px, 240px 240px;
-  opacity: 0.65;
-  mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 80%);
-  -webkit-mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 80%);
   pointer-events: none;
+}
+
+.kinetic-type-word {
+  position: absolute;
+  left: var(--word-left);
+  top: var(--word-top);
+  display: block;
+  width: max-content;
+  max-width: none;
+  pointer-events: auto;
+  user-select: none;
+  white-space: nowrap;
+  font-size: var(--word-size);
+  font-weight: 800;
+  line-height: 0.85;
+  letter-spacing: 0;
+  transform-origin: center;
+  mix-blend-mode: difference;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 767px) {
+  .kinetic-type-word {
+    left: var(--word-left-mobile);
+    top: var(--word-top-mobile);
+    font-size: var(--word-size-mobile);
+  }
+
+  .kinetic-type-word-desktop {
+    display: none;
+  }
 }
 
 /* ---------------------------------------------------------------- */
@@ -297,14 +217,6 @@ textarea {
   }
 }
 
-/* Fallback for reduced-motion: same palette, no animation, no JS */
-.dd-mesh-static {
-  background:
-    radial-gradient(circle at 15% 10%, rgb(var(--dd-accent) / 30%), transparent 55%),
-    radial-gradient(circle at 85% 30%, rgb(var(--dd-accent-2) / 24%), transparent 55%),
-    radial-gradient(circle at 45% 85%, rgb(var(--dd-accent-3) / 18%), transparent 55%);
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -321,14 +233,13 @@ textarea {
 }
 
 /* ---------------------------------------------------------------- */
-/* Contact Form Moving Gradient                                     */
-/* Colors: Blue (#1235A0), Teal (#10D9AB), Yellow (#FEBD02), Red (#FF4101) */
+/* Contact Form Moving Gradient: black, blue, and yellow.           */
 /* ---------------------------------------------------------------- */
 
 .contact-moving-gradient {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.3) 100%),
-    linear-gradient(125deg, #0E2A85 0%, #0C8F80 33%, #D99A00 66%, #D93600 100%);
+    linear-gradient(125deg, #000000 0%, #1138e6 55%, #ffd93b 100%);
   background-size: 100% 100%, 300% 300%;
   animation: contactGradientShift 12s ease-in-out infinite alternate;
 }
@@ -429,7 +340,7 @@ textarea {
   -webkit-backdrop-filter: blur(10px);
   border: 1.5px solid rgba(255, 255, 255, 0.7);
   box-shadow:
-    0 6px 20px rgba(18, 53, 160, 0.03),
+    0 6px 20px rgba(17, 56, 230, 0.03),
     inset 0 1.5px 3px rgba(255, 255, 255, 0.9);
 }
 
@@ -443,16 +354,16 @@ textarea {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.85);
-  color: #1235A0;
-  box-shadow: 0 4px 12px rgba(18, 53, 160, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  color: #1138e6;
+  box-shadow: 0 4px 12px rgba(17, 56, 230, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.8);
   transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease, color 200ms ease;
 }
 
 a:hover .contact-icon-glass-btn {
   transform: translateY(-2px);
   background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 6px 16px rgba(18, 53, 160, 0.12);
-  color: #00D9AB;
+  box-shadow: 0 6px 16px rgba(17, 56, 230, 0.12);
+  color: #1138e6;
 }
 
 .contact-frosted-input {
@@ -485,18 +396,18 @@ a:hover .contact-icon-glass-btn {
 
 .contact-frosted-input:focus {
   background: rgba(255, 255, 255, 0.8);
-  border-color: rgba(0, 217, 171, 0.85);
+  border-color: rgba(17, 56, 230, 0.85);
   transform: translateY(-1px);
   box-shadow:
-    0 0 0 4px rgba(0, 217, 171, 0.18),
-    0 6px 18px rgba(18, 53, 160, 0.08);
+    0 0 0 4px rgba(17, 56, 230, 0.18),
+    0 6px 18px rgba(17, 56, 230, 0.08);
 }
 
 .contact-frosted-input[aria-invalid="true"] {
-  border-color: #FF4101;
+  border-color: #000000;
   box-shadow:
-    0 0 0 4px rgba(255, 65, 1, 0.14),
-    0 4px 12px rgba(255, 65, 1, 0.06);
+    0 0 0 4px rgba(0, 0, 0, 0.14),
+    0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .contact-frosted-submit {
@@ -511,11 +422,11 @@ a:hover .contact-icon-glass-btn {
   font-size: 0.9375rem;
   font-weight: 700;
   color: #ffffff;
-  background: linear-gradient(135deg, #1235A0 0%, #00D9AB 100%);
+  background: linear-gradient(135deg, #000000 0%, #1138e6 100%);
   border: 1.5px solid rgba(255, 255, 255, 0.5);
   box-shadow:
-    0 10px 24px -4px rgba(18, 53, 160, 0.28),
-    0 4px 12px rgba(0, 217, 171, 0.2),
+    0 10px 24px -4px rgba(17, 56, 230, 0.28),
+    0 4px 12px rgba(17, 56, 230, 0.2),
     inset 0 1px 1px rgba(255, 255, 255, 0.6);
   cursor: pointer;
   transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease;
@@ -541,8 +452,8 @@ a:hover .contact-icon-glass-btn {
   .contact-frosted-submit:hover {
     transform: translateY(-2px);
     box-shadow:
-      0 14px 30px -4px rgba(18, 53, 160, 0.35),
-      0 6px 16px rgba(0, 217, 171, 0.3),
+      0 14px 30px -4px rgba(17, 56, 230, 0.35),
+      0 6px 16px rgba(255, 217, 59, 0.3),
       inset 0 1px 1px rgba(255, 255, 255, 0.8);
   }
 
@@ -561,11 +472,11 @@ a:hover .contact-icon-glass-btn {
 
 .contact-frosted-submit:active {
   transform: translateY(0) scale(0.98);
-  box-shadow: 0 4px 12px rgba(18, 53, 160, 0.25);
+  box-shadow: 0 4px 12px rgba(17, 56, 230, 0.25);
 }
 
 .contact-frosted-submit:focus-visible {
-  outline: 3px solid #00D9AB;
+  outline: 3px solid #1138e6;
   outline-offset: 3px;
 }
 
@@ -579,13 +490,13 @@ a:hover .contact-icon-glass-btn {
 @supports not (backdrop-filter: blur(1px)) {
   .contact-main-glass-card {
     background: #ffffff;
-    border-color: rgba(18, 53, 160, 0.15);
-    box-shadow: 0 20px 50px rgba(18, 53, 160, 0.08);
+    border-color: rgba(17, 56, 230, 0.15);
+    box-shadow: 0 20px 50px rgba(17, 56, 230, 0.08);
   }
   .contact-left-glass-panel,
   .contact-frosted-input {
     background: #f8fafc;
-    border-color: rgba(18, 53, 160, 0.15);
+    border-color: rgba(17, 56, 230, 0.15);
   }
 }
 
@@ -598,12 +509,12 @@ a:hover .contact-icon-glass-btn {
   isolation: isolate;
   overflow: hidden;
   border-radius: 9999px;
-  background: linear-gradient(135deg, #0E2A85 0%, #0C8F80 100%);
+  background: linear-gradient(135deg, #000000 0%, #1138e6 100%);
   border: none;
   color: #ffffff;
   box-shadow:
-    0 8px 20px -4px rgba(14, 42, 133, 0.3),
-    0 4px 10px rgba(12, 143, 128, 0.2),
+    0 8px 20px -4px rgba(17, 56, 230, 0.3),
+    0 4px 10px rgba(17, 56, 230, 0.2),
     inset 0 1px 1px rgba(255, 255, 255, 0.6);
   transition: transform 200ms ease, box-shadow 200ms ease, opacity 200ms ease, background 250ms ease;
 }
@@ -627,10 +538,10 @@ a:hover .contact-icon-glass-btn {
 @media (hover: hover) {
   .liquid-glass-btn-primary:hover {
     transform: translateY(-2px);
-    background: linear-gradient(135deg, #0A1F6E 0%, #0A7A6E 100%);
+    background: linear-gradient(135deg, #1138e6 0%, #000000 100%);
     box-shadow:
-      0 14px 28px -4px rgba(10, 31, 110, 0.45),
-      0 6px 16px rgba(10, 122, 110, 0.35),
+      0 14px 28px -4px rgba(17, 56, 230, 0.45),
+      0 6px 16px rgba(0, 0, 0, 0.35),
       inset 0 1px 1px rgba(255, 255, 255, 0.8);
   }
 
@@ -650,7 +561,7 @@ a:hover .contact-icon-glass-btn {
   border: 1.5px solid rgba(255, 255, 255, 0.8);
   color: rgb(var(--dd-ink));
   box-shadow:
-    0 4px 16px rgba(18, 53, 160, 0.05),
+    0 4px 16px rgba(17, 56, 230, 0.05),
     inset 0 1.5px 2px rgba(255, 255, 255, 0.95);
   transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease, border-color 200ms ease;
 }
@@ -659,9 +570,9 @@ a:hover .contact-icon-glass-btn {
   .liquid-glass-btn-outline:hover {
     transform: translateY(-2px);
     background: rgba(255, 255, 255, 0.75);
-    border-color: rgba(0, 217, 171, 0.7);
+    border-color: rgba(17, 56, 230, 0.7);
     box-shadow:
-      0 8px 24px rgba(18, 53, 160, 0.1),
+      0 8px 24px rgba(17, 56, 230, 0.1),
       inset 0 1.5px 2px rgba(255, 255, 255, 1);
   }
 }
@@ -701,7 +612,7 @@ a:hover .contact-icon-glass-btn {
     filter: brightness(1.14);
     border-color: rgba(255, 255, 255, 1);
     box-shadow:
-      0 32px 75px -10px rgba(18, 53, 160, 0.16),
+      0 32px 75px -10px rgba(17, 56, 230, 0.16),
       0 12px 35px rgba(255, 255, 255, 0.7),
       inset 0 2px 4px 0 rgba(255, 255, 255, 1);
   }
@@ -713,7 +624,7 @@ a:hover .contact-icon-glass-btn {
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.75);
   box-shadow:
-    0 8px 32px rgba(18, 53, 160, 0.06),
+    0 8px 32px rgba(17, 56, 230, 0.06),
     inset 0 -1px 0 rgba(255, 255, 255, 0.6);
 }
 
@@ -730,14 +641,14 @@ a:hover .contact-icon-glass-btn {
   -webkit-backdrop-filter: blur(24px) saturate(150%);
   border: none;
   box-shadow:
-    0 20px 45px -10px rgba(18, 53, 160, 0.12),
+    0 20px 45px -10px rgba(17, 56, 230, 0.12),
     0 6px 18px rgba(0, 0, 0, 0.04);
   transition: transform 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
 }
 
 .floating-glass-pill:hover {
   box-shadow:
-    0 24px 55px -10px rgba(18, 53, 160, 0.16),
+    0 24px 55px -10px rgba(17, 56, 230, 0.16),
     0 8px 22px rgba(0, 0, 0, 0.05);
 }
 
@@ -754,7 +665,7 @@ a:hover .contact-icon-glass-btn {
   -webkit-backdrop-filter: blur(24px) saturate(150%);
   border: none;
   box-shadow:
-    0 20px 45px -10px rgba(18, 53, 160, 0.14),
+    0 20px 45px -10px rgba(17, 56, 230, 0.14),
     0 6px 18px rgba(0, 0, 0, 0.04);
 }
 
@@ -785,7 +696,7 @@ a:hover .contact-icon-glass-btn {
   pointer-events: none;
   background: radial-gradient(circle at 35% 30%, #ffffff 0%, #e8eef5 50%, #cbd5e1 85%, #94a3b8 100%);
   box-shadow:
-    0 0 60px 20px rgba(14, 42, 133, 0.12),
+    0 0 60px 20px rgba(17, 56, 230, 0.12),
     0 24px 50px -10px rgba(30, 50, 90, 0.14),
     0 8px 20px rgba(0, 0, 0, 0.04),
     inset 0 -14px 28px rgba(0, 0, 0, 0.09),
@@ -801,9 +712,5 @@ a:hover .contact-icon-glass-btn {
     animation: none !important;
   }
 }
-
-
-
-
 
 

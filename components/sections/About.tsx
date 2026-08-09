@@ -11,11 +11,11 @@ import { stats, values } from "@/lib/constants";
 
 const valueCardStyles = [
   { iconColor: "text-dd-blue-600", hoverGlow: "hover:shadow-glow-blue", borderHover: "group-hover:border-dd-blue-600/40" },
-  { iconColor: "text-dd-teal-600", hoverGlow: "hover:shadow-glow-teal", borderHover: "group-hover:border-dd-teal-600/40" },
-  { iconColor: "text-dd-yellow-700", hoverGlow: "hover:shadow-glow-yellow", borderHover: "group-hover:border-dd-yellow-700/40" },
-  { iconColor: "text-dd-red-600", hoverGlow: "hover:shadow-glow-red", borderHover: "group-hover:border-dd-red-600/40" },
   { iconColor: "text-dd-blue-600", hoverGlow: "hover:shadow-glow-blue", borderHover: "group-hover:border-dd-blue-600/40" },
-  { iconColor: "text-dd-teal-600", hoverGlow: "hover:shadow-glow-teal", borderHover: "group-hover:border-dd-teal-600/40" },
+  { iconColor: "text-dd-yellow-700", hoverGlow: "hover:shadow-glow-yellow", borderHover: "group-hover:border-dd-yellow-700/40" },
+  { iconColor: "text-dd-yellow-700", hoverGlow: "hover:shadow-glow-yellow", borderHover: "group-hover:border-dd-yellow-700/40" },
+  { iconColor: "text-dd-blue-600", hoverGlow: "hover:shadow-glow-blue", borderHover: "group-hover:border-dd-blue-600/40" },
+  { iconColor: "text-dd-blue-600", hoverGlow: "hover:shadow-glow-blue", borderHover: "group-hover:border-dd-blue-600/40" },
 ];
 
 export function About() {
@@ -42,10 +42,10 @@ export function About() {
           {/* Left Column - Sticky Heading & Studio Badge */}
           <ScrollReveal>
             <div className="lg:sticky lg:top-28 lg:self-start space-y-6">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-navy">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-yellow-600">
                 About Doodle Dynamo
               </p>
-              <h2 className="text-balance text-3xl font-extrabold leading-[0.98] tracking-[-0.055em] text-dd-ink sm:text-4xl md:text-5xl lg:text-6xl">
+              <h2 className="text-balance text-3xl font-extrabold leading-[0.98] tracking-[-0.055em] text-white sm:text-4xl md:text-5xl lg:text-6xl">
                 Small team.<br />
                 Wide-angle thinking.
               </h2>
@@ -66,10 +66,10 @@ export function About() {
           {/* Right Column - Intro Paragraphs & Values Module */}
           <div>
             <ScrollReveal delay={0.08}>
-              <p className="max-w-[650px] text-xl font-medium leading-relaxed tracking-[-0.02em] text-dd-ink md:text-2xl">
+              <p className="max-w-[650px] text-xl font-medium leading-relaxed tracking-[-0.02em] text-white md:text-2xl">
                 We connect strategy, creative work, and engineering so every part of a brand moves in the same direction.
               </p>
-              <p className="mt-6 max-w-[620px] text-base font-medium leading-relaxed text-dd-gray-600">
+              <p className="mt-6 max-w-[620px] text-base font-medium leading-relaxed text-white/65">
                 That means fewer handoffs, sharper decisions, and digital work built around clear business goals.
               </p>
             </ScrollReveal>
@@ -139,7 +139,7 @@ export function About() {
         {/* Stats Counter Row with Eyebrow Header Context */}
         <ScrollReveal className="mt-16 lg:mt-20">
           <div className="mb-5 flex items-center justify-center gap-3">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-dd-blue-600">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-dd-yellow-600">
               Studio Metrics • Impact By The Numbers
             </p>
           </div>
