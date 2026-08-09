@@ -77,6 +77,7 @@ type KineticWordProps = {
   viewportWidth: MotionValue<number>;
   viewportHeight: MotionValue<number>;
   fieldY: MotionValue<number>;
+  scrollY: MotionValue<number>;
   canReact: MotionValue<number>;
   reducedMotion: boolean;
 };
@@ -97,6 +98,7 @@ function KineticWord({
   viewportWidth,
   viewportHeight,
   fieldY,
+  scrollY,
   canReact,
   reducedMotion,
 }: KineticWordProps) {
@@ -141,10 +143,22 @@ function KineticWord({
     damping: 25,
     mass: 0.45,
   });
+
+  // Scroll-driven random appearance & disappearance: words fade in/out in staggered scroll waves
   const opacity = useTransform(
-    response,
-    [0, 1],
-    [placement.idleOpacity, placement.activeOpacity]
+    [scrollY, response],
+    ([scroll, prox]: number[]) => {
+      if (prox > 0.05) return Math.max(placement.idleOpacity, prox * placement.activeOpacity);
+      if (reducedMotion) return placement.idleOpacity;
+
+      // Unique phase offset per word based on top position, left position, and string hash
+      const phase = placement.top * 0.18 + placement.left * 0.35 + placement.label.length * 2.4;
+      const wave = Math.sin(scroll * 0.0034 + phase);
+      
+      // Calculate smooth organic visibility factor (0 to 1)
+      const visibility = Math.max(0, (wave - 0.1) / 0.9);
+      return visibility * placement.idleOpacity;
+    }
   );
   const scale = useTransform(response, [0, 1], [1, 1.08]);
   const style = {
@@ -289,6 +303,7 @@ export function KineticTypeField() {
             viewportWidth={viewportWidth}
             viewportHeight={viewportHeight}
             fieldY={fieldY}
+            scrollY={scrollY}
             canReact={canReact}
             reducedMotion={reducedMotion}
           />
