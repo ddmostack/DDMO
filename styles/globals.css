@@ -155,6 +155,11 @@ textarea {
   line-height: 0.85;
   letter-spacing: 0;
   transform-origin: center;
+  background-image: linear-gradient(135deg, #1138e6 0%, #ffd93b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
   will-change: transform, opacity;
 }
 

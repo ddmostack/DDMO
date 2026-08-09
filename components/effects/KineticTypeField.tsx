@@ -130,8 +130,6 @@ function KineticWord({
     [placement.idleOpacity, placement.activeOpacity]
   );
   const scale = useTransform(response, [0, 1], [1, 1.08]);
-  const color = useTransform(response, [0, 1], ["#1138e6", placement.accent]);
-
   const style = {
     "--word-left": `${placement.left}%`,
     "--word-top": `${placement.top}%`,
@@ -139,9 +137,13 @@ function KineticWord({
     "--word-top-mobile": `${placement.mobileTop}%`,
     "--word-size": `${placement.size}px`,
     "--word-size-mobile": `${placement.mobileSize}px`,
+    backgroundImage: "linear-gradient(135deg, #1138e6 0%, #ffd93b 100%)",
+    WebkitBackgroundClip: "text",
+    backgroundClip: "text",
+    color: "transparent",
+    WebkitTextFillColor: "transparent",
     opacity,
     scale,
-    color,
     x: springParallaxX,
     y: springParallaxY,
   } as KineticWordStyle;

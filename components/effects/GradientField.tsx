@@ -91,13 +91,13 @@ export function GradientField() {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
       style={{ opacity: fieldOpacity }}
     >
-      {/* Blue Blob (#1138e6 / #38bdf8) - Top Left Vivid Glow */}
+      {/* White Base Blob 1 - Top Left */}
       <motion.div
         className="absolute -top-[14%] -left-[10%] h-[52rem] w-[52rem]"
         style={{ x: blobAX, y: blobAY }}
       >
         <motion.div
-          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(56,189,248,0.92)_0%,rgba(17,56,230,0.85)_38%,rgba(17,56,230,0.25)_65%,transparent_80%)] blur-[95px] mix-blend-screen brightness-[1.25] saturate-[1.35] opacity-90"
+          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(255,255,255,1)_0%,rgba(248,249,251,0.9)_50%,transparent_80%)] blur-[95px] opacity-100"
           animate={{
             x: [0, 50, -40, 0],
             y: [0, -45, 35, 0],
@@ -112,13 +112,13 @@ export function GradientField() {
         />
       </motion.div>
 
-      {/* Yellow Blob (#ffd93b / #ffea79) - Positioned directly behind "to convert." text */}
+      {/* White Base Blob 2 - Center */}
       <motion.div
         className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[48rem] w-[48rem]"
         style={{ x: blobBX, y: blobBY }}
       >
         <motion.div
-          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,234,121,0.95)_0%,rgba(255,217,59,0.82)_40%,rgba(255,217,59,0.22)_65%,transparent_80%)] blur-[95px] mix-blend-screen brightness-[1.3] saturate-[1.4] opacity-90"
+          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,1)_0%,rgba(250,250,252,0.85)_40%,transparent_80%)] blur-[95px] opacity-100"
           animate={{
             x: [0, -35, 45, 0],
             y: [0, 30, -35, 0],
@@ -133,13 +133,13 @@ export function GradientField() {
         />
       </motion.div>
 
-      {/* Electric Cyan/Indigo Blob (#06b6d4 / #1d4ed8) - Right side vibrant depth */}
+      {/* White Base Blob 3 - Right Side */}
       <motion.div
         className="absolute top-[18%] -right-[14%] h-[46rem] w-[46rem]"
         style={{ x: blobCX, y: blobCY }}
       >
         <motion.div
-          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_60%_40%,rgba(6,182,212,0.85)_0%,rgba(29,78,216,0.75)_45%,rgba(29,78,216,0.2)_70%,transparent_80%)] blur-[90px] mix-blend-screen brightness-[1.2] saturate-[1.3] opacity-85"
+          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_60%_40%,rgba(255,255,255,1)_0%,rgba(247,248,250,0.9)_45%,transparent_80%)] blur-[90px] opacity-100"
           animate={{
             x: [0, 40, -50, 0],
             y: [0, -40, 25, 0],
