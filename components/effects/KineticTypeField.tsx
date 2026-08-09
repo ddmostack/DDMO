@@ -40,34 +40,34 @@ type WordPlacement = {
 };
 
 const WORDS: WordPlacement[] = [
-  // Top Hero Region
-  { id: "momentum-a", label: "MOMENTUM", left: -5, top: 4, mobileLeft: -10, mobileTop: 6, size: 72, mobileSize: 42, rotation: -8, driftX: 16, driftY: 12, duration: 23, idleOpacity: 0.45, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.025 },
-  { id: "clarity-a", label: "CLARITY", left: 74, top: 6, mobileLeft: 64, mobileTop: 5, size: 62, mobileSize: 40, rotation: 7, driftX: -13, driftY: 16, duration: 27, idleOpacity: 0.42, activeOpacity: 0.90, accent: BLUE, mobile: true, parallaxFactor: 0.04 },
-  { id: "velocity-a", label: "VELOCITY", left: 35, top: 18, mobileLeft: 25, mobileTop: 18, size: 54, mobileSize: 36, rotation: -5, driftX: -15, driftY: -10, duration: 25, idleOpacity: 0.38, activeOpacity: 0.88, accent: YELLOW, mobile: true, parallaxFactor: 0.035 },
-  { id: "precision-a", label: "PRECISION", left: -10, top: 26, mobileLeft: -12, mobileTop: 28, size: 68, mobileSize: 42, rotation: 9, driftX: 18, driftY: 14, duration: 22, idleOpacity: 0.44, activeOpacity: 0.92, accent: BLUE, mobile: true, parallaxFactor: 0.03 },
+  // Top Hero Region (Visible immediately around hero card)
+  { id: "momentum-a", label: "MOMENTUM", left: 3, top: 8, mobileLeft: 2, mobileTop: 8, size: 72, mobileSize: 42, rotation: -8, driftX: 16, driftY: 12, duration: 23, idleOpacity: 0.55, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.025 },
+  { id: "clarity-a", label: "CLARITY", left: 72, top: 7, mobileLeft: 60, mobileTop: 6, size: 66, mobileSize: 40, rotation: 7, driftX: -13, driftY: 16, duration: 27, idleOpacity: 0.52, activeOpacity: 0.92, accent: BLUE, mobile: true, parallaxFactor: 0.04 },
+  { id: "velocity-a", label: "VELOCITY", left: 5, top: 25, mobileLeft: 4, mobileTop: 24, size: 58, mobileSize: 36, rotation: -5, driftX: -15, driftY: -10, duration: 25, idleOpacity: 0.48, activeOpacity: 0.90, accent: YELLOW, mobile: true, parallaxFactor: 0.035 },
+  { id: "precision-a", label: "PRECISION", left: 70, top: 26, mobileLeft: 56, mobileTop: 28, size: 68, mobileSize: 42, rotation: 9, driftX: 18, driftY: 14, duration: 22, idleOpacity: 0.50, activeOpacity: 0.92, accent: BLUE, mobile: true, parallaxFactor: 0.03 },
 
   // Mid Hero & About Region
-  { id: "craft-a", label: "CRAFT", left: -12, top: 38, mobileLeft: -18, mobileTop: 40, size: 64, mobileSize: 48, rotation: 11, driftX: 12, driftY: -15, duration: 19, idleOpacity: 0.48, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.03 },
-  { id: "strategy-a", label: "STRATEGY", left: 71, top: 40, mobileLeft: 56, mobileTop: 48, size: 76, mobileSize: 44, rotation: -6, driftX: -18, driftY: 11, duration: 29, idleOpacity: 0.45, activeOpacity: 0.92, accent: YELLOW, mobile: true, parallaxFactor: 0.05 },
-  { id: "vision-a", label: "VISION", left: 32, top: 50, mobileLeft: 20, mobileTop: 58, size: 58, mobileSize: 38, rotation: 8, driftX: 14, driftY: -12, duration: 24, idleOpacity: 0.40, activeOpacity: 0.90, accent: BLUE, mobile: true, parallaxFactor: 0.025 },
-  { id: "ideas-a", label: "IDEAS", left: 4, top: 56, mobileLeft: 2, mobileTop: 66, size: 56, mobileSize: 46, rotation: -13, driftX: 14, driftY: 18, duration: 21, idleOpacity: 0.46, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.02 },
+  { id: "craft-a", label: "CRAFT", left: 4, top: 40, mobileLeft: 3, mobileTop: 40, size: 64, mobileSize: 48, rotation: 11, driftX: 12, driftY: -15, duration: 19, idleOpacity: 0.52, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.03 },
+  { id: "strategy-a", label: "STRATEGY", left: 68, top: 42, mobileLeft: 54, mobileTop: 46, size: 76, mobileSize: 44, rotation: -6, driftX: -18, driftY: 11, duration: 29, idleOpacity: 0.50, activeOpacity: 0.92, accent: YELLOW, mobile: true, parallaxFactor: 0.05 },
+  { id: "vision-a", label: "VISION", left: 6, top: 54, mobileLeft: 4, mobileTop: 56, size: 62, mobileSize: 38, rotation: 8, driftX: 14, driftY: -12, duration: 24, idleOpacity: 0.48, activeOpacity: 0.90, accent: BLUE, mobile: true, parallaxFactor: 0.025 },
+  { id: "ideas-a", label: "IDEAS", left: 72, top: 56, mobileLeft: 58, mobileTop: 64, size: 60, mobileSize: 46, rotation: -13, driftX: 14, driftY: 18, duration: 21, idleOpacity: 0.50, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.02 },
 
   // Lower About Region
-  { id: "impact-a", label: "IMPACT", left: 77, top: 62, mobileLeft: 58, mobileTop: 78, size: 88, mobileSize: 50, rotation: 9, driftX: -16, driftY: -12, duration: 25, idleOpacity: 0.42, activeOpacity: 0.88, accent: BLUE, mobile: true, parallaxFactor: 0.045 },
-  { id: "innovation-a", label: "INNOVATION", left: -6, top: 70, mobileLeft: -8, mobileTop: 88, size: 70, mobileSize: 40, rotation: -7, driftX: 20, driftY: 15, duration: 30, idleOpacity: 0.40, activeOpacity: 0.90, accent: YELLOW, mobile: true, parallaxFactor: 0.035 },
-  { id: "partnership-a", label: "PARTNERSHIP", left: -8, top: 82, mobileLeft: 0, mobileTop: 0, size: 84, mobileSize: 42, rotation: 5, driftX: 19, driftY: -14, duration: 30, idleOpacity: 0.44, activeOpacity: 0.92, accent: YELLOW, mobile: false, parallaxFactor: 0.035 },
-  { id: "openness-a", label: "OPENNESS", left: 68, top: 85, mobileLeft: 0, mobileTop: 0, size: 66, mobileSize: 40, rotation: -10, driftX: -12, driftY: 17, duration: 24, idleOpacity: 0.42, activeOpacity: 0.95, accent: YELLOW, mobile: false, parallaxFactor: 0.02 },
+  { id: "impact-a", label: "IMPACT", left: 70, top: 68, mobileLeft: 56, mobileTop: 74, size: 84, mobileSize: 50, rotation: 9, driftX: -16, driftY: -12, duration: 25, idleOpacity: 0.48, activeOpacity: 0.90, accent: BLUE, mobile: true, parallaxFactor: 0.045 },
+  { id: "innovation-a", label: "INNOVATION", left: 4, top: 72, mobileLeft: 3, mobileTop: 82, size: 70, mobileSize: 40, rotation: -7, driftX: 20, driftY: 15, duration: 30, idleOpacity: 0.46, activeOpacity: 0.90, accent: YELLOW, mobile: true, parallaxFactor: 0.035 },
+  { id: "partnership-a", label: "PARTNERSHIP", left: 5, top: 84, mobileLeft: 0, mobileTop: 0, size: 80, mobileSize: 42, rotation: 5, driftX: 19, driftY: -14, duration: 30, idleOpacity: 0.48, activeOpacity: 0.92, accent: YELLOW, mobile: false, parallaxFactor: 0.035 },
+  { id: "openness-a", label: "OPENNESS", left: 66, top: 86, mobileLeft: 0, mobileTop: 0, size: 66, mobileSize: 40, rotation: -10, driftX: -12, driftY: 17, duration: 24, idleOpacity: 0.46, activeOpacity: 0.95, accent: YELLOW, mobile: false, parallaxFactor: 0.02 },
 
   // Section 3 & Beyond
-  { id: "built-to-move-a", label: "BUILT TO MOVE", left: 10, top: 94, mobileLeft: 0, mobileTop: 0, size: 118, mobileSize: 44, rotation: -4, driftX: 15, driftY: 10, duration: 28, idleOpacity: 0.40, activeOpacity: 0.88, accent: YELLOW, mobile: false, parallaxFactor: 0.04 },
-  { id: "agility-a", label: "AGILITY", left: 75, top: 98, mobileLeft: 0, mobileTop: 0, size: 62, mobileSize: 38, rotation: 10, driftX: -14, driftY: -11, duration: 22, idleOpacity: 0.38, activeOpacity: 0.88, accent: BLUE, mobile: false, parallaxFactor: 0.03 },
-  { id: "momentum-b", label: "MOMENTUM", left: 64, top: 108, mobileLeft: 0, mobileTop: 0, size: 76, mobileSize: 42, rotation: 12, driftX: -20, driftY: -16, duration: 26, idleOpacity: 0.42, activeOpacity: 0.92, accent: BLUE, mobile: false, parallaxFactor: 0.03 },
-  { id: "identity-a", label: "IDENTITY", left: 20, top: 116, mobileLeft: 0, mobileTop: 0, size: 68, mobileSize: 40, rotation: -8, driftX: 16, driftY: 12, duration: 27, idleOpacity: 0.40, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.025 },
-  { id: "clarity-b", label: "CLARITY", left: -4, top: 124, mobileLeft: 0, mobileTop: 0, size: 96, mobileSize: 40, rotation: -7, driftX: 18, driftY: 13, duration: 22, idleOpacity: 0.44, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.05 },
-  { id: "transformation-a", label: "TRANSFORMATION", left: 45, top: 130, mobileLeft: 0, mobileTop: 0, size: 80, mobileSize: 42, rotation: 6, driftX: -18, driftY: -14, duration: 32, idleOpacity: 0.38, activeOpacity: 0.88, accent: BLUE, mobile: false, parallaxFactor: 0.04 },
-  { id: "ideas-b", label: "IDEAS", left: 78, top: 137, mobileLeft: 0, mobileTop: 0, size: 132, mobileSize: 46, rotation: 8, driftX: -15, driftY: 19, duration: 31, idleOpacity: 0.40, activeOpacity: 0.88, accent: YELLOW, mobile: false, parallaxFactor: 0.025 },
-  { id: "distinction-a", label: "DISTINCTION", left: 8, top: 145, mobileLeft: 0, mobileTop: 0, size: 74, mobileSize: 40, rotation: -11, driftX: 15, driftY: -13, duration: 26, idleOpacity: 0.42, activeOpacity: 0.92, accent: BLUE, mobile: false, parallaxFactor: 0.035 },
-  { id: "kinetic-a", label: "KINETIC", left: 62, top: 152, mobileLeft: 0, mobileTop: 0, size: 86, mobileSize: 44, rotation: 9, driftX: -16, driftY: 14, duration: 24, idleOpacity: 0.40, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.03 },
+  { id: "built-to-move-a", label: "BUILT TO MOVE", left: 8, top: 94, mobileLeft: 0, mobileTop: 0, size: 108, mobileSize: 44, rotation: -4, driftX: 15, driftY: 10, duration: 28, idleOpacity: 0.45, activeOpacity: 0.88, accent: YELLOW, mobile: false, parallaxFactor: 0.04 },
+  { id: "agility-a", label: "AGILITY", left: 72, top: 98, mobileLeft: 0, mobileTop: 0, size: 62, mobileSize: 38, rotation: 10, driftX: -14, driftY: -11, duration: 22, idleOpacity: 0.44, activeOpacity: 0.88, accent: BLUE, mobile: false, parallaxFactor: 0.03 },
+  { id: "momentum-b", label: "MOMENTUM", left: 64, top: 108, mobileLeft: 0, mobileTop: 0, size: 76, mobileSize: 42, rotation: 12, driftX: -20, driftY: -16, duration: 26, idleOpacity: 0.46, activeOpacity: 0.92, accent: BLUE, mobile: false, parallaxFactor: 0.03 },
+  { id: "identity-a", label: "IDENTITY", left: 16, top: 116, mobileLeft: 0, mobileTop: 0, size: 68, mobileSize: 40, rotation: -8, driftX: 16, driftY: 12, duration: 27, idleOpacity: 0.44, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.025 },
+  { id: "clarity-b", label: "CLARITY", left: 4, top: 124, mobileLeft: 0, mobileTop: 0, size: 92, mobileSize: 40, rotation: -7, driftX: 18, driftY: 13, duration: 22, idleOpacity: 0.48, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.05 },
+  { id: "transformation-a", label: "TRANSFORMATION", left: 42, top: 130, mobileLeft: 0, mobileTop: 0, size: 78, mobileSize: 42, rotation: 6, driftX: -18, driftY: -14, duration: 32, idleOpacity: 0.42, activeOpacity: 0.88, accent: BLUE, mobile: false, parallaxFactor: 0.04 },
+  { id: "ideas-b", label: "IDEAS", left: 74, top: 137, mobileLeft: 0, mobileTop: 0, size: 120, mobileSize: 46, rotation: 8, driftX: -15, driftY: 19, duration: 31, idleOpacity: 0.44, activeOpacity: 0.88, accent: YELLOW, mobile: false, parallaxFactor: 0.025 },
+  { id: "distinction-a", label: "DISTINCTION", left: 8, top: 145, mobileLeft: 0, mobileTop: 0, size: 74, mobileSize: 40, rotation: -11, driftX: 15, driftY: -13, duration: 26, idleOpacity: 0.46, activeOpacity: 0.92, accent: BLUE, mobile: false, parallaxFactor: 0.035 },
+  { id: "kinetic-a", label: "KINETIC", left: 60, top: 152, mobileLeft: 0, mobileTop: 0, size: 84, mobileSize: 44, rotation: 9, driftX: -16, driftY: 14, duration: 24, idleOpacity: 0.44, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.03 },
 ];
 
 type KineticWordProps = {
@@ -144,20 +144,17 @@ function KineticWord({
     mass: 0.45,
   });
 
-  // Scroll-driven random appearance & disappearance: words fade in/out in staggered scroll waves
+  // Calculate clear, high-contrast visibility with proximity hover brightening
   const opacity = useTransform(
     [scrollY, response],
     ([scroll, prox]: number[]) => {
       if (prox > 0.05) return Math.max(placement.idleOpacity, prox * placement.activeOpacity);
       if (reducedMotion) return placement.idleOpacity;
 
-      // Unique phase offset per word based on top position, left position, and string hash
+      // Subtle organic breathing oscillation while keeping background words crisp and visible
       const phase = placement.top * 0.18 + placement.left * 0.35 + placement.label.length * 2.4;
-      const wave = Math.sin(scroll * 0.0034 + phase);
-      
-      // Calculate smooth organic visibility factor (0 to 1)
-      const visibility = Math.max(0, (wave - 0.1) / 0.9);
-      return visibility * placement.idleOpacity;
+      const breathing = 0.85 + 0.15 * Math.sin(scroll * 0.0015 + phase);
+      return breathing * placement.idleOpacity;
     }
   );
   const scale = useTransform(response, [0, 1], [1, 1.08]);

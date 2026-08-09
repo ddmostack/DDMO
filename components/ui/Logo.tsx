@@ -1,23 +1,23 @@
+import Image from "next/image";
+
 type LogoProps = {
+  className?: string;
   inverse?: boolean;
 };
 
-export function Logo({ inverse = false }: LogoProps) {
+export function Logo({ className = "", inverse = false }: LogoProps) {
   return (
-    <span className="inline-flex items-center gap-3" aria-label="Doodle Dynamo home">
-      <span
-        className="contact-moving-gradient relative grid h-9 w-9 place-items-center rounded-md text-sm font-extrabold text-white"
-        aria-hidden="true"
-      >
-        <span className="translate-x-[1px]">DD</span>
-      </span>
-      <span
-        className={`text-sm font-extrabold tracking-[-0.045em] sm:text-base ${
-          inverse ? "text-white" : "text-dd-ink"
+    <span className={`inline-flex items-center ${className}`} aria-label="Doodle Dynamo home">
+      <Image
+        src="/logo.png"
+        alt="Doodle Dynamo"
+        width={160}
+        height={50}
+        className={`h-8 sm:h-9 w-auto object-contain transition-transform duration-300 ${
+          inverse ? "brightness-0 invert" : "mix-blend-multiply contrast-125"
         }`}
-      >
-        Doodle<br className="hidden sm:block" /> Dynamo
-      </span>
+        priority
+      />
     </span>
   );
 }
