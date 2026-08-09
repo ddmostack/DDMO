@@ -11,6 +11,7 @@ import {
 import { useEffect } from "react";
 
 import { GradientField } from "@/components/effects/GradientField";
+import { GradientShimmer } from "@/components/ui/gradient-shimmer";
 
 import type { MotionStyle, MotionValue } from "framer-motion";
 
@@ -153,11 +154,6 @@ function KineticWord({
     "--word-top-mobile": `${placement.mobileTop}%`,
     "--word-size": `${placement.size}px`,
     "--word-size-mobile": `${placement.mobileSize}px`,
-    backgroundImage: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 234, 121, 0.9) 100%)",
-    WebkitBackgroundClip: "text",
-    backgroundClip: "text",
-    color: "transparent",
-    WebkitTextFillColor: "transparent",
     opacity,
     scale,
     x: springParallaxX,
@@ -195,7 +191,15 @@ function KineticWord({
             }
       }
     >
-      {placement.label}
+      <GradientShimmer
+        gradient={placement.accent === "#ffd93b" ? "sunrise" : "bubble"}
+        duration={2.2}
+        spread={3.5}
+        pauseBetween={1000}
+        baseColor="rgba(255, 255, 255, 0.95)"
+      >
+        {placement.label}
+      </GradientShimmer>
     </motion.span>
   );
 }
