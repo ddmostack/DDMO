@@ -129,7 +129,7 @@ textarea {
 .kinetic-type-base {
   position: absolute;
   inset: 0;
-  background: #000000;
+  background: #ffffff;
 }
 
 .kinetic-type-plane {
@@ -155,7 +155,6 @@ textarea {
   line-height: 0.85;
   letter-spacing: 0;
   transform-origin: center;
-  mix-blend-mode: difference;
   will-change: transform, opacity;
 }
 

@@ -10,6 +10,8 @@ import {
 } from "framer-motion";
 import { useEffect } from "react";
 
+import { GradientField } from "@/components/effects/GradientField";
+
 import type { MotionStyle, MotionValue } from "framer-motion";
 
 const BLUE = "#1138e6";
@@ -128,7 +130,7 @@ function KineticWord({
     [placement.idleOpacity, placement.activeOpacity]
   );
   const scale = useTransform(response, [0, 1], [1, 1.08]);
-  const color = useTransform(response, [0, 1], ["#ffffff", placement.accent]);
+  const color = useTransform(response, [0, 1], ["#1138e6", placement.accent]);
 
   const style = {
     "--word-left": `${placement.left}%`,
@@ -253,6 +255,8 @@ export function KineticTypeField() {
     >
       <div className="kinetic-type-base" />
       <motion.div className="kinetic-type-plane" style={{ y: fieldY }}>
+        {/* Glowing Gradient Mesh attached directly behind the moving kinetic type words */}
+        <GradientField />
         {WORDS.map((placement) => (
           <KineticWord
             key={placement.id}

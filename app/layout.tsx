@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 
 import "@/styles/globals.css";
-import { GradientField } from "@/components/effects/GradientField";
 import { KineticTypeField } from "@/components/effects/KineticTypeField";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 
@@ -48,7 +47,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           Skip to content
         </a>
         <CustomCursor />
-        <GradientField />
         <KineticTypeField />
         {children}
       </body>

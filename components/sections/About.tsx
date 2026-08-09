@@ -42,21 +42,21 @@ export function About() {
           {/* Left Column - Sticky Heading & Studio Badge */}
           <ScrollReveal>
             <div className="lg:sticky lg:top-28 lg:self-start space-y-6">
-              <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-yellow-600">
+              <p className="text-xs font-bold uppercase tracking-[0.14em] text-dd-navy">
                 About Doodle Dynamo
               </p>
-              <h2 className="text-balance text-3xl font-extrabold leading-[0.98] tracking-[-0.055em] text-white sm:text-4xl md:text-5xl lg:text-6xl">
+              <h2 className="text-balance text-3xl font-extrabold leading-[0.98] tracking-[-0.055em] text-dd-ink sm:text-4xl md:text-5xl lg:text-6xl">
                 Small team.<br />
                 Wide-angle thinking.
               </h2>
 
               {/* Supporting Badge Card to eliminate left column dead space */}
-              <div className="liquid-glass-card mt-6 max-w-[360px] rounded-2xl border border-white/30 bg-white/10 p-6 shadow-lg backdrop-blur-xl transition-all duration-300 hover:bg-white/20 hover:border-white/50">
-                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-dd-yellow-600">
-                  <span className="h-2 w-2 rounded-full bg-dd-yellow-600 animate-pulse" aria-hidden="true" />
+              <div className="liquid-glass-card mt-6 max-w-[360px] rounded-2xl border border-slate-200/80 bg-white/70 p-6 shadow-md backdrop-blur-xl transition-all duration-300 hover:bg-white hover:shadow-lg">
+                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-dd-navy">
+                  <span className="h-2 w-2 rounded-full bg-dd-blue-600 animate-pulse" aria-hidden="true" />
                   Agile Studio Model
                 </div>
-                <p className="mt-3 text-sm font-medium leading-relaxed text-white/85">
+                <p className="mt-3 text-sm font-medium leading-relaxed text-dd-gray-600">
                   Direct access to senior strategists and developers. No middle management or bloated agency layers.
                 </p>
               </div>
@@ -66,10 +66,10 @@ export function About() {
           {/* Right Column - Intro Paragraphs & Values Module */}
           <div>
             <ScrollReveal delay={0.08}>
-              <p className="max-w-[650px] text-xl font-medium leading-relaxed tracking-[-0.02em] text-white md:text-2xl">
+              <p className="max-w-[650px] text-xl font-medium leading-relaxed tracking-[-0.02em] text-dd-ink md:text-2xl">
                 We connect strategy, creative work, and engineering so every part of a brand moves in the same direction.
               </p>
-              <p className="mt-6 max-w-[620px] text-base font-medium leading-relaxed text-white/85">
+              <p className="mt-6 max-w-[620px] text-base font-medium leading-relaxed text-dd-gray-600">
                 That means fewer handoffs, sharper decisions, and digital work built around clear business goals.
               </p>
             </ScrollReveal>
@@ -109,7 +109,7 @@ export function About() {
                         className="h-full rounded-2xl"
                       >
                         <article
-                          className={`liquid-glass-card group h-full p-6 transition-all duration-300 border border-white/25 bg-white/10 hover:border-white/60 hover:bg-white/20 ${style.hoverGlow} backdrop-blur-xl rounded-2xl`}
+                          className={`liquid-glass-card group h-full p-6 transition-all duration-300 border border-slate-200/80 bg-white/70 hover:border-white hover:bg-white/95 shadow-sm hover:shadow-md ${style.hoverGlow} backdrop-blur-xl rounded-2xl`}
                         >
                           {/* Heading + Icon Optically Aligned to Cap-Height */}
                           <div className="flex items-center gap-3">
@@ -119,11 +119,11 @@ export function About() {
                               strokeWidth={2}
                               aria-hidden="true"
                             />
-                            <h3 className="font-bold tracking-[-0.02em] text-white transition-transform duration-300 group-hover:translate-x-1 text-lg">
+                            <h3 className="font-bold tracking-[-0.02em] text-dd-ink transition-transform duration-300 group-hover:translate-x-1 text-lg">
                               {value.title}
                             </h3>
                           </div>
-                          <p className="mt-3 text-sm font-medium leading-relaxed text-white/80">
+                          <p className="mt-3 text-sm font-medium leading-relaxed text-dd-gray-600">
                             {value.description}
                           </p>
                         </article>
@@ -139,12 +139,12 @@ export function About() {
         {/* Stats Counter Row with Eyebrow Header Context */}
         <ScrollReveal className="mt-16 lg:mt-20">
           <div className="mb-5 flex items-center justify-center gap-3">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-dd-yellow-600">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-dd-navy">
               Studio Metrics • Impact By The Numbers
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 overflow-hidden rounded-[28px] border border-white/30 bg-white/10 p-3 shadow-xl backdrop-blur-xl lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 overflow-hidden rounded-[28px] border border-slate-200/80 bg-white/60 p-3 shadow-md backdrop-blur-xl lg:grid-cols-4">
             {stats.map((stat, index) => (
               <CursorTiltCard
                 key={stat.label}
@@ -153,7 +153,7 @@ export function About() {
                 glare={true}
                 className="rounded-[20px]"
               >
-                <article className="liquid-glass-card group h-full rounded-[20px] bg-white/10 border border-white/20 px-5 py-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 hover:border-white/40 hover:shadow-xl md:px-7">
+                <article className="liquid-glass-card group h-full rounded-[20px] bg-white/80 border border-slate-100 px-5 py-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-lg md:px-7">
                   <StatCounter delay={index * 0.12} {...stat} />
                 </article>
               </CursorTiltCard>
