@@ -21,6 +21,7 @@ export interface GradientStop {
 }
 
 export type GradientPresetName =
+  | "brand"
   | "sunrise"
   | "bubble"
   | "peach"
@@ -42,7 +43,7 @@ export interface GradientShimmerProps extends Omit<
 > {
   /** The text to shimmer. Plain string only — the gradient sweeps over it. */
   children: string;
-  /** Multi-stop gradient or a preset name. Defaults to `"sunrise"`. */
+  /** Multi-stop gradient or a preset name. Defaults to `"brand"`. */
   gradient?: GradientInput;
   /** Sweep curve. Defaults to `"smooth"`. */
   easing?: EasingPreset;
@@ -79,6 +80,13 @@ export interface GradientShimmerProps extends Omit<
  * true regardless of theme.
  */
 export const gradientPresets: Record<GradientPresetName, GradientStop[]> = {
+  brand: [
+    { color: "#1138e6", position: 0 },
+    { color: "#2563eb", position: 0.25 },
+    { color: "#38bdf8", position: 0.5 },
+    { color: "#ffd93b", position: 0.8 },
+    { color: "#ffea79", position: 1 },
+  ],
   sunrise: [
     { color: "#B6D3EF", position: 0 },
     { color: "#CAD1D7", position: 0.153 },
@@ -300,9 +308,9 @@ const DEFAULT_SPREAD = 3;
 const DEFAULT_ANGLE = 105;
 
 function resolveStops(gradient: GradientInput | undefined): GradientStop[] {
-  if (!gradient) return gradientPresets.sunrise;
+  if (!gradient) return gradientPresets.brand;
   if (typeof gradient === "string")
-    return gradientPresets[gradient] ?? gradientPresets.sunrise;
+    return gradientPresets[gradient] ?? gradientPresets.brand;
   return gradient;
 }
 

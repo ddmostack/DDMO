@@ -192,9 +192,10 @@ function KineticWord({
       }
     >
       <GradientShimmer
-        gradient={placement.accent === "#ffd93b" ? "sunrise" : "bubble"}
+        gradient="brand"
         duration={2.2}
         spread={3.5}
+        angle={135}
         pauseBetween={1000}
         baseColor="rgba(255, 255, 255, 0.95)"
       >
