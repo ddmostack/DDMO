@@ -145,11 +145,11 @@ export function Hero() {
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-              className="mb-7 inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white/80 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-dd-navy shadow-sm backdrop-blur-md"
+              className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/40 bg-white/20 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white shadow-sm backdrop-blur-md"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-dd-blue-600 animate-pulse" aria-hidden="true" />
+              <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" aria-hidden="true" />
               Independent digital studio
-              <span className="h-1.5 w-1.5 rounded-full bg-dd-blue-600 animate-pulse" aria-hidden="true" />
+              <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" aria-hidden="true" />
             </motion.p>
 
             {/* Kinetic Text Reveal Headline with Parallax & Word Rotator */}
@@ -158,7 +158,7 @@ export function Hero() {
               initial={reduceMotion ? { opacity: 0 } : "hidden"}
               animate={reduceMotion ? { opacity: 1 } : "visible"}
               transition={reduceMotion ? { duration: 0.7 } : undefined}
-              className="max-w-[920px] text-balance text-[clamp(2.6rem,8vw,7.2rem)] font-extrabold leading-[0.92] tracking-[-0.075em] text-dd-ink"
+              className="max-w-[920px] text-balance text-[clamp(2.6rem,8vw,7.2rem)] font-extrabold leading-[0.92] tracking-[-0.075em] text-white drop-shadow-md"
             >
               {/* Line 1: Ideas built */}
               <span className="inline-block overflow-hidden py-1">
@@ -230,10 +230,10 @@ export function Hero() {
                             backgroundPosition: ["0% 50%", "200% 50%"],
                           }}
                           exit="exit"
-                          className="inline-block bg-clip-text text-transparent"
+                          className="inline-block bg-clip-text text-transparent drop-shadow-sm"
                           style={{
                             backgroundImage:
-                              "linear-gradient(90deg, #1138e6 0%, #ffd93b 50%, #1138e6 100%)",
+                              "linear-gradient(90deg, #ffd93b 0%, #ffffff 50%, #ffea79 100%)",
                             backgroundSize: "200% auto",
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
@@ -273,7 +273,7 @@ export function Hero() {
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-              className="mt-8 max-w-[620px] text-balance text-base font-medium leading-relaxed text-dd-gray-600 md:text-xl"
+              className="mt-8 max-w-[620px] text-balance text-base font-medium leading-relaxed text-white/90 drop-shadow-sm md:text-xl"
             >
               Strategy, design, and technology for ambitious brands ready to turn attention into momentum.
             </motion.p>
@@ -305,17 +305,17 @@ export function Hero() {
       <motion.a
         href="#about"
         aria-label="Scroll down to About section"
-        className="group absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 text-dd-muted transition-colors hover:text-dd-blue-600"
+        className="group absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center gap-1.5 text-white/80 transition-colors hover:text-white"
         initial={reduceMotion ? false : { opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.6 }}
       >
-        <span className="text-[10px] font-bold uppercase tracking-widest text-dd-muted group-hover:text-dd-blue-600">
+        <span className="text-[10px] font-bold uppercase tracking-widest text-white/80 group-hover:text-white">
           Scroll
         </span>
-        <div className="h-8 w-0.5 overflow-hidden rounded-full bg-slate-200">
+        <div className="h-8 w-0.5 overflow-hidden rounded-full bg-white/30">
           <motion.div
-            className="h-full w-full rounded-full bg-dd-blue-600"
+            className="h-full w-full rounded-full bg-white"
             animate={reduceMotion ? {} : { y: ["-100%", "100%"] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
           />

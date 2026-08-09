@@ -153,7 +153,7 @@ function KineticWord({
     "--word-top-mobile": `${placement.mobileTop}%`,
     "--word-size": `${placement.size}px`,
     "--word-size-mobile": `${placement.mobileSize}px`,
-    backgroundImage: "linear-gradient(135deg, #0a218a 0%, #1138e6 50%, #d9b200 100%)",
+    backgroundImage: "linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 234, 121, 0.9) 100%)",
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
     color: "transparent",

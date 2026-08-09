@@ -61,28 +61,11 @@ export function GradientField() {
   const springX = useSpring(mouseX, { stiffness: 40, damping: 20 });
   const springY = useSpring(mouseY, { stiffness: 40, damping: 20 });
 
-  // Parallax translation per blob
-  const blobAY = useTransform(scrollYProgress, [0, 1], [0, -350]);
-  const blobBY = useTransform(scrollYProgress, [0, 1], [0, 420]);
-  const blobCY = useTransform(scrollYProgress, [0, 1], [0, -280]);
+  const blobAY = useTransform(scrollYProgress, [0, 1], [0, -250]);
+  const blobBY = useTransform(scrollYProgress, [0, 1], [0, 300]);
 
-  const blobAX = useTransform(springX, [-1, 1], [-30, 30]);
-  const blobBX = useTransform(springX, [-1, 1], [24, -24]);
-  const blobCX = useTransform(springY, [-1, 1], [-20, 20]);
-
-  if (reducedMotion) {
-    return (
-      <motion.div
-        ref={ref}
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
-        style={{ opacity: fieldOpacity }}
-      >
-        <div className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[44rem] w-[44rem] rounded-full bg-[radial-gradient(circle,rgba(255,217,59,0.55)_0%,transparent_70%)] blur-[115px] opacity-75" />
-        <div className="absolute -top-[10%] -left-[10%] h-[48rem] w-[48rem] rounded-full bg-[radial-gradient(circle,rgba(17,56,230,0.65)_0%,transparent_70%)] blur-[115px] opacity-80" />
-      </motion.div>
-    );
-  }
+  const blobAX = useTransform(springX, [-1, 1], [-25, 25]);
+  const blobBX = useTransform(springY, [-1, 1], [-20, 20]);
 
   return (
     <motion.div
@@ -91,68 +74,69 @@ export function GradientField() {
       className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
       style={{ opacity: fieldOpacity }}
     >
-      {/* White Base Blob 1 - Top Left */}
+      {/* Sky Blue Luminous Gradient Base (Matches user image sky-blue tones) */}
+      <div className="absolute inset-0 bg-[linear-gradient(160deg,#2563eb_0%,#3b82f6_35%,#60a5fa_60%,#93c5fd_82%,#eff6ff_100%)]" />
+
+      {/* Ambient Radial Light Core */}
       <motion.div
-        className="absolute -top-[14%] -left-[10%] h-[52rem] w-[52rem]"
+        className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[55rem] w-[55rem]"
         style={{ x: blobAX, y: blobAY }}
       >
         <motion.div
-          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(255,255,255,1)_0%,rgba(248,249,251,0.9)_50%,transparent_80%)] blur-[95px] opacity-100"
-          animate={{
-            x: [0, 50, -40, 0],
-            y: [0, -45, 35, 0],
-            scale: [1, 1.12, 0.92, 1],
-            rotate: [0, 18, -12, 0],
-          }}
+          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.45)_0%,rgba(147,197,253,0.35)_40%,transparent_70%)] blur-[80px]"
+          animate={
+            reducedMotion
+              ? {}
+              : {
+                  scale: [1, 1.1, 0.95, 1],
+                  opacity: [0.85, 1, 0.85],
+                }
+          }
           transition={{
-            duration: 24,
+            duration: 18,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
       </motion.div>
 
-      {/* White Base Blob 2 - Center */}
+      {/* Top Left Deep Blue Accent */}
       <motion.div
-        className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 h-[48rem] w-[48rem]"
+        className="absolute -top-[15%] -left-[10%] h-[50rem] w-[50rem]"
         style={{ x: blobBX, y: blobBY }}
       >
         <motion.div
-          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,1)_0%,rgba(250,250,252,0.85)_40%,transparent_80%)] blur-[95px] opacity-100"
-          animate={{
-            x: [0, -35, 45, 0],
-            y: [0, 30, -35, 0],
-            scale: [1, 1.14, 0.95, 1],
-            rotate: [0, -15, 20, 0],
-          }}
+          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_40%_40%,rgba(29,78,216,0.5)_0%,rgba(59,130,246,0.25)_50%,transparent_75%)] blur-[90px]"
+          animate={
+            reducedMotion
+              ? {}
+              : {
+                  x: [0, 40, -30, 0],
+                  y: [0, -30, 25, 0],
+                }
+          }
           transition={{
-            duration: 20,
+            duration: 22,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
       </motion.div>
 
-      {/* White Base Blob 3 - Right Side */}
-      <motion.div
-        className="absolute top-[18%] -right-[14%] h-[46rem] w-[46rem]"
-        style={{ x: blobCX, y: blobCY }}
-      >
-        <motion.div
-          className="h-full w-full rounded-full bg-[radial-gradient(circle_at_60%_40%,rgba(255,255,255,1)_0%,rgba(247,248,250,0.9)_45%,transparent_80%)] blur-[90px] opacity-100"
-          animate={{
-            x: [0, 40, -50, 0],
-            y: [0, -40, 25, 0],
-            scale: [1, 0.92, 1.1, 1],
-            rotate: [0, 22, -16, 0],
-          }}
-          transition={{
-            duration: 28,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </motion.div>
+      {/* Center Precision Grid Pattern with Circular Vignette Mask (Matches user image center grid overlay) */}
+      <div 
+        className="absolute inset-0 opacity-45"
+        style={{
+          backgroundImage: `
+            linear-gradient(to right, rgba(255, 255, 255, 0.4) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.4) 1px, transparent 1px)
+          `,
+          backgroundSize: "44px 44px",
+          backgroundPosition: "center center",
+          WebkitMaskImage: "radial-gradient(ellipse 55% 55% at 50% 44%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.5) 55%, transparent 75%)",
+          maskImage: "radial-gradient(ellipse 55% 55% at 50% 44%, rgba(0,0,0,1) 25%, rgba(0,0,0,0.5) 55%, transparent 75%)",
+        }}
+      />
     </motion.div>
   );
 }
