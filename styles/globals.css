@@ -155,7 +155,7 @@ textarea {
   line-height: 0.85;
   letter-spacing: 0;
   transform-origin: center;
-  background-image: linear-gradient(135deg, #1138e6 0%, #ffd93b 100%);
+  background-image: linear-gradient(135deg, #0a218a 0%, #1138e6 50%, #d9b200 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

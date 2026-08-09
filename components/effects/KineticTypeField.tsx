@@ -39,18 +39,34 @@ type WordPlacement = {
 };
 
 const WORDS: WordPlacement[] = [
-  { id: "momentum-a", label: "MOMENTUM", left: -5, top: 7, mobileLeft: -10, mobileTop: 9, size: 70, mobileSize: 42, rotation: -8, driftX: 16, driftY: 12, duration: 23, idleOpacity: 0.20, activeOpacity: 0.90, accent: YELLOW, mobile: true, parallaxFactor: 0.025 },
-  { id: "clarity-a", label: "CLARITY", left: 76, top: 9, mobileLeft: 66, mobileTop: 7, size: 58, mobileSize: 40, rotation: 7, driftX: -13, driftY: 16, duration: 27, idleOpacity: 0.18, activeOpacity: 0.85, accent: BLUE, mobile: true, parallaxFactor: 0.04 },
-  { id: "craft-a", label: "CRAFT", left: -12, top: 43, mobileLeft: -18, mobileTop: 44, size: 64, mobileSize: 48, rotation: 11, driftX: 12, driftY: -15, duration: 19, idleOpacity: 0.22, activeOpacity: 0.92, accent: YELLOW, mobile: true, parallaxFactor: 0.03 },
-  { id: "strategy-a", label: "STRATEGY", left: 73, top: 45, mobileLeft: 58, mobileTop: 68, size: 72, mobileSize: 44, rotation: -6, driftX: -18, driftY: 11, duration: 29, idleOpacity: 0.18, activeOpacity: 0.85, accent: YELLOW, mobile: true, parallaxFactor: 0.05 },
-  { id: "ideas-a", label: "IDEAS", left: 4, top: 61, mobileLeft: 2, mobileTop: 76, size: 54, mobileSize: 46, rotation: -13, driftX: 14, driftY: 18, duration: 21, idleOpacity: 0.20, activeOpacity: 0.90, accent: YELLOW, mobile: true, parallaxFactor: 0.02 },
-  { id: "impact-a", label: "IMPACT", left: 79, top: 66, mobileLeft: 60, mobileTop: 90, size: 88, mobileSize: 50, rotation: 9, driftX: -16, driftY: -12, duration: 25, idleOpacity: 0.16, activeOpacity: 0.80, accent: BLUE, mobile: true, parallaxFactor: 0.045 },
-  { id: "partnership-a", label: "PARTNERSHIP", left: -8, top: 78, mobileLeft: 0, mobileTop: 0, size: 84, mobileSize: 42, rotation: 5, driftX: 19, driftY: -14, duration: 30, idleOpacity: 0.18, activeOpacity: 0.85, accent: YELLOW, mobile: false, parallaxFactor: 0.035 },
-  { id: "openness-a", label: "OPENNESS", left: 70, top: 82, mobileLeft: 0, mobileTop: 0, size: 66, mobileSize: 40, rotation: -10, driftX: -12, driftY: 17, duration: 24, idleOpacity: 0.20, activeOpacity: 0.92, accent: YELLOW, mobile: false, parallaxFactor: 0.02 },
-  { id: "built-to-move-a", label: "BUILT TO MOVE", left: 12, top: 94, mobileLeft: 0, mobileTop: 0, size: 118, mobileSize: 44, rotation: -4, driftX: 15, driftY: 10, duration: 28, idleOpacity: 0.16, activeOpacity: 0.82, accent: YELLOW, mobile: false, parallaxFactor: 0.04 },
-  { id: "momentum-b", label: "MOMENTUM", left: 66, top: 108, mobileLeft: 0, mobileTop: 0, size: 76, mobileSize: 42, rotation: 12, driftX: -20, driftY: -16, duration: 26, idleOpacity: 0.18, activeOpacity: 0.88, accent: BLUE, mobile: false, parallaxFactor: 0.03 },
-  { id: "clarity-b", label: "CLARITY", left: -4, top: 124, mobileLeft: 0, mobileTop: 0, size: 96, mobileSize: 40, rotation: -7, driftX: 18, driftY: 13, duration: 22, idleOpacity: 0.18, activeOpacity: 0.85, accent: YELLOW, mobile: false, parallaxFactor: 0.05 },
-  { id: "ideas-b", label: "IDEAS", left: 78, top: 137, mobileLeft: 0, mobileTop: 0, size: 132, mobileSize: 46, rotation: 8, driftX: -15, driftY: 19, duration: 31, idleOpacity: 0.16, activeOpacity: 0.82, accent: YELLOW, mobile: false, parallaxFactor: 0.025 },
+  // Top Hero Region
+  { id: "momentum-a", label: "MOMENTUM", left: -5, top: 4, mobileLeft: -10, mobileTop: 6, size: 72, mobileSize: 42, rotation: -8, driftX: 16, driftY: 12, duration: 23, idleOpacity: 0.45, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.025 },
+  { id: "clarity-a", label: "CLARITY", left: 74, top: 6, mobileLeft: 64, mobileTop: 5, size: 62, mobileSize: 40, rotation: 7, driftX: -13, driftY: 16, duration: 27, idleOpacity: 0.42, activeOpacity: 0.90, accent: BLUE, mobile: true, parallaxFactor: 0.04 },
+  { id: "velocity-a", label: "VELOCITY", left: 35, top: 18, mobileLeft: 25, mobileTop: 18, size: 54, mobileSize: 36, rotation: -5, driftX: -15, driftY: -10, duration: 25, idleOpacity: 0.38, activeOpacity: 0.88, accent: YELLOW, mobile: true, parallaxFactor: 0.035 },
+  { id: "precision-a", label: "PRECISION", left: -10, top: 26, mobileLeft: -12, mobileTop: 28, size: 68, mobileSize: 42, rotation: 9, driftX: 18, driftY: 14, duration: 22, idleOpacity: 0.44, activeOpacity: 0.92, accent: BLUE, mobile: true, parallaxFactor: 0.03 },
+
+  // Mid Hero & About Region
+  { id: "craft-a", label: "CRAFT", left: -12, top: 38, mobileLeft: -18, mobileTop: 40, size: 64, mobileSize: 48, rotation: 11, driftX: 12, driftY: -15, duration: 19, idleOpacity: 0.48, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.03 },
+  { id: "strategy-a", label: "STRATEGY", left: 71, top: 40, mobileLeft: 56, mobileTop: 48, size: 76, mobileSize: 44, rotation: -6, driftX: -18, driftY: 11, duration: 29, idleOpacity: 0.45, activeOpacity: 0.92, accent: YELLOW, mobile: true, parallaxFactor: 0.05 },
+  { id: "vision-a", label: "VISION", left: 32, top: 50, mobileLeft: 20, mobileTop: 58, size: 58, mobileSize: 38, rotation: 8, driftX: 14, driftY: -12, duration: 24, idleOpacity: 0.40, activeOpacity: 0.90, accent: BLUE, mobile: true, parallaxFactor: 0.025 },
+  { id: "ideas-a", label: "IDEAS", left: 4, top: 56, mobileLeft: 2, mobileTop: 66, size: 56, mobileSize: 46, rotation: -13, driftX: 14, driftY: 18, duration: 21, idleOpacity: 0.46, activeOpacity: 0.95, accent: YELLOW, mobile: true, parallaxFactor: 0.02 },
+
+  // Lower About Region
+  { id: "impact-a", label: "IMPACT", left: 77, top: 62, mobileLeft: 58, mobileTop: 78, size: 88, mobileSize: 50, rotation: 9, driftX: -16, driftY: -12, duration: 25, idleOpacity: 0.42, activeOpacity: 0.88, accent: BLUE, mobile: true, parallaxFactor: 0.045 },
+  { id: "innovation-a", label: "INNOVATION", left: -6, top: 70, mobileLeft: -8, mobileTop: 88, size: 70, mobileSize: 40, rotation: -7, driftX: 20, driftY: 15, duration: 30, idleOpacity: 0.40, activeOpacity: 0.90, accent: YELLOW, mobile: true, parallaxFactor: 0.035 },
+  { id: "partnership-a", label: "PARTNERSHIP", left: -8, top: 82, mobileLeft: 0, mobileTop: 0, size: 84, mobileSize: 42, rotation: 5, driftX: 19, driftY: -14, duration: 30, idleOpacity: 0.44, activeOpacity: 0.92, accent: YELLOW, mobile: false, parallaxFactor: 0.035 },
+  { id: "openness-a", label: "OPENNESS", left: 68, top: 85, mobileLeft: 0, mobileTop: 0, size: 66, mobileSize: 40, rotation: -10, driftX: -12, driftY: 17, duration: 24, idleOpacity: 0.42, activeOpacity: 0.95, accent: YELLOW, mobile: false, parallaxFactor: 0.02 },
+
+  // Section 3 & Beyond
+  { id: "built-to-move-a", label: "BUILT TO MOVE", left: 10, top: 94, mobileLeft: 0, mobileTop: 0, size: 118, mobileSize: 44, rotation: -4, driftX: 15, driftY: 10, duration: 28, idleOpacity: 0.40, activeOpacity: 0.88, accent: YELLOW, mobile: false, parallaxFactor: 0.04 },
+  { id: "agility-a", label: "AGILITY", left: 75, top: 98, mobileLeft: 0, mobileTop: 0, size: 62, mobileSize: 38, rotation: 10, driftX: -14, driftY: -11, duration: 22, idleOpacity: 0.38, activeOpacity: 0.88, accent: BLUE, mobile: false, parallaxFactor: 0.03 },
+  { id: "momentum-b", label: "MOMENTUM", left: 64, top: 108, mobileLeft: 0, mobileTop: 0, size: 76, mobileSize: 42, rotation: 12, driftX: -20, driftY: -16, duration: 26, idleOpacity: 0.42, activeOpacity: 0.92, accent: BLUE, mobile: false, parallaxFactor: 0.03 },
+  { id: "identity-a", label: "IDENTITY", left: 20, top: 116, mobileLeft: 0, mobileTop: 0, size: 68, mobileSize: 40, rotation: -8, driftX: 16, driftY: 12, duration: 27, idleOpacity: 0.40, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.025 },
+  { id: "clarity-b", label: "CLARITY", left: -4, top: 124, mobileLeft: 0, mobileTop: 0, size: 96, mobileSize: 40, rotation: -7, driftX: 18, driftY: 13, duration: 22, idleOpacity: 0.44, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.05 },
+  { id: "transformation-a", label: "TRANSFORMATION", left: 45, top: 130, mobileLeft: 0, mobileTop: 0, size: 80, mobileSize: 42, rotation: 6, driftX: -18, driftY: -14, duration: 32, idleOpacity: 0.38, activeOpacity: 0.88, accent: BLUE, mobile: false, parallaxFactor: 0.04 },
+  { id: "ideas-b", label: "IDEAS", left: 78, top: 137, mobileLeft: 0, mobileTop: 0, size: 132, mobileSize: 46, rotation: 8, driftX: -15, driftY: 19, duration: 31, idleOpacity: 0.40, activeOpacity: 0.88, accent: YELLOW, mobile: false, parallaxFactor: 0.025 },
+  { id: "distinction-a", label: "DISTINCTION", left: 8, top: 145, mobileLeft: 0, mobileTop: 0, size: 74, mobileSize: 40, rotation: -11, driftX: 15, driftY: -13, duration: 26, idleOpacity: 0.42, activeOpacity: 0.92, accent: BLUE, mobile: false, parallaxFactor: 0.035 },
+  { id: "kinetic-a", label: "KINETIC", left: 62, top: 152, mobileLeft: 0, mobileTop: 0, size: 86, mobileSize: 44, rotation: 9, driftX: -16, driftY: 14, duration: 24, idleOpacity: 0.40, activeOpacity: 0.90, accent: YELLOW, mobile: false, parallaxFactor: 0.03 },
 ];
 
 type KineticWordProps = {
@@ -137,7 +153,7 @@ function KineticWord({
     "--word-top-mobile": `${placement.mobileTop}%`,
     "--word-size": `${placement.size}px`,
     "--word-size-mobile": `${placement.mobileSize}px`,
-    backgroundImage: "linear-gradient(135deg, #1138e6 0%, #ffd93b 100%)",
+    backgroundImage: "linear-gradient(135deg, #0a218a 0%, #1138e6 50%, #d9b200 100%)",
     WebkitBackgroundClip: "text",
     backgroundClip: "text",
     color: "transparent",
