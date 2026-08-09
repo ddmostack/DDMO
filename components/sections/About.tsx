@@ -51,12 +51,12 @@ export function About() {
               </h2>
 
               {/* Supporting Badge Card to eliminate left column dead space */}
-              <div className="liquid-glass-card mt-6 max-w-[360px] rounded-2xl border border-white/70 bg-white/35 p-6 shadow-sm backdrop-blur-md transition-all duration-300 hover:bg-white/50 hover:shadow-md">
-                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-dd-navy">
-                  <span className="h-2 w-2 rounded-full bg-dd-blue-600 animate-pulse" aria-hidden="true" />
+              <div className="liquid-glass-card mt-6 max-w-[360px] rounded-2xl border border-white/30 bg-white/10 p-6 shadow-lg backdrop-blur-xl transition-all duration-300 hover:bg-white/20 hover:border-white/50">
+                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-dd-yellow-600">
+                  <span className="h-2 w-2 rounded-full bg-dd-yellow-600 animate-pulse" aria-hidden="true" />
                   Agile Studio Model
                 </div>
-                <p className="mt-3 text-sm font-medium leading-relaxed text-dd-gray-600">
+                <p className="mt-3 text-sm font-medium leading-relaxed text-white/85">
                   Direct access to senior strategists and developers. No middle management or bloated agency layers.
                 </p>
               </div>
@@ -69,7 +69,7 @@ export function About() {
               <p className="max-w-[650px] text-xl font-medium leading-relaxed tracking-[-0.02em] text-white md:text-2xl">
                 We connect strategy, creative work, and engineering so every part of a brand moves in the same direction.
               </p>
-              <p className="mt-6 max-w-[620px] text-base font-medium leading-relaxed text-white/65">
+              <p className="mt-6 max-w-[620px] text-base font-medium leading-relaxed text-white/85">
                 That means fewer handoffs, sharper decisions, and digital work built around clear business goals.
               </p>
             </ScrollReveal>
@@ -109,7 +109,7 @@ export function About() {
                         className="h-full rounded-2xl"
                       >
                         <article
-                          className={`liquid-glass-card group h-full p-6 transition-all duration-300 hover:border-white/90 hover:bg-white/50 ${style.hoverGlow} backdrop-blur-md rounded-2xl`}
+                          className={`liquid-glass-card group h-full p-6 transition-all duration-300 border border-white/25 bg-white/10 hover:border-white/60 hover:bg-white/20 ${style.hoverGlow} backdrop-blur-xl rounded-2xl`}
                         >
                           {/* Heading + Icon Optically Aligned to Cap-Height */}
                           <div className="flex items-center gap-3">
@@ -119,11 +119,11 @@ export function About() {
                               strokeWidth={2}
                               aria-hidden="true"
                             />
-                            <h3 className="font-bold tracking-[-0.02em] text-dd-ink transition-transform duration-300 group-hover:translate-x-1 text-lg">
+                            <h3 className="font-bold tracking-[-0.02em] text-white transition-transform duration-300 group-hover:translate-x-1 text-lg">
                               {value.title}
                             </h3>
                           </div>
-                          <p className="mt-3 text-sm font-medium leading-relaxed text-dd-gray-600">
+                          <p className="mt-3 text-sm font-medium leading-relaxed text-white/80">
                             {value.description}
                           </p>
                         </article>
@@ -144,7 +144,7 @@ export function About() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 overflow-hidden rounded-[28px] border border-white/80 bg-white/25 p-3 shadow-lg backdrop-blur-xl lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 overflow-hidden rounded-[28px] border border-white/30 bg-white/10 p-3 shadow-xl backdrop-blur-xl lg:grid-cols-4">
             {stats.map((stat, index) => (
               <CursorTiltCard
                 key={stat.label}
@@ -153,7 +153,7 @@ export function About() {
                 glare={true}
                 className="rounded-[20px]"
               >
-                <article className="liquid-glass-card group h-full rounded-[20px] bg-white/40 px-5 py-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white/75 hover:shadow-xl md:px-7">
+                <article className="liquid-glass-card group h-full rounded-[20px] bg-white/10 border border-white/20 px-5 py-7 transition-all duration-300 hover:-translate-y-1 hover:bg-white/20 hover:border-white/40 hover:shadow-xl md:px-7">
                   <StatCounter delay={index * 0.12} {...stat} />
                 </article>
               </CursorTiltCard>

@@ -64,7 +64,12 @@ export function StatCounter({
       <div>
         {/* Scale Bounce Punctuation on Number when Count Completes */}
         <motion.p
-          className="bg-dd-gradient bg-clip-text text-3xl font-extrabold tracking-[-0.04em] text-transparent sm:text-4xl md:text-5xl inline-block"
+          className="bg-clip-text text-3xl font-extrabold tracking-[-0.04em] text-transparent sm:text-4xl md:text-5xl inline-block"
+          style={{
+            backgroundImage: "linear-gradient(135deg, #ffd93b 0%, #38bdf8 50%, #ffffff 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
           animate={
             isCompleted && !reduceMotion
               ? { scale: [1, 1.08, 1] }
@@ -79,11 +84,11 @@ export function StatCounter({
           {reduceMotion ? value : displayValue}
           {suffix}
         </motion.p>
-        <p className="mt-2 text-sm font-medium leading-relaxed text-dd-gray-600">{label}</p>
+        <p className="mt-2 text-sm font-medium leading-relaxed text-white/80">{label}</p>
       </div>
 
       {/* Syncing Thin Animated Underline / Progress Bar */}
-      <div className="mt-4 h-0.5 w-full overflow-hidden rounded-full bg-dd-navy/15" aria-hidden="true">
+      <div className="mt-4 h-0.5 w-full overflow-hidden rounded-full bg-white/20" aria-hidden="true">
         <motion.div
           className="h-full rounded-full bg-gradient-to-r from-dd-blue-600 via-dd-yellow-600 to-dd-blue-600"
           style={{ width: `${(reduceMotion ? 1 : progressRatio) * 100}%` }}

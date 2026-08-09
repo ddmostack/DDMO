@@ -145,11 +145,11 @@ export function Hero() {
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] as const }}
-              className="mb-7 inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.14em] text-white/65"
+              className="mb-7 inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md"
             >
-              <span className="h-px w-9 bg-dd-yellow-600" aria-hidden="true" />
+              <span className="h-1.5 w-1.5 rounded-full bg-dd-yellow-600 animate-pulse" aria-hidden="true" />
               Independent digital studio
-              <span className="h-px w-9 bg-dd-yellow-600" aria-hidden="true" />
+              <span className="h-1.5 w-1.5 rounded-full bg-dd-yellow-600 animate-pulse" aria-hidden="true" />
             </motion.p>
 
             {/* Kinetic Text Reveal Headline with Parallax & Word Rotator */}
@@ -230,10 +230,10 @@ export function Hero() {
                             backgroundPosition: ["0% 50%", "200% 50%"],
                           }}
                           exit="exit"
-                          className="inline-block bg-clip-text text-transparent"
+                          className="inline-block bg-clip-text text-transparent drop-shadow-sm"
                           style={{
                             backgroundImage:
-                              "linear-gradient(90deg, #1138e6 0%, #ffd93b 50%, #1138e6 100%)",
+                              "linear-gradient(90deg, #ffd93b 0%, #38bdf8 50%, #ffea79 100%)",
                             backgroundSize: "200% auto",
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
@@ -273,7 +273,7 @@ export function Hero() {
               initial={reduceMotion ? false : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-              className="mt-8 max-w-[620px] text-balance text-base font-medium leading-relaxed text-white/70 md:text-xl"
+              className="mt-8 max-w-[620px] text-balance text-base font-medium leading-relaxed text-white/90 md:text-xl"
             >
               Strategy, design, and technology for ambitious brands ready to turn attention into momentum.
             </motion.p>
